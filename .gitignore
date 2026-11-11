@@ -1,0 +1,10 @@
+node_modules/
+dl/fonts/npm/node_modules/
+dl/hw/*/
+test/
+test2/
+shots/
+audit/
+__pycache__/
+*.pyc
+.DS_Store

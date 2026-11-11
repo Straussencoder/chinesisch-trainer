@@ -1,0 +1,36 @@
+import os as _os; ROOT = _os.environ.get("ZH_ROOT") or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+from playwright.sync_api import sync_playwright
+import sys, time; sys.path.insert(0, ROOT + "/scripts"); import fontroute
+wav=sys.argv[1]; mode=sys.argv[2]
+with sync_playwright() as p:
+    b = p.chromium.launch(args=["--use-fake-ui-for-media-stream","--use-fake-device-for-media-stream","--use-file-for-fake-audio-capture="+wav,"--autoplay-policy=no-user-gesture-required"])
+    ctx = b.new_context(viewport={"width":390,"height":844}, permissions=["microphone"])
+    pg = ctx.new_page(); fontroute.setup(pg)
+    errs=[]; pg.on("pageerror", lambda e: errs.append(str(e)))
+    pg.goto("file://" + ROOT + "/test/index.html"); pg.wait_for_function("!!window.ZH_AUDIO"); pg.wait_for_timeout(300)
+    print("supported", pg.evaluate("() => window.__t.recSupported()"))
+    if mode=="toene":
+        pg.evaluate("() => { location.hash='toene'; }"); pg.wait_for_timeout(500)
+        pg.evaluate("() => { const T=window.__t; const s=T.state(); s.prefs.tmode='syl'; }")
+        pg.evaluate("() => { location.hash='lernen'; location.hash='toene'; }"); pg.wait_for_timeout(400)
+        pg.click(".tbtn[data-tone='2']"); pg.wait_for_timeout(300)
+        print("own-box before:", pg.inner_text("#t-own")[:200].replace("\n"," | "))
+        pg.click("#t-own [data-act='rec']"); pg.wait_for_timeout(500)
+        print("recording:", pg.inner_text("#t-own")[:160].replace("\n"," | "))
+        pg.wait_for_function("() => { const o=window.__t.getOwn(); return o && !o.rec && !o.busy; }", timeout=15000)
+        o = pg.evaluate("() => { const o=window.__t.getOwn(); return {err:o.error, text:o.text, native:o.native, url:!!o.url, key:o.key}; }")
+        print(o)
+        pg.query_selector("#t-own").screenshot(path="/tmp/rec_toene.png")
+    else:
+        pg.evaluate("() => { location.hash='lernen'; }"); pg.wait_for_timeout(400)
+        pg.evaluate("() => { const T=window.__t; T.startLesson(T.LESSONS[0].id); const S=T.getS(); S.queue.unshift({type:'intro', w:T.WORD['谢谢']}); T.renderSession(); }")
+        pg.wait_for_timeout(600)
+        print(pg.evaluate("() => { const S=window.__t.getS(); const e=S.queue[0]; return {type:e.type, zh:e.w.zh}; }"))
+        pg.click("#wc-own [data-act='rec']"); pg.wait_for_timeout(500)
+        print("recording:", pg.inner_text("#wc-own")[:160].replace("\n"," | "))
+        pg.wait_for_function("() => { const o=window.__t.getOwn(); return o && !o.rec && !o.busy; }", timeout=15000)
+        o = pg.evaluate("() => { const o=window.__t.getOwn(); return {err:o.error, text:o.text, native:o.native, url:!!o.url, key:o.key}; }")
+        print(o)
+        pg.query_selector(".wordcard").screenshot(path="/tmp/rec_intro.png")
+    print("errs", errs)
+    b.close()

@@ -1,0 +1,26 @@
+import os as _os; ROOT = _os.environ.get("ZH_ROOT") or _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+from playwright.sync_api import sync_playwright
+errs = []
+with sync_playwright() as p:
+    b = p.chromium.launch()
+    pg = b.new_page(viewport={"width": 390, "height": 844})
+    pg.on("pageerror", lambda e: errs.append(str(e)))
+    pg.on("console", lambda m: errs.append("console: " + m.text) if m.type == "error" else None)
+    pg.goto("file://" + ROOT + "/test/index.html#toene")
+    pg.wait_for_function("!!window.ZH_AUDIO")
+    pg.click('[data-act="tplay"] >> nth=0')
+    pg.click('.tbtn[data-tone="1"]')
+    pg.click('[data-tmode="word"]')
+    res = pg.evaluate("""() => { const t = window.__t; const no = t.CARDS.filter(c => !t.canWords(c)).map(c => c.id + ' ' + c.zh + ' [' + t.chunksOf(c).filter(ch => !t.clipsFor(ch)).map(ch => ch.zh).join(',') + ']');
+      return {ok: t.CARDS.length - no.length, no}; }""")
+    print("Wort für Wort möglich:", res["ok"], "von", len(pg.evaluate("window.__t.CARDS.map(c=>c.id)")))
+    print("ohne:", res["no"])
+    pg.evaluate("location.hash='saetze'")
+    pg.click('[data-cat="essen"]')
+    pg.click("#c-reveal")
+    pg.click('.wchip >> nth=0')
+    pg.click('[data-act="cwords"]')
+    pg.evaluate("document.getElementById('sound-settings').open = true")
+    pg.screenshot(path=ROOT + "/shots/saetze2.png", full_page=True)
+    b.close()
+print("errors:", [e for e in errs if "fonts.g" not in e and "net::" not in e])
