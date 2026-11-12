@@ -144,7 +144,7 @@ function drawRace(c, W, H, R, t){
   /* Start, Meter, Ziel */
   var toS = function(wx){ return wx - cam; };
   gGate(c, toS(0), H, "起点", false);
-  for(var m=100; m<RACE_M; m+=100){ var mx = toS(m/RACE_M*WORLD); if(mx > -30 && mx < W + 30){ c.fillStyle = "rgba(251,246,234,.85)"; c.fillRect(mx - 15, H*0.535, 30, 12); c.fillStyle = "#3b352d"; c.font = "600 9px 'Noto Sans', sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(m + " m", mx, H*0.535 + 6.5); } }
+  for(var m=100; m<RACE_M; m+=100){ var mx = toS(m/RACE_M*WORLD); if(mx > 16 && mx < W - 16){ c.fillStyle = "rgba(251,246,234,.85)"; c.fillRect(mx - 15, H*0.535, 30, 12); c.fillStyle = "#3b352d"; c.font = "600 9px 'Noto Sans', sans-serif"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(m + " m", mx, H*0.535 + 6.5); } }
   for(var b=80; b<WORLD; b+=160){ var bx = toS(b); if(bx > -10 && bx < W + 10){ c.fillStyle = (b/160|0) % 2 ? "#c23a2c" : "#f6efe0"; c.beginPath(); c.arc(bx, H*0.775 + Math.sin(t*0.004 + b)*1.2, 3.2*k, 0, 6.283); c.fill(); } }
   gGate(c, toS(WORLD), H, "终点", true);
   /* Wellen hinter den Booten */
@@ -374,10 +374,10 @@ function renderLobby(){
   var ready = gameReady(), gs = state.game || {played:0, wins:{}, best:{}}, due = dueWords().length, n = learnedWords().length;
   var h = '<div class="lobby-hero"><canvas id="lobby-canvas" aria-label="Zwei Drachenboote auf dem Fluss"></canvas></div>'+
     '<div class="lobby-title"><span class="brush" lang="zh" aria-hidden="true">龙舟赛</span><h1 class="lt-de" id="h-spiel">Drachenboot-Rennen</h1></div>';
-  h += '<p class="subtitle" style="max-width:62ch">Jede richtige Antwort zu deinen gelernten Wörtern ist ein Paddelschlag. Antworte schnell für mehr Schwung, schaff mehrere in Folge für eine Serie. Falsche Antworten kosten Zeit und landen wieder beim Wiederholen.</p>';
-  h += '<div class="statline"><span><span class="sl"><span class="seal" style="background:var(--ink);color:var(--paper)" aria-hidden="true">词</span><b>'+n+'</b></span>Wörter im Rennen</span>'+
+  h += '<p class="subtitle">Jede richtige Antwort zu deinen gelernten Wörtern ist ein Paddelschlag. Antworte schnell für mehr Schwung, schaff mehrere in Folge für eine Serie. Falsche Antworten kosten Zeit und landen wieder beim Wiederholen.</p>';
+  h += '<div class="statline"><span><span class="sl"><span class="seal" style="--sbg:var(--ink); color:var(--paper)" aria-hidden="true">词</span><b>'+n+'</b></span>Wörter im Rennen</span>'+
     '<span><span class="sl"><span class="seal" aria-hidden="true">复</span><b>'+due+'</b></span>fällig, kommen zuerst</span>'+
-    '<span><span class="sl"><span class="seal" style="background:var(--gold)" aria-hidden="true">赛</span><b>'+(gs.played||0)+'</b></span>Rennen gefahren</span></div>';
+    '<span><span class="sl"><span class="seal" style="--sbg:var(--gold)" aria-hidden="true">赛</span><b>'+(gs.played||0)+'</b></span>Rennen gefahren</span></div>';
   if(!ready) h += '<div class="card" style="padding:16px 18px; margin-top:14px"><b>Noch zu wenig Wörter.</b> Fürs Rennen brauchst du mindestens 4 gelernte Wörter. Mach zuerst Lektion 1.<div style="margin-top:12px"><a class="btn red" href="#lernen">Zum Lernpfad</a></div></div>';
   h += '<h2 class="sec">Wähl deinen Gegner</h2><div class="rivals">'+RIVALS.map(function(r){
     var wins = gs.wins[r.id]||0, best = gs.best[r.id];
@@ -386,7 +386,7 @@ function renderLobby(){
       '<div class="rv-rec">'+(wins ? plural(wins, "Sieg", "Siege")+(best ? ", Bestzeit "+String(best).replace(".", ",")+" s" : "") : "Noch nicht besiegt")+'</div>'+
       '<button type="button" class="btn red" data-race="'+r.id+'"'+(ready ? "" : " disabled")+'>Antreten</button></div></div>';
   }).join("")+'</div>';
-  h += '<p class="muted" style="font-size:13.5px; margin-top:18px">Tipp: 爷爷 yéye heißt Opa, 阿姨 āyí Tante und 师傅 shīfu Meister. So lernst du nebenbei, wie man Leute anspricht.</p>';
+  h += '<p class="muted" style="font-size:var(--fs-m); margin-top:18px">Tipp: <span class="hz" lang="zh">爷爷</span> yéye heißt Opa, <span class="hz" lang="zh">阿姨</span> āyí Tante und <span class="hz" lang="zh">师傅</span> shīfu Meister. So lernst du nebenbei, wie man Leute anspricht.</p>';
   v.innerHTML = h;
   lobbyLoop();
 }

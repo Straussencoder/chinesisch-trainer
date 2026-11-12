@@ -19,7 +19,7 @@ window.ZH_LESSONS = [
       {de:"Sie ist Chinesin.", t:"她|tā 是|shì 中国|Zhōng_guó 人|rén", p:"。"}
     ]}
   ]},
-  {id:"u3", title:"Zahlen", zh:"数字", place:{zh:"长城", py:"Cháng_chéng", de:"An der Großen Mauer", text:"Bei Mutianyu zählst du die Wachtürme.", scene:"wall"}, lessons:[
+  {id:"u3", title:"Zahlen", zh:"数字", place:{zh:"长城", py:"Cháng_chéng", de:"An der Großen Mauer", short:"Große Mauer", text:"Bei Mutianyu zählst du die Wachtürme.", scene:"wall"}, lessons:[
     {id:"l5", title:"1 bis 5", words:[["一","yī","eins"],["二","èr","zwei"],["三","sān","drei"],["四","sì","vier"],["五","wǔ","fünf"]], sents:[]},
     {id:"l6", title:"6 bis 10", words:[["六","liù","sechs"],["七","qī","sieben"],["八","bā","acht"],["九","jiǔ","neun"],["十","shí","zehn"]], sents:[]}
   ]},
