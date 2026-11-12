@@ -19,6 +19,7 @@ const wFile = w => BLOCK.has("w:" + w) ? "/nonexistent" : wFile0(w);
 const S = new Set(), W = new Set(), missing = [];
 D.syl.flat().forEach(([zh, py]) => { const n = numeric(py); fs.existsSync(sylFile(n)) ? S.add(n) : missing.push("Silbe " + zh + " " + n); });
 D.words.forEach(([zh]) => { fs.existsSync(wFile(zh)) ? W.add(zh) : missing.push("Wort " + zh); });
+(D.duel || []).forEach(([s0]) => [s0 + "2", s0 + "3"].forEach(n => { fs.existsSync(sylFile(n)) ? S.add(n) : missing.push("Silbe " + n); }));
 D.cards.forEach(c => {
   const chars = Array.from(c.zh).filter(isHan); let i = 0;
   c.py.split(" ").forEach(w => {

@@ -8,6 +8,15 @@ window.ZH_DATA = {
   ],
   /* Wörter mit 2 Silben, ohne neutralen Ton und ohne zwei 3. Töne hintereinander.
      Nur Wörter, für die es eine Aufnahme gibt (audio-cmn). */
+  /* Ton-Duell: dieselbe Silbe im 2. und 3. Ton [Silbe, Zeichen 2. Ton, Pinyin, Bedeutung, Zeichen 3. Ton, Pinyin, Bedeutung] */
+  duel: [
+    ["ma","麻","má","prickelnd (wie in málà)","马","mǎ","Pferd"],["ni","泥","ní","Schlamm","你","nǐ","du"],["yi","姨","yí","Tante (in 阿姨)","椅","yǐ","Stuhl (in 椅子)"],
+    ["ji","急","jí","eilig","几","jǐ","wie viele"],["xiang","详","xiáng","ausführlich","想","xiǎng","denken, möchten"],["you","油","yóu","Öl","有","yǒu","haben"],
+    ["li","梨","lí","Birne","里","lǐ","in, innen"],["qing","晴","qíng","sonnig","请","qǐng","bitte"],["yu","鱼","yú","Fisch","雨","yǔ","Regen"],
+    ["ke","咳","ké","husten","可","kě","können (in 可以)"],["mi","迷","mí","sich verirren","米","mǐ","Reis (roh)"],["yuan","元","yuán","Yuan (Geld)","远","yuǎn","weit"],
+    ["na","拿","ná","nehmen","哪","nǎ","welcher"],["hen","痕","hén","Spur","很","hěn","sehr"],["guo","国","guó","Land","果","guǒ","Frucht (in 水果)"],
+    ["chang","长","cháng","lang","场","chǎng","Platz"],["xi","习","xí","üben (in 学习)","洗","xǐ","waschen"]
+  ],
   words: [
     ["咖啡","kā_fēi","Kaffee"],["飞机","fēi_jī","Flugzeug"],["今天","jīn_tiān","heute"],["公园","gōng_yuán","Park"],["欢迎","huān_yíng","willkommen"],["机场","jī_chǎng","Flughafen"],["中午","zhōng_wǔ","Mittag"],["商店","shāng_diàn","Laden"],["音乐","yīn_yuè","Musik"],["天气","tiān_qì","Wetter"],
     ["熊猫","xióng_māo","Panda"],["明天","míng_tiān","morgen"],["时间","shí_jiān","Zeit"],["昨天","zuó_tiān","gestern"],["银行","yín_háng","Bank"],["学习","xué_xí","lernen"],["啤酒","pí_jiǔ","Bier"],["茶馆","chá_guǎn","Teehaus"],["没有","méi_yǒu","nicht haben"],["学校","xué_xiào","Schule"],

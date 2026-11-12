@@ -83,7 +83,7 @@ Außerhalb von claude.ai (z. B. lokal geöffnet) läuft die App auch, speichert 
 
 ## Lernstand und Erinnerung
 
-- Lernstand in der Artifact-Datenbank: `data/users/u_04twSZJsrC3BKQng2ROkuw/progress` (Felder u. a. `words{zh:{b,d,iv,e}}`, `days{datum:{xp,lessons,reviews}}`, `learn{done,dlg,lsn,txt}`, `pats`, `prefs{goal}`). Beim Laden bereinigt `normalize()` kaputte Einträge.
+- Lernstand in der Artifact-Datenbank: `data/users/u_04twSZJsrC3BKQng2ROkuw/progress` (Felder u. a. `words{zh:{b,d,iv,e}}`, `days{datum:{xp,lessons,reviews}}`, `learn{done,dlg,lsn,txt}`, `pats`, `tips` (Hinweise der Heute-Karte: Datum des ersten Zeigens oder `x` = erledigt), `prefs{goal,tmode}`). Beim Laden bereinigt `normalize()` kaputte Einträge.
 - Tägliche Erinnerung: geplante Aufgabe `trig_01AeGnvtRoVbZJpMXkyfiLjg`, jeden Tag 17:38 Uhr (Europe/Budapest), Push aufs Handy (Android). Sie liest den Lernstand aus der Datenbank und nennt fällige Wörter, Punkte von heute, Serie und nächste Lektion; ist das Tagesziel erreicht, nur „Heute schon geübt, nichts zu tun.“
 
 ## Etappen-Bilder
