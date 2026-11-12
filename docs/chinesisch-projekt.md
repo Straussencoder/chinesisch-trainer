@@ -16,7 +16,7 @@
 - **Zeit:** ca. 30 Min. pro Tag, mal mehr, mal weniger.
 - **Erste Reise:** in ca. einem Jahr, nach dem Bachelor.
 - **Gerät:** MacBook Pro mit Chrome und Handy. Oft auch unterwegs ohne Ton.
-- **Erinnerung:** jeden Tag um 17:38 Uhr als Push-Nachricht (gewünscht war 18 Uhr; leicht vorgezogen, weil volle Stunden oft verspätet laufen). Seit 7.11.2026 liest sie den Stand aus der Datenbank der App: Sie nennt die fälligen Wörter, die Punkte von heute, die Serie und die nächste Lektion. Ist das Tagesziel schon erreicht, meldet sie nur „Heute schon geübt, nichts zu tun.“
+- **Erinnerung:** jeden Tag um 17:38 Uhr als Push-Nachricht (gewünscht war 18 Uhr; leicht vorgezogen, weil volle Stunden oft verspätet laufen). Seit 7.11.2026 liest sie den Stand aus der Datenbank der App: Sie nennt die fälligen Wörter, die Punkte von heute, die Serie und die nächste Lektion. Ist das Tagesziel schon erreicht, meldet sie nur „Heute schon geübt, nichts zu tun.“ Seit 12.11.2026 nennt sie einen konkreten nächsten Schritt nach denselben Regeln wie die App: nach einer Pause (mehr als 15 fällige Wörter) »Erst wiederholen« mit der Tagesrunde, sonst Tagesrunde oder nächste Lektion; dazu höchstens ein Zusatz (hartnäckiges Wort wird erklärt, Ton-Duell bei schwachem 2. Ton, schwache Lektion nachholen, Zahlen-Training noch nicht ausprobiert).
 
 ## Entscheidungen
 - **Sprache:** Mandarin (Hochchinesisch, „Putonghua“). Amtssprache in China und Taiwan, wird überall verstanden.
