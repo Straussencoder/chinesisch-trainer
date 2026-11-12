@@ -48,6 +48,12 @@ with sync_playwright() as p:
         st = pg.evaluate("() => window.__t.state().tones")
         ok(len(seen) >= 8 and tones == {2, 3}, f"{view}: Duell wechselt Silben und Töne ({len(seen)} Silben, Töne {sorted(tones)})")
         ok(st["2"]["n"] + st["3"]["n"] == 24 and st["2"]["ok"] + st["3"]["ok"] == okc and st["1"]["n"] == 0 and st["4"]["n"] == 0, f"{view}: Duell zählt in der Trefferquote nur Ton 2 und 3 ({st})")
+        # ohne Ton: Duell nimmt keine Antwort an, Zeichen bleibt verdeckt
+        pg.evaluate("() => { window.__t.setQuiet(30); location.hash = 'lernen'; }"); pg.wait_for_timeout(60); pg.evaluate("() => { location.hash = 'toene'; }"); pg.wait_for_timeout(200)
+        before_n = pg.evaluate("() => window.__t.state().tones['2'].n + window.__t.state().tones['3'].n")
+        pg.evaluate("() => window.__t.pickTone(2)"); pg.keyboard.press("3"); pg.wait_for_timeout(60)
+        ok(pg.evaluate("() => window.__t.state().tones['2'].n + window.__t.state().tones['3'].n") == before_n and pg.locator("#t-zis .q").count() == 1 and pg.locator("#t-btns .tbtn[disabled]").count() == 2 and pg.locator('#t-reveal [data-act="quietoff"]').count() == 1, f"{view}: ohne Ton ist das Duell gesperrt und verrät nichts")
+        pg.evaluate("() => window.__t.setQuiet(null)")
         # Wörter-Modus: ohne geübte Tonpaare kommt der schwächste Einzelton öfter
         pg.evaluate("() => { const s = window.__t.state(); s.tpair = {}; s.tones = {'1':{n:10,ok:9}, '2':{n:10,ok:2}, '3':{n:10,ok:9}, '4':{n:10,ok:9}}; s.prefs.tmode = 'word'; }")
         share = pg.evaluate("() => { const T = window.__t; let c = 0; for(let i=0;i<400;i++){ T.newToneQ(); if(T.getTq().item.tones.indexOf(2)>=0) c++; } return c; }")
@@ -67,6 +73,10 @@ with sync_playwright() as p:
             i = next((k for k, e in enumerate(q) if e["re"] and e["zh"] == zh), -1); j = next((k for k, e in enumerate(q) if not e["re"] and e["zh"] == zh and e["t"] != "pairs"), 99)
             return 0 <= i < j
         ok(before("国") and before("九"), f"{view}: Wortkarte vor der ersten Frage zu 国 und 九")
+        gap = min((next(k for k, e in enumerate(q) if not e["re"] and e["zh"] == zh and e["t"] != "pairs") - next(k for k, e in enumerate(q) if e["re"] and e["zh"] == zh)) for zh in ("国", "九"))
+        ok(gap >= 3, f"{view}: zwischen Karte und Frage liegen mindestens zwei andere Aufgaben (Abstand {gap})")
+        pw = pg.evaluate("() => { const S = window.__t.getS(); const p = S.queue.find(e => e.type === 'pairs'); return p ? p.ws.map(w => w.zh) : []; }")
+        ok("国" not in pw and "九" not in pw, f"{view}: hartnäckige Wörter nicht schon im Paare-Finden vor ihrer Karte ({pw})")
         ok(not any(e["re"] and e["zh"] in ("我", "你") for e in q), f"{view}: keine Karte für 我 (danach oft richtig) und 你 (erst 3 Fehler)")
         pg.evaluate("() => { const S = window.__t.getS(); const i = S.queue.findIndex(e => e.re); S.queue.unshift(S.queue.splice(i, 1)[0]); window.__t.renderSession(); }"); pg.wait_for_timeout(150)
         txt = pg.inner_text("#session .s-main")
@@ -107,7 +117,7 @@ with sync_playwright() as p:
         ok(pg.evaluate("() => window.__t.getS() && window.__t.getS().lesson.id") == "l4", f"{view}: Tippen startet Lektion 4")
         pg.evaluate("() => { window.__t.exitSession(); const s = window.__t.state(); s.learn.done.l4.best = 80; }"); home(pg)
         tip = pg.inner_text(".daycard .tip-row") if pg.locator(".daycard .tip-row").count() else ""
-        ok("Neu frei: Zahlen-Training" in tip, f"{view}: danach die neu freie Übung ({tip[:40]!r})")
+        ok("Noch nicht ausprobiert: Zahlen-Training" in tip, f"{view}: danach die neu freie Übung ({tip[:40]!r})")
         pg.click(".daycard .tip-row"); pg.wait_for_timeout(250)
         ok(pg.evaluate("() => window.__t.getS() && window.__t.getS().kind") == "num" and pg.evaluate("() => window.__t.state().tips.num") == "x", f"{view}: Zahlen-Training startet und ist vermerkt")
         pg.evaluate("() => window.__t.exitSession()"); home(pg)
@@ -123,9 +133,12 @@ with sync_playwright() as p:
     pg.goto(URL); pg.wait_for_function("!!window.__t"); pg.wait_for_timeout(200)
     t1 = pg.evaluate("() => window.__t.state().tips"); m1 = pg.evaluate("() => window.__t.state().prefs.tmode")
     ok(t1.get("num") == "x" and m1 == "duel", f"Lernstand: tips und Duell-Modus bleiben nach dem Laden ({t1}, {m1})")
-    for bad in ["[1,2]", "'x'", "null"]:
+    for bad in ["[1,2]", "'x'", "null", "{num:5, txt:true, l4:'gestern'}"]:
         pg.evaluate(f"() => {{ localStorage.setItem('zh-trainer-v1', JSON.stringify({{v:3, tips:{bad}}})); }}"); pg.reload(); pg.wait_for_function("!!window.__t"); pg.wait_for_timeout(150)
         ok(pg.evaluate("() => { const t = window.__t.state().tips; return !!t && typeof t === 'object' && !Array.isArray(t); }"), f"Lernstand: kaputtes tips ({bad}) wird zu leerem Objekt")
+    pg.evaluate("() => { localStorage.setItem('zh-trainer-v1', JSON.stringify({v:3, num:{'47':{n:2, bad:0}}, learn:{done:{}, dlg:{}, lsn:{}, txt:{t01:{at:'2026-11-01', best:100, n:1}}}, words:{}})); }"); pg.reload(); pg.wait_for_function("!!window.__t"); pg.wait_for_timeout(150)
+    t2 = pg.evaluate("() => window.__t.state().tips")
+    ok(t2.get("num") == "x" and t2.get("txt") == "x" and "sent" not in t2, f"Lernstand ohne tips: schon genutzte Übungen gelten als ausprobiert ({t2})")
     ctx.close()
     # --- Pluszeichen beim Satzbauen ---
     ctx, pg, errs = fresh(b, "mobile")

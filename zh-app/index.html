@@ -1279,17 +1279,17 @@ window.ZH_DATA = {
     [["马","mǎ","Pferd"],["姐","jiě","ältere Schwester"],["早","zǎo","früh"],["手","shǒu","Hand"],["晚","wǎn","spät, Abend"],["有","yǒu","haben"],["椅","yǐ","Stuhl (in 椅子)"],["北","běi","Norden"],["很","hěn","sehr"],["我","wǒ","ich"],["你","nǐ","du"],["水","shuǐ","Wasser"],["买","mǎi","kaufen"],["好","hǎo","gut"],["小","xiǎo","klein"],["九","jiǔ","neun"],["五","wǔ","fünf"],["米","mǐ","Reis (roh), Meter"],["狗","gǒu","Hund"],["雨","yǔ","Regen"]],
     [["骂","mà","schimpfen"],["爸","bà","Papa"],["再","zài","wieder"],["是","shì","sein"],["问","wèn","fragen"],["坐","zuò","sitzen"],["路","lù","Straße, Weg"],["饭","fàn","Essen, gekochter Reis"],["叫","jiào","heißen, rufen"],["帽","mào","Mütze (in 帽子)"],["对","duì","richtig"],["树","shù","Baum"],["卖","mài","verkaufen"],["睡","shuì","schlafen"],["大","dà","groß"],["去","qù","hingehen, hinfahren"],["肉","ròu","Fleisch"],["面","miàn","Nudeln"],["菜","cài","Gemüse, Gericht"],["四","sì","vier"]]
   ],
-  /* Wörter mit 2 Silben, ohne neutralen Ton und ohne zwei 3. Töne hintereinander.
-     Nur Wörter, für die es eine Aufnahme gibt (audio-cmn). */
   /* Ton-Duell: dieselbe Silbe im 2. und 3. Ton [Silbe, Zeichen 2. Ton, Pinyin, Bedeutung, Zeichen 3. Ton, Pinyin, Bedeutung] */
   duel: [
-    ["ma","麻","má","prickelnd (wie in málà)","马","mǎ","Pferd"],["ni","泥","ní","Schlamm","你","nǐ","du"],["yi","姨","yí","Tante (in 阿姨)","椅","yǐ","Stuhl (in 椅子)"],
+    ["ma","麻","má","betäubend scharf (in 麻辣)","马","mǎ","Pferd"],["ni","泥","ní","Schlamm","你","nǐ","du"],["yi","姨","yí","Tante (in 阿姨)","椅","yǐ","Stuhl (in 椅子)"],
     ["ji","急","jí","eilig","几","jǐ","wie viele"],["xiang","详","xiáng","ausführlich","想","xiǎng","denken, möchten"],["you","油","yóu","Öl","有","yǒu","haben"],
     ["li","梨","lí","Birne","里","lǐ","in, innen"],["qing","晴","qíng","sonnig","请","qǐng","bitte"],["yu","鱼","yú","Fisch","雨","yǔ","Regen"],
     ["ke","咳","ké","husten","可","kě","können (in 可以)"],["mi","迷","mí","sich verirren","米","mǐ","Reis (roh)"],["yuan","元","yuán","Yuan (Geld)","远","yuǎn","weit"],
     ["na","拿","ná","nehmen","哪","nǎ","welcher"],["hen","痕","hén","Spur","很","hěn","sehr"],["guo","国","guó","Land","果","guǒ","Frucht (in 水果)"],
-    ["chang","长","cháng","lang","场","chǎng","Platz"],["xi","习","xí","üben (in 学习)","洗","xǐ","waschen"]
+    ["chang","长","cháng","lang","厂","chǎng","Fabrik (in 工厂)"],["xi","习","xí","üben (in 学习)","洗","xǐ","waschen"]
   ],
+  /* Wörter mit 2 Silben, ohne neutralen Ton und ohne zwei 3. Töne hintereinander.
+     Nur Wörter, für die es eine Aufnahme gibt (audio-cmn). */
   words: [
     ["咖啡","kā_fēi","Kaffee"],["飞机","fēi_jī","Flugzeug"],["今天","jīn_tiān","heute"],["公园","gōng_yuán","Park"],["欢迎","huān_yíng","willkommen"],["机场","jī_chǎng","Flughafen"],["中午","zhōng_wǔ","Mittag"],["商店","shāng_diàn","Laden"],["音乐","yīn_yuè","Musik"],["天气","tiān_qì","Wetter"],
     ["熊猫","xióng_māo","Panda"],["明天","míng_tiān","morgen"],["时间","shí_jiān","Zeit"],["昨天","zuó_tiān","gestern"],["银行","yín_háng","Bank"],["学习","xué_xí","lernen"],["啤酒","pí_jiǔ","Bier"],["茶馆","chá_guǎn","Teehaus"],["没有","méi_yǒu","nicht haben"],["学校","xué_xiào","Schule"],
@@ -3907,6 +3907,18 @@ var LS_KEY = "zh-trainer-v1";
 var INTERVALS = [0,1,3,7,14,30];
 var NEW_PER_DAY = 8;
 function defaults(){ return {tmode:"syl", dir:"say", cat:"alle", slow:false, voice:"", autoplay:"words", pinyin:true, toneColors:true, fx:true, theme:"auto", hz:"normal", goal:20, smode:"cards", draw:true}; }
+/* Hinweise der Heute-Karte: nur "x" (erledigt) oder ein Datum. Fehlt das Feld (alter Lernstand), gilt eine Übung, die schon genutzt wurde, als erledigt */
+function cleanTips(s){
+  var t = s.tips, out = {};
+  if(t && typeof t==='object' && !Array.isArray(t)) Object.keys(t).forEach(function(k){ var v = t[k]; if(v==="x" || (typeof v==="string" && /^\d{4}-\d{2}-\d{2}$/.test(v))) out[k] = v; });
+  else {
+    if(s.num && Object.keys(s.num).length) out.num = "x";
+    if(s.pats && Object.keys(s.pats).length) out.sent = "x";
+    if(s.learn && s.learn.txt && Object.keys(s.learn.txt).length) out.txt = "x";
+    if(s.learn && s.learn.lsn && Object.keys(s.learn.lsn).length) out.lsn = "x";
+  }
+  return out;
+}
 function blank(){
   return {v:3, updatedAt:0, cards:{}, tones:{"1":{n:0,ok:0},"2":{n:0,ok:0},"3":{n:0,ok:0},"4":{n:0,ok:0}}, conf:{}, days:{}, learn:{done:{}, dlg:{}, lsn:{}, txt:{}}, words:{}, err:{}, draw:{}, tests:[], hsk:[], num:{}, tpair:{}, game:{played:0, wins:{}, best:{}}, pats:{}, tips:{}, prefs:defaults()};
 }
@@ -3921,7 +3933,7 @@ function normalize(s){
   Object.keys(s.words).forEach(function(k){ var r = s.words[k]; if(typeof r.b!=="number" || !/^\d{4}-\d{2}-\d{2}$/.test(String(r.d)) || isNaN(dateOf(String(r.d)))) delete s.words[k]; });
   if(!s.prefs || typeof s.prefs!=="object") s.prefs = {};
   return {v:3, updatedAt:+s.updatedAt||0, cards:s.cards||{}, tones:Object.assign(b.tones, s.tones||{}), conf:s.conf||{}, days:s.days||{},
-    learn:{done:(s.learn && s.learn.done) || {}, dlg:(s.learn && s.learn.dlg) || {}, lsn:(s.learn && s.learn.lsn) || {}, txt:(s.learn && s.learn.txt) || {}}, words:s.words||{}, err:s.err||{}, draw:s.draw||{}, tests:Array.isArray(s.tests) ? s.tests : [], num:(s.num && typeof s.num==='object') ? s.num : {}, tpair:(s.tpair && typeof s.tpair==='object') ? s.tpair : {}, hsk:Array.isArray(s.hsk) ? s.hsk : [], game:Object.assign({played:0, wins:{}, best:{}}, s.game||{}), pats:(s.pats && typeof s.pats==='object') ? s.pats : {}, tips:(s.tips && typeof s.tips==='object' && !Array.isArray(s.tips)) ? s.tips : {}, prefs:Object.assign(defaults(), s.prefs||{})};
+    learn:{done:(s.learn && s.learn.done) || {}, dlg:(s.learn && s.learn.dlg) || {}, lsn:(s.learn && s.learn.lsn) || {}, txt:(s.learn && s.learn.txt) || {}}, words:s.words||{}, err:s.err||{}, draw:s.draw||{}, tests:Array.isArray(s.tests) ? s.tests : [], num:(s.num && typeof s.num==='object') ? s.num : {}, tpair:(s.tpair && typeof s.tpair==='object') ? s.tpair : {}, hsk:Array.isArray(s.hsk) ? s.hsk : [], game:Object.assign({played:0, wins:{}, best:{}}, s.game||{}), pats:(s.pats && typeof s.pats==='object') ? s.pats : {}, tips:cleanTips(s), prefs:Object.assign(defaults(), s.prefs||{})};
 }
 function loadLocal(){ try{ var raw = localStorage.getItem(LS_KEY); return raw ? normalize(JSON.parse(raw)) : blank(); }catch(e){ return blank(); } }
 function saveLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
@@ -4358,10 +4370,10 @@ function viewBanner(scene, zh, de, id){
 /* Hinweise in der Heute-Karte: eine schwache Lektion zum Nachholen oder eine Übung, die neu frei ist.
    Jeder Hinweis steht höchstens eine Woche lang da; eine Übung verschwindet, sobald du sie einmal gemacht hast. */
 var TIPS = [
-  {k:"num", on:function(){ return numAvail(); }, act:'data-act="numprac"', seal:"数", t:"Neu frei: Zahlen-Training", d:"Zahlen lesen, hören und selbst bauen, bis 99."},
-  {k:"sent", on:function(){ return sentPool().length >= 4; }, act:'data-act="sentprac"', seal:"句", t:"Neu frei: Satz-Training", d:"Zehn Sätze nur aus Wörtern, die du kennst."},
-  {k:"txt", on:function(){ return textUnits().length > 0; }, act:'data-act="readtext"', seal:"读", t:"Neu frei: Kurze Texte", d:"Eine Nachricht oder ein Schild aus deinen Wörtern, mit drei Fragen."},
-  {k:"lsn", on:function(){ return lsnUnits().length > 0 && !quiet(); }, act:'data-act="listen"', seal:"听", t:"Neu frei: Gespräche hören", d:"Ein geschafftes Gespräch einmal ohne Text hören."}];
+  {k:"num", on:function(){ return numAvail(); }, act:'data-act="numprac"', seal:"数", t:"Noch nicht ausprobiert: Zahlen-Training", d:"Zahlen lesen, hören und selbst bauen, bis 99."},
+  {k:"sent", on:function(){ return sentPool().length >= 4; }, act:'data-act="sentprac"', seal:"句", t:"Noch nicht ausprobiert: Satz-Training", d:"Zehn Sätze nur aus Wörtern, die du kennst."},
+  {k:"txt", on:function(){ return textUnits().length > 0; }, act:'data-act="readtext"', seal:"读", t:"Noch nicht ausprobiert: Kurze Texte", d:"Eine Nachricht oder ein Schild aus deinen Wörtern, mit drei Fragen."},
+  {k:"lsn", on:function(){ return lsnUnits().length > 0 && !quiet(); }, act:'data-act="listen"', seal:"听", t:"Noch nicht ausprobiert: Gespräche hören", d:"Ein geschafftes Gespräch einmal ohne Text hören."}];
 function tipFresh(k){ var v = state.tips[k]; return v!=="x" && (!v || daysBetween(v, today()) < 7); }
 function markTip(k){ state.tips[k] = "x"; }
 function tipRow(){
@@ -4369,15 +4381,15 @@ function tipRow(){
   /* geschaffte Lektion, die auf Anhieb unter 60 % lag und noch nicht nachgeholt ist */
   var weakL = LESSONS.filter(function(l){ var r = state.learn.done[l.id]; return r && typeof r.best==="number" && r.best < 60 && tipFresh(l.id); })[0];
   if(weakL){
-    if(!state.tips[weakL.id]) state.tips[weakL.id] = t;
-    return '<button type="button" class="tip-row" data-lesson="'+weakL.id+'"><span class="seal" aria-hidden="true">再</span><span><b>Lektion '+weakL.n+' nochmal: '+esc(weakL.title)+'</b><small>Beim ersten Mal '+state.learn.done[weakL.id].best+' % auf Anhieb. Ein zweites Mal festigt die Wörter.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
+    if(!state.tips[weakL.id]){ state.tips[weakL.id] = t; saveLocal(); }
+    return '<button type="button" class="tip-row" data-lesson="'+weakL.id+'"><span class="seal" aria-hidden="true">再</span><span><b>Lektion '+weakL.n+' nochmal: '+esc(weakL.title)+'</b><small>Bestes Ergebnis: '+state.learn.done[weakL.id].best+' % auf Anhieb. Noch eine Runde festigt die Wörter.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
   }
   var tip = TIPS.filter(function(x){ return x.on() && tipFresh(x.k); })[0];
   if(!tip) return "";
-  if(!state.tips[tip.k]) state.tips[tip.k] = t;
+  if(!state.tips[tip.k]){ state.tips[tip.k] = t; saveLocal(); }
   return '<button type="button" class="tip-row" '+tip.act+'><span class="seal" aria-hidden="true">'+tip.seal+'</span><span><b>'+tip.t+'</b><small>'+tip.d+'</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
 }
-/* Ab so vielen fälligen Wörtern schlägt die Startseite zuerst die Tagesrunde vor */
+/* Bei mehr als so vielen fälligen Wörtern schlägt die Startseite zuerst die Tagesrunde vor */
 var BACKLOG = 15;
 function renderLearn(){
   var d = dayGet(), goal = state.prefs.goal, nx = nextLesson(), due = dueWords().length, learned = learnedWords().length;
@@ -5327,7 +5339,8 @@ function makeSentMean(s, all){
 }
 function buildReview(words, pool){
   var ex = [], types = ["mean","hear","char","write"], list = words.slice(0, 15);
-  if(list.length>=4) ex.push({id:++exSeq, type:"pairs", ws:pickN(list, Math.min(5, list.length))});
+  var plist = list.filter(function(w){ return !stubborn(w); }); if(plist.length < 4) plist = list;
+  if(list.length>=4) ex.push({id:++exSeq, type:"pairs", ws:pickN(plist, Math.min(5, plist.length))});
   /* Ab Fach 2 musst du das Wort selbst schreiben, nur Wiedererkennen reicht dann nicht mehr */
   shuffle(list.slice()).forEach(function(w){
     var r = state.words[w.zh];
@@ -5350,7 +5363,11 @@ function buildReview(words, pool){
   /* Hartnäckige Wörter: vor der ersten Frage dazu kommt die Wortkarte noch einmal */
   list.filter(stubborn).forEach(function(w){
     var at = -1; ex.forEach(function(e, i){ if(at<0 && e.w===w) at = i; });
-    if(at>=0) ex.splice(at, 0, {id:++exSeq, type:"intro", w:w, re:true});
+    if(at<0) return;
+    /* Die Frage dazu kommt erst ein paar Aufgaben später, damit sie nicht nur aus dem Kurzzeitgedächtnis beantwortet wird */
+    var q = ex.splice(at, 1)[0];
+    ex.splice(at, 0, {id:++exSeq, type:"intro", w:w, re:true});
+    ex.splice(Math.min(at + 4, ex.length), 0, q);
   });
   return ex;
 }
@@ -5964,6 +5981,7 @@ function finishSession(){
     S.goldNew = !first && S.perfect && !prevD.gold;
     S.goldTry = !first && !S.perfect && !prevD.gold;
     state.learn.done[S.lesson.id] = {at:today(), best:Math.max(pct, prevD.best||0)};
+    if(!first) markTip(S.lesson.id);
     if(prevD.gold || S.goldNew) state.learn.done[S.lesson.id].gold = prevD.gold || today();
     S.unitGoldNew = S.goldNew && !unitWasGold && unitGold(S.lesson.unit);
     if(first) S.lesson.W.forEach(function(w){ if(!state.words[w.zh]) state.words[w.zh] = newWordRec(); });
@@ -6806,7 +6824,7 @@ function newToneQ(){
     var wp = weakestPair();
     if(wp && Math.random()<0.4){ var pc = pool.filter(function(x){ return x.tones.join("-")===wp && x!==prev; }); if(pc.length) item = pc[Math.floor(Math.random()*pc.length)]; }
     /* Noch kein Tonpaar oft genug geübt: dann Wörter mit dem schwächsten Einzelton öfter */
-    var wt = !item && weakestTone();
+    var wt = !wp && weakestTone();
     if(wt && Math.random()<0.35){ var wc = pool.filter(function(x){ return x.tones.indexOf(wt)>=0 && x!==prev; }); if(wc.length) item = wc[Math.floor(Math.random()*wc.length)]; }
   }
   if(mode==="syl"){
@@ -6823,6 +6841,7 @@ function newToneQ(){
 function playToneItem(){
   if(!tq) return;
   var it = tq.item, c = it.tones.length===1 ? clip("s", numeric(it.py)) : clip("w", it.zh);
+  if(it.duel && !c){ loadAudioAll(); toast("Aufnahmen werden geladen …", 2200); return; }
   if(!(c && playClips([c]))) speak(it.zh);
 }
 /* Töne in drei Bereichen: Üben, Trefferquote, Pinyin-Tabelle */
@@ -6835,13 +6854,13 @@ function renderToneSec(){
 function toneHint(){
   var pairs = {}, best = null;
   Object.keys(state.conf).forEach(function(k){ var a = k.split(">"), key = [a[0],a[1]].sort().join("-"); pairs[key] = (pairs[key]||0) + state.conf[k]; if(!best || pairs[key] > pairs[best]) best = key; });
-  if(best!=="2-3" || pairs[best] < 3) return "";
+  if(best!=="2-3" || pairs[best] < 3 || quiet()) return "";
   return 'Du verwechselst am häufigsten den 2. und den 3. Ton ('+pairs[best]+'-mal). <button type="button" class="dl-tb" data-tmode="duel">Ton-Duell üben</button>';
 }
 /* Nach der Antwort: beide Töne der Silbe zum Anhören */
 function duelReveal(item, done){
   var d = item.duel;
-  if(!done) return '<div class="rv-py">'+esc(d.base)+'</div><div class="muted" style="padding-top:6px">'+(quiet() ? "Ohne Ton geht das Ton-Duell nicht. Schalte den Ton ein oder wähl oben einen anderen Modus." : "Steigt die Silbe, oder geht sie tief runter?")+'</div>';
+  if(!done) return '<div class="rv-py">'+esc(d.base)+'</div><div class="muted" style="padding-top:6px">'+(quiet() ? 'Ohne Ton geht das Ton-Duell nicht. Schalte den Ton ein oder wähl oben einen anderen Modus. <button type="button" class="dl-tb" data-act="quietoff">Ton einschalten</button>' : "Steigt die Silbe, oder geht sie tief runter?")+'</div>';
   var row = function(x, t){ return '<button type="button" class="duel-row'+(item.tones[0]===t ? " on" : "")+'" data-say="'+esc(x.zh)+'|'+esc(x.py)+'"><span class="mk py t'+t+'">'+t+'.</span><span class="hz" lang="zh">'+esc(x.zh)+'</span><span class="py t'+t+'">'+esc(x.py)+'</span><span class="de">'+esc(x.de)+'</span>'+ICON_SPK+'</button>'; };
   return '<div class="duel-pair">'+row(d.a, 2)+row(d.b, 3)+'</div><button type="button" class="iconbtn" data-act="duelboth">'+ICON_SPK+' Beide nacheinander</button>';
 }
@@ -6854,7 +6873,7 @@ function renderTone(){
     var p = picks[i], c = item.tones[i], pick;
     if(done) pick = p===c ? '<span class="pick" style="color:var(--ok)">✓ '+c+'. Ton</span>' : '<span class="pick bad" style="color:var(--bad)">'+c+'. Ton, nicht <s>'+p+'</s></span>';
     else pick = '<span class="pick">'+(p ? p+". Ton" : (i===picks.length ? "Welcher Ton?" : "&nbsp;"))+'</span>';
-    return '<div style="display:flex; flex-direction:column; align-items:center; gap:8px"><button type="button" class="zi" data-act="tplay" aria-label="Anhören" lang="zh">'+(done || quiet() ? esc(ch) : '<span class="q">?</span>')+'</button>'+pick+'</div>';
+    return '<div style="display:flex; flex-direction:column; align-items:center; gap:8px"><button type="button" class="zi" data-act="tplay" aria-label="Anhören" lang="zh">'+(done || (quiet() && !item.duel) ? esc(ch) : '<span class="q">?</span>')+'</button>'+pick+'</div>';
   }).join("");
   var hint = toneHint();
   $("#t-hint").hidden = !hint || duel; $("#t-hint").innerHTML = hint;
@@ -6866,7 +6885,7 @@ function renderTone(){
   $("#t-btns").classList.toggle("duel", duel);
   $("#t-btns").innerHTML = (duel ? [2,3] : [1,2,3,4]).map(function(k){
     var cls = done && item.tones.length===1 ? (k===item.tones[0] ? " right" : (k===picks[0] ? " wrong" : "")) : "";
-    return '<button type="button" class="tbtn'+cls+'" data-tone="'+k+'" style="--tc:var(--t'+k+')"'+(done?" disabled":"")+'><span class="mk">'+TONE_MARK[k]+'</span>'+toneCurve(k)+'<b>'+k+'. Ton</b><small>'+TONE_DESC[k]+'</small></button>';
+    return '<button type="button" class="tbtn'+cls+'" data-tone="'+k+'" style="--tc:var(--t'+k+')"'+(done || (duel && quiet()) ? " disabled" : "")+'><span class="mk">'+TONE_MARK[k]+'</span>'+toneCurve(k)+'<b>'+k+'. Ton</b><small>'+TONE_DESC[k]+'</small></button>';
   }).join("");
   var fb = "";
   if(done){
@@ -7063,6 +7082,7 @@ function renderToneStats(){
 }
 function pickTone(k){
   if(!tq || tq.done) return;
+  if(tq.item.duel && quiet()) return;
   tq.picks.push(k);
   if(tq.picks.length===tq.item.tones.length){
     tq.done = true;
@@ -7375,7 +7395,7 @@ document.addEventListener("click", function(e){
     case "lsnplay": lsnPlay(0); break;
     case "lsnslow": state.prefs.slow = !state.prefs.slow; touch(); renderSession(); break;
     case "lplay": { var le = cur(); if(le && le.type==="lhear") speak(le.ln.zh); } break;
-    case "duelboth": { var dq = tq && tq.item.duel; if(dq){ var c2 = clip("s", numeric(dq.a.py)), c3 = clip("s", numeric(dq.b.py)); if(c2 && c3) playClips([c2, c3]); } } break;
+    case "duelboth": { var dq = tq && tq.item.duel; if(dq){ var c2 = clip("s", numeric(dq.a.py)), c3 = clip("s", numeric(dq.b.py)); if(c2 && c3) playClips([c2, c3]); else { loadAudioAll(); toast("Aufnahmen werden geladen …", 2200); } } } break;
     case "rec": { var rt = currentView==="toene" ? (tq && tq.done ? toneTarget(tq.item) : null) : (cur() && cur().type==="intro" ? wordTarget(cur().w) : null); if(rt) ownStart(rt); } break;
     case "recstop": recStop(); break;
     case "ownhear": ownHear(); break;
