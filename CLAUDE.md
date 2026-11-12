@@ -41,7 +41,7 @@ Erzeugte Ordner (nicht im Repo): `test/` (Test-Build), `test2/`, `shots/`, `audi
 ```
 bash scripts/setup.sh
 ```
-Holt die Schriften für die Tests (npm), entpackt Hanzi Writer, installiert eslint und Playwright mit Chromium und legt die Arbeitsordner an. Python 3 mit Pillow, Node 18+ und npm werden vorausgesetzt.
+Holt die Schriften für die Tests (npm), entpackt Hanzi Writer, installiert eslint und Playwright und legt die Arbeitsordner an. Ist schon ein Chromium da (z. B. in Claude Code im Browser), wird es benutzt; Playwright für Python bekommt dann dieselbe Version wie das vorhandene für Node. Python 3 mit Pillow, Node 18+ und npm werden vorausgesetzt.
 
 ## Bauen
 
@@ -66,7 +66,7 @@ Daten neu erzeugen, wenn ihre Quelle geändert wurde:
 - eslint: `npx eslint -c scripts/eslint.config.mjs test/index.html` bzw. auf ausgezogene Skripte; Warnungen zu unbenutzten Variablen sind harmlos.
 - Die Tests leiten Google Fonts auf lokale Dateien um (`scripts/fontroute.py`). Mikrofon und Spracherkennung werden über Chromium-Flags bzw. `add_init_script` nachgebaut; dabei immer `window.SpeechRecognition` **und** `webkitSpeechRecognition` ersetzen.
 - Alle Pfade in den Skripten hängen am Repo-Ordner (`ROOT`, per `ZH_ROOT` überschreibbar).
-- `patch_*.py`, `v5*.py`, `v6shots.py`, `r1shots.py`, `shot*.py`, `journeyshots.py`, `play.py`, `xcheck.py`, `pitch*.py` sind alte Hilfsskripte aus früheren Runden (Bildschirmfotos, einmalige Umbauten, Tonhöhen-Analyse). Nicht Teil der Testreihe.
+- Alte Hilfsskripte aus früheren Runden (Bildschirmfotos, einmalige Umbauten, Tonhöhen-Analyse) wurden am 12.11.2026 gelöscht. Sie stehen noch in der Git-Geschichte (erster Commit).
 
 ## Veröffentlichen
 
