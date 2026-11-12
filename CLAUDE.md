@@ -74,7 +74,7 @@ Die App läuft als Artifact auf claude.ai, weil sie dessen Funktionen nutzt (Dat
 - Slug: `eaee8426-2b03-4d48-8ea2-c5919007e2aa`
 - Link: https://claude.ai/artifact/W1bszcWm8iBVbNZ4WZE88q
 - Stand bei der Übertragung: Version `1794085414-b9b4` (11.11.2026)
-- Zuletzt veröffentlicht: Version `1794494507-d081` (12.11.2026, Design aufgeräumt; davor `1794085414-b9b4`)
+- Zuletzt veröffentlicht: Version `1794515919-254b` (12.11.2026, Ton-Duell, hartnäckige Wörter, Tagesrunde nach Pausen; davor `1794494507-d081` Design, `1794085414-b9b4` Übertragung)
 - Fähigkeiten: `{db:{}, user:{}, sample:{}}`
 
 Veröffentlicht werden genau diese Dateien: `index.html`, `audio-1.js` … `audio-4.js`, `pinyin.js`, `schreiben.js`, `img/*.webp`. Wenn die Artifact-Werkzeuge (`mcp__claude-artifacts__*`) in der Sitzung da sind: erst `get_artifact` (aktuelle Version), dann `publish_files` mit `slug` und `base_version`, jede Datei mit `as` = Pfad im Artifact. Ohne diese Werkzeuge: Florian veröffentlicht über einen Chat im claude.ai-Projekt „🇨🇳 CHINESISCH“, der das Repo einliest.
