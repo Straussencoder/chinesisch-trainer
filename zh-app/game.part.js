@@ -372,8 +372,8 @@ function stars(n){ var h = ""; for(var i=1;i<=3;i++) h += '<i class="'+(i<=n ? "
 function renderLobby(){
   var v = $("#view-spiel"); if(!v) return;
   var ready = gameReady(), gs = state.game || {played:0, wins:{}, best:{}}, due = dueWords().length, n = learnedWords().length;
-  var h = '<div class="lobby-hero"><canvas id="lobby-canvas" aria-label="Zwei Drachenboote auf dem Fluss"></canvas>'+
-    '<div class="lobby-title"><span class="brush" lang="zh" aria-hidden="true">龙舟赛</span><h1 class="lt-de" id="h-spiel">Drachenboot-Rennen</h1></div></div>';
+  var h = '<div class="lobby-hero"><canvas id="lobby-canvas" aria-label="Zwei Drachenboote auf dem Fluss"></canvas></div>'+
+    '<div class="lobby-title"><span class="brush" lang="zh" aria-hidden="true">龙舟赛</span><h1 class="lt-de" id="h-spiel">Drachenboot-Rennen</h1></div>';
   h += '<p class="subtitle" style="max-width:62ch">Jede richtige Antwort zu deinen gelernten Wörtern ist ein Paddelschlag. Antworte schnell für mehr Schwung, schaff mehrere in Folge für eine Serie. Falsche Antworten kosten Zeit und landen wieder beim Wiederholen.</p>';
   h += '<div class="statline"><span><span class="sl"><span class="seal" style="background:var(--ink);color:var(--paper)" aria-hidden="true">词</span><b>'+n+'</b></span>Wörter im Rennen</span>'+
     '<span><span class="sl"><span class="seal" aria-hidden="true">复</span><b>'+due+'</b></span>fällig, kommen zuerst</span>'+

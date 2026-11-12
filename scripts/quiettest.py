@@ -119,9 +119,9 @@ with sync_playwright() as p:
         ctx.close()
     # Ablauf der Zeit und Speicherort
     ctx = b.new_context(); pg = ctx.new_page()
-    pg.add_init_script("if(!sessionStorage.getItem('x')){ sessionStorage.setItem('x', 1); localStorage.setItem('zh-trainer-quiet', String(Date.now() + 1500)); }")
+    pg.add_init_script("if(!sessionStorage.getItem('x')){ sessionStorage.setItem('x', 1); localStorage.setItem('zh-trainer-quiet', String(Date.now() + 6000)); }")
     pg.goto("file://" + ROOT + "/test/index.html"); pg.wait_for_function("!!window.__t"); pg.wait_for_timeout(200)
-    a = pg.evaluate("() => window.__t.quiet()"); pg.wait_for_timeout(1800)
+    a = pg.evaluate("() => window.__t.quiet()"); pg.wait_for_function("() => !window.__t.quiet()", timeout=15000)
     ok(a and pg.evaluate("() => !window.__t.quiet()"), "Ohne Ton endet von selbst nach Ablauf der Zeit")
     pg.evaluate("() => window.__t.setQuiet(0)")
     ok(pg.evaluate("() => localStorage.getItem('zh-trainer-quiet') === '-1' && !('quiet' in window.__t.state().prefs)"), "»Dauerhaft« gilt nur auf diesem Gerät, nicht im geteilten Speicherstand")

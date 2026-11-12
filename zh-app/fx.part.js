@@ -8,18 +8,18 @@ function fxLayer(){
   x.scale(dpr, dpr);
   return {c:c, x:x, W:W, H:H};
 }
-/* Tuschespritzer: Tropfen fliegen vom Punkt weg und zerlaufen */
+/* Tuschespritzer: wenige kleine Tropfen in Siegelrot und Gold fliegen kurz vom Punkt weg */
 function inkBurst(px, py, colors, n){
   if(reducedMotion()) return;
   var f = fxLayer(); if(!f) return;
-  colors = colors || ["#c23a2c", "#1d1a16", "#b8892e"];
+  colors = colors || [cssVar("--seal") || "#b23c2c", cssVar("--gold") || "#98702a"];
   var P = [];
-  for(var i=0;i<(n||30);i++){ var a = Math.random()*6.283, v = 1.6 + Math.random()*4.6; P.push({x:px, y:py, vx:Math.cos(a)*v, vy:Math.sin(a)*v - 1, r:1.4 + Math.random()*4.2, c:colors[i%colors.length]}); }
-  var t0 = performance.now(), dur = 0.7;
+  for(var i=0;i<Math.min(n||12, 14);i++){ var a = Math.random()*6.283, v = 1.4 + Math.random()*2.8; P.push({x:px, y:py, vx:Math.cos(a)*v, vy:Math.sin(a)*v - 1, r:1 + Math.random()*1.8, c:colors[i%colors.length]}); }
+  var t0 = performance.now(), dur = 0.5;
   (function fr(t){
     var el = (t - t0)/1000, life = Math.max(0, 1 - el/dur);
     f.x.clearRect(0, 0, f.W, f.H);
-    P.forEach(function(p){ p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.vx *= 0.9; p.vy *= 0.94; var sp = Math.min(2.2, Math.hypot(p.vx, p.vy)/2.5); f.x.globalAlpha = life*0.95; f.x.fillStyle = p.c; f.x.beginPath(); f.x.ellipse(p.x, p.y, p.r*(1 + sp*0.4), p.r*(1 - sp*0.15), Math.atan2(p.vy, p.vx), 0, 6.283); f.x.fill(); });
+    P.forEach(function(p){ p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.vx *= 0.9; p.vy *= 0.94; var sp = Math.min(2.2, Math.hypot(p.vx, p.vy)/2.5); f.x.globalAlpha = life*0.7; f.x.fillStyle = p.c; f.x.beginPath(); f.x.ellipse(p.x, p.y, p.r*(1 + sp*0.4), p.r*(1 - sp*0.15), Math.atan2(p.vy, p.vx), 0, 6.283); f.x.fill(); });
     if(el < dur) requestAnimationFrame(fr); else f.c.remove();
   })(t0);
 }
@@ -29,13 +29,15 @@ function petals(n, gold){
   if(reducedMotion()) return;
   var f = fxLayer(); if(!f) return;
   var cols = gold ? ["#e8c766", "#f4dc8e", "#c4952e", "#fbefc4", "#d4a63a"] : ["#e8a0a8", "#f2c4c9", "#c23a2c", "#f7dfe2", "#d9787f"], P = [];
-  for(var i=0;i<n;i++) P.push({x:Math.random()*f.W, y:-20-Math.random()*f.H*0.6, s:5+Math.random()*7, vy:1.2+Math.random()*2.2, vx:-0.6+Math.random()*1.2, r:Math.random()*6.28, vr:-0.06+Math.random()*0.12, c:cols[i%cols.length], ph:Math.random()*6.28});
-  var t0 = performance.now(), x = f.x;
-  function petal(p){ x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.globalAlpha = .9;
+  /* nur an den Rändern, damit die Mitte mit Text und Knöpfen frei bleibt */
+  var edge = Math.min(140, f.W*0.2);
+  for(var i=0;i<n;i++) P.push({x:i%2 ? Math.random()*edge : f.W - Math.random()*edge, y:-20-Math.random()*f.H*0.6, s:4+Math.random()*5, vy:1.2+Math.random()*2, vx:-0.5+Math.random()*1, r:Math.random()*6.28, vr:-0.06+Math.random()*0.12, c:cols[i%cols.length], ph:Math.random()*6.28});
+  var t0 = performance.now(), x = f.x, fade = 1;
+  function petal(p){ x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.globalAlpha = .8*fade;
     for(var k=0;k<5;k++){ x.rotate(1.2566); x.beginPath(); x.ellipse(0, -p.s*0.55, p.s*0.38, p.s*0.6, 0, 0, 6.283); x.fill(); }
     x.fillStyle = "#c49a3e"; x.beginPath(); x.arc(0, 0, p.s*0.18, 0, 6.283); x.fill(); x.restore(); }
   (function frame(t){
-    var el = t - t0; x.clearRect(0, 0, f.W, f.H);
+    var el = t - t0; x.clearRect(0, 0, f.W, f.H); fade = Math.max(0, Math.min(1, (3400 - el)/1000));
     P.forEach(function(p){ p.y += p.vy; p.x += p.vx + Math.sin(p.ph + el/500)*0.6; p.r += p.vr; petal(p); });
     if(el < 3800) requestAnimationFrame(frame); else f.c.remove();
   })(t0);

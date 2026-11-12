@@ -30,7 +30,7 @@ with sync_playwright() as p:
     pg.click('[data-switch="pinyin"]')
     # Segmente
     for pref, val, test in [("hz","gross","() => document.documentElement.getAttribute('data-hz')==='gross'"),
-                            ("theme","dark","() => document.documentElement.getAttribute('data-app-theme')==='dark' && getComputedStyle(document.body).backgroundColor !== 'rgb(243, 236, 221)'"),
+                            ("theme","dark","() => document.documentElement.getAttribute('data-app-theme')==='dark' && getComputedStyle(document.body).backgroundColor === 'rgb(33, 27, 21)'"),
                             ("theme","light","() => document.documentElement.getAttribute('data-app-theme')==='light'"),
                             ("theme","auto","() => !document.documentElement.hasAttribute('data-app-theme')"),
                             ("autoplay","sentence","() => window.__t.state().prefs.autoplay==='sentence'"),

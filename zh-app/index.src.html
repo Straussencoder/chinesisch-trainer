@@ -37,6 +37,10 @@
   --brush:"Ma Shan Zheng", "Kaiti SC", "STKaiti", "KaiTi", "Noto Serif SC", serif;
   --hz-scale:1;
   --st-bg:#f2e5ce;
+  --pic-filter:none; --tg-bg:#efe0c3; --tg-ink:#1d1a16;
+  --inv-bg:var(--ink); --inv-ink:var(--paper); --gold-ink:#fff; --bp-ink:#fff; --as-filter:brightness(.8);
+  --gold-hi:#f4dc8e; --gold-mid:#d4a63a; --gold-lo:#a77a1f; --gold-text:#a77a1f; --card-paper:#fdf8ee;
+  --shadow-lg:0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 1px 2px rgba(60,40,20,.05), 0 12px 28px -20px rgba(60,40,20,.38);
   /* Papierflecken im Stempel: wo die Stempelfarbe nicht ganz deckt */
   --stampgrain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.09' numOctaves='4' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .98 0 0 0 0 .95 0 0 0 0 .9 7 0 0 0 -4.3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23g)'/%3E%3C/svg%3E");
   --wash:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='3' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .36 0 0 0 0 .22 0 0 0 .55 -.2'/%3E%3C/filter%3E%3Crect width='420' height='420' filter='url(%23w)'/%3E%3C/svg%3E");
@@ -52,7 +56,7 @@
     --ok:#76bf98; --ok-bg:#223328; --bad:#ec8471; --bad-bg:#3d241d;
     --t1:#ee8088; --t2:#ddac5a; --t3:#6cc497; --t4:#97acec; --t0:#a2968a;
     --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 24px -14px rgba(0,0,0,.65);
-    --nav:#17120e; --st-bg:#a39582;
+    --nav:#17120e; --st-bg:#3a3128; --inv-bg:#dccdb2; --inv-ink:#211b15; --gold-ink:#2a1f0a; --bp-ink:#14110d; --as-filter:none; --gold-hi:#d9c07a; --gold-mid:#b98d34; --gold-lo:#8a6418; --gold-text:#e0b866; --card-paper:#4a3f33; --soft:0 1px 2px rgba(0,0,0,.35), 0 6px 16px -10px rgba(0,0,0,.6); --shadow-lg:0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent), 0 12px 28px -18px rgba(0,0,0,.6); --pic-filter:brightness(.86) saturate(.92) sepia(.08); --tg-bg:var(--sheet); --tg-ink:var(--ink);
     --sS:#8eaada; --sV:#ec8f7f; --sO:#79c39f; --sA:#dcb362; --sD:#bba0de; --sT:#78c6cf; --sL:#d6a37f; --sZ:#e096b4; --sQ:#b9b0a5; --sP:#bdb2a1; --sX:#bcc987;
     color-scheme: dark;
   }
@@ -63,7 +67,7 @@
   --ok:#76bf98; --ok-bg:#223328; --bad:#ec8471; --bad-bg:#3d241d;
   --t1:#ee8088; --t2:#ddac5a; --t3:#6cc497; --t4:#97acec; --t0:#a2968a;
   --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 24px -14px rgba(0,0,0,.65);
-  --nav:#17120e; --st-bg:#a39582;
+  --nav:#17120e; --st-bg:#3a3128; --inv-bg:#dccdb2; --inv-ink:#211b15; --gold-ink:#2a1f0a; --bp-ink:#14110d; --as-filter:none; --gold-hi:#d9c07a; --gold-mid:#b98d34; --gold-lo:#8a6418; --gold-text:#e0b866; --card-paper:#4a3f33; --soft:0 1px 2px rgba(0,0,0,.35), 0 6px 16px -10px rgba(0,0,0,.6); --shadow-lg:0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent), 0 12px 28px -18px rgba(0,0,0,.6); --pic-filter:brightness(.86) saturate(.92) sepia(.08); --tg-bg:var(--sheet); --tg-ink:var(--ink);
   --sS:#8eaada; --sV:#ec8f7f; --sO:#79c39f; --sA:#dcb362; --sD:#bba0de; --sT:#78c6cf; --sL:#d6a37f; --sZ:#e096b4; --sQ:#b9b0a5; --sP:#bdb2a1; --sX:#bcc987;
   color-scheme: dark;
 }
@@ -99,7 +103,7 @@ a{color:inherit}
 .stat-chip .seal{width:24px; height:24px; font-size:16px; border-radius:50%}
 .stat-chip.goal .seal{background:var(--gold)}
 .gear{width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:var(--sheet); box-shadow:0 0 0 1px var(--line); color:var(--ink-2)}
-.gear[aria-current="page"]{background:var(--seal); color:#fff; box-shadow:none}
+.gear[aria-current="page"]{background:var(--seal); color:var(--seal-ink); box-shadow:none}
 
 main{min-width:0; padding:18px 16px calc(104px + env(safe-area-inset-bottom)); max-width:780px; width:100%; margin:0 auto}
 .view{display:none}
@@ -109,7 +113,7 @@ main{min-width:0; padding:18px 16px calc(104px + env(safe-area-inset-bottom)); m
 .tabbar{position:fixed; left:50%; transform:translateX(-50%); width:min(540px, calc(100% - 20px)); bottom:calc(10px + env(safe-area-inset-bottom)); z-index:20; display:grid; grid-template-columns:repeat(5,1fr); gap:2px; background:var(--nav); border-radius:22px; padding:6px; box-shadow:0 14px 34px -12px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06)}
 .navlink{position:relative; display:flex; flex-direction:column; align-items:center; padding:5px 2px 4px; text-decoration:none; border-radius:16px; font-size:11px; font-weight:600; line-height:1.2; color:var(--nav-muted); transition:background .25s, color .25s, transform .2s}
 .navlink .ni{font-family:var(--hanzi); font-size:19px; font-weight:700; line-height:1.35}
-.tabbar .navlink[aria-current="page"]{color:#fff; background:var(--seal); transform:translateY(-1px)}
+.tabbar .navlink[aria-current="page"]{color:var(--seal-ink); background:var(--seal); transform:translateY(-1px)}
 .navlink .badge{position:absolute; top:-2px; right:calc(50% - 28px); min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:var(--gold); color:#1b1814; font-size:11px; font-weight:800; line-height:18px; text-align:center; font-variant-numeric:tabular-nums}
 .side-art{display:none}
 
@@ -123,7 +127,7 @@ main{min-width:0; padding:18px 16px calc(104px + env(safe-area-inset-bottom)); m
   .sidebar .navlink .ni{min-width:46px; text-align:center; font-size:18px; padding:3px 0; border-radius:9px; transition:background .25s}
   .sidebar .navlink:hover{color:var(--nav-ink); background:rgba(255,255,255,.05)}
   .sidebar .navlink[aria-current="page"]{color:var(--nav-ink); background:rgba(255,255,255,.08)}
-  .sidebar .navlink[aria-current="page"] .ni{color:#fff; background:var(--seal)}
+  .sidebar .navlink[aria-current="page"] .ni{color:var(--seal-ink); background:var(--seal)}
   .sidebar .navlink .badge{position:static; margin-left:auto}
   .side-day{position:relative; z-index:1; padding:14px; border-radius:14px; background:rgba(255,255,255,.05); box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
   .side-day .muted{color:var(--nav-muted)}
@@ -143,10 +147,10 @@ h1.title .brush{font-size:1.25em; color:var(--seal); margin-right:4px}
 .subtitle{color:var(--muted); margin:4px 0 0}
 h2.sec{display:flex; align-items:center; gap:10px; font-family:var(--display); font-size:21px; margin:34px 0 12px; font-weight:600}
 h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); transform:rotate(45deg); flex:none}
-.card{background:var(--sheet) var(--texture); border:0; border-radius:14px; box-shadow:0 0 0 1px color-mix(in srgb, var(--line) 60%, transparent), 0 1px 2px rgba(60,40,20,.05), 0 12px 28px -20px rgba(60,40,20,.38)}
+.card{background:var(--sheet) var(--texture); border:0; border-radius:14px; box-shadow:var(--shadow-lg)}
 .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:12px; padding:12px 20px; font-weight:700; font-size:16px; cursor:pointer; border:0; text-decoration:none; transition:transform .08s, box-shadow .12s, filter .12s; line-height:1.2}
 .btn:active:not(:disabled){transform:translateY(1px) scale(.99)}
-.btn.ink{background:var(--ink); color:var(--paper); box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 6px 14px -8px color-mix(in srgb, var(--ink) 80%, transparent)}
+.btn.ink{background:var(--inv-bg); color:var(--inv-ink); box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 6px 14px -8px color-mix(in srgb, var(--ink) 80%, transparent)}
 .btn.ink:active:not(:disabled){box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 2px 6px -4px color-mix(in srgb, var(--ink) 80%, transparent)}
 .btn.red{background:linear-gradient(180deg, color-mix(in srgb, var(--seal) 90%, #fff), var(--seal) 70%); color:var(--seal-ink); box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--seal) 75%, #000), inset 0 1px 0 rgba(255,255,255,.18), 0 7px 16px -9px color-mix(in srgb, var(--seal) 85%, transparent)}
 .btn.red:active:not(:disabled){box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--seal) 75%, #000), 0 2px 6px -4px color-mix(in srgb, var(--seal) 85%, transparent)}
@@ -162,6 +166,10 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .seg{display:inline-flex; flex-wrap:wrap; gap:2px; background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:3px}
 .seg button{border:0; background:transparent; color:var(--muted); font-weight:600; font-size:14px; padding:7px 12px; border-radius:9px; cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--sheet); color:var(--ink); box-shadow:var(--shadow)}
+.vtabs{display:flex; gap:4px 22px; flex-wrap:wrap; margin:14px 0 16px; border-bottom:1px solid var(--line)}
+.vtabs button{border:0; background:none; padding:8px 0 9px; margin-bottom:-1px; font-weight:700; font-size:15px; color:var(--muted); cursor:pointer; border-bottom:2.5px solid transparent}
+.vtabs button:hover{color:var(--ink)}
+.vtabs button[aria-pressed="true"]{color:var(--ink); border-bottom-color:var(--seal)}
 .pill{display:inline-block; font-size:12.5px; font-weight:600; border:1px solid var(--line); border-radius:999px; padding:1px 9px; color:var(--muted); white-space:nowrap}
 .pill.due{border-color:var(--seal); color:var(--seal)}
 .pill.ok{border-color:var(--ok); color:var(--ok)}
@@ -178,40 +186,9 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .wd i{width:18px; height:18px; border-radius:50%; border:1.5px solid var(--line); display:block}
 .wd i.on{background:var(--seal); border-color:var(--seal)}
 .wd i.today{box-shadow:0 0 0 2px var(--sheet), 0 0 0 3.5px var(--gold)}
-.continue{position:relative; overflow:hidden; margin-top:18px; background:var(--ink); color:var(--paper); border-radius:18px; padding:22px 22px 24px; box-shadow:var(--shadow)}
-.continue .deco{position:absolute; right:-6px; bottom:-34px; font-family:var(--brush); font-size:170px; line-height:1; color:color-mix(in srgb, var(--paper) 9%, transparent); pointer-events:none}
-.continue .eyebrow{font-size:12.5px; text-transform:uppercase; letter-spacing:.1em; color:color-mix(in srgb, var(--paper) 70%, transparent); font-weight:700}
-.continue h3{font-family:var(--display); font-size:26px; margin:6px 0 4px; line-height:1.2}
-.continue .words-prev{display:flex; flex-wrap:wrap; gap:6px 14px; margin:10px 0 16px; position:relative}
-.continue .words-prev span{display:inline-flex; flex-direction:column; align-items:center; line-height:1.2}
-.continue .words-prev .hz{font-size:24px}
-.continue .words-prev small{font-size:12px; color:color-mix(in srgb, var(--paper) 72%, transparent)}
-.continue .btn{position:relative}
 
-.unit{margin-top:34px}
-.unit-head{display:flex; align-items:center; gap:14px; margin-bottom:10px}
-.unit-head .seal{min-width:56px; height:56px; padding:0 8px; font-size:30px; border-radius:10px; writing-mode:horizontal-tb}
-.unit-head h2{font-family:var(--display); font-size:22px; margin:0; line-height:1.2}
-.unit-head .uprog{font-size:13px; color:var(--muted)}
-.lessons{list-style:none; margin:0; padding:0; position:relative}
-.lessons::before{content:""; position:absolute; left:27px; top:28px; bottom:28px; width:2px; background:repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 11px)}
-.lesson{position:relative; display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:center; padding:8px 0}
-.coin{position:relative; z-index:1; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; font-family:var(--hanzi); font-weight:700; font-size:20px; background:var(--sheet); border:2px solid var(--line); color:var(--muted); cursor:pointer; padding:0}
-.coin small{display:none}
-.lesson.done .coin{background:var(--seal); border-color:var(--seal); color:var(--seal-ink)}
-.lesson.current .coin{border-color:var(--seal); color:var(--seal); box-shadow:0 0 0 5px color-mix(in srgb, var(--seal) 16%, transparent); animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{50%{box-shadow:0 0 0 9px color-mix(in srgb, var(--seal) 6%, transparent)}}
-.lesson.locked .coin{border-style:dashed; cursor:default}
-.lcard{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 14px; padding:12px 14px}
-.lesson.locked .lcard{opacity:.62; box-shadow:none}
-.lesson.current .lcard{border-color:color-mix(in srgb, var(--seal) 55%, var(--line))}
-.lcard .lt{font-weight:700; font-size:16px}
-.lcard .lw{display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:2px}
-.lcard .lw span{font-family:var(--hanzi); font-size:17px; color:var(--ink-2)}
-.lcard .btn{padding:9px 16px; font-size:15px}
 
 /* ---------- Reise ---------- */
-.stamps{display:grid; grid-template-columns:repeat(4, 1fr); gap:10px}
 .stamp{position:relative; aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; text-align:center; line-height:1.1; border-radius:50%}
 .stamp.sq{border-radius:14px}
 .stamp .sz{font-family:var(--brush); font-size:clamp(20px, 6vw, 30px); line-height:1.05}
@@ -219,6 +196,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .stamp .sz.l3{font-size:clamp(17px, 4.6vw, 25px)}
 .stamp .sz.l4{font-size:clamp(13px, 3.4vw, 19px); letter-spacing:-.02em}
 .stamp{min-width:0; width:min(100%, 136px); justify-self:center}
+@media (min-width:880px){ .bk .stamp{width:min(100%, 108px)} }
 .stamp.got{color:var(--seal); border:3px double var(--seal); transform:rotate(var(--r)); background:color-mix(in srgb, var(--seal) 6%, transparent)}
 .stamp.got::after{content:""; position:absolute; inset:0; border-radius:inherit; background:var(--texture); mix-blend-mode:multiply; opacity:.6}
 .stamp.open{color:var(--muted); border:2px dashed var(--line); opacity:.75}
@@ -227,23 +205,24 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .nrow{position:relative; z-index:1; height:96px}
 .node{position:absolute; top:14px; left:calc(50% + var(--x) - 34px); width:68px; height:68px; border-radius:50%; display:grid; place-items:center; font-family:var(--hanzi); font-weight:700; font-size:22px; cursor:pointer; padding:0;
   background:var(--sheet); border:2px solid var(--line); color:var(--muted); box-shadow:inset 0 0 0 4px var(--sheet), inset 0 0 0 5px var(--line), var(--soft); animation:pop .45s cubic-bezier(.2,1.5,.4,1) backwards; animation-delay:var(--d); transition:transform .25s cubic-bezier(.2,.9,.3,1.4)}
-.node:not(:disabled):hover{transform:translateY(-3px) scale(1.05)}
+@media (hover:hover){ .node:not(:disabled):hover{transform:translateY(-3px) scale(1.05)} }
 .trail.calm .node{animation:none}
 @keyframes pop{from{transform:scale(.4); opacity:0} to{transform:none; opacity:1}}
 .node.done{background:var(--seal); border-color:var(--seal); color:var(--seal-ink); overflow:hidden; box-shadow:inset 0 0 0 4px var(--seal), inset 0 0 0 5.5px color-mix(in srgb, var(--seal-ink) 62%, transparent), 0 1px 3px -1px color-mix(in srgb, var(--seal) 60%, transparent)}
 .node.done::after{content:""; position:absolute; inset:-2px; border-radius:inherit; background:var(--stampgrain); background-size:120px 120px; opacity:.32; pointer-events:none}
 .node.done > .cn, .node.done > .an{position:relative; z-index:1}
 .nrow:nth-child(odd) .node.done{--sr:-4deg} .node.done{transform:rotate(var(--sr, 3deg))}
-.node.done:not(:disabled):hover{transform:rotate(0deg) scale(1.05)}
+@media (hover:hover){ .node.done:not(:disabled):hover{transform:rotate(0deg) scale(1.05)} }
 .node.current{border-color:var(--seal); color:var(--seal); box-shadow:inset 0 0 0 4px var(--sheet), inset 0 0 0 5px var(--seal), var(--soft), 0 0 0 8px color-mix(in srgb, var(--seal) 13%, transparent)}
 .node.locked{border-style:dashed; cursor:default; background:var(--paper-2)}
 .node.open{outline:3px solid var(--gold); outline-offset:3px}
 .node{grid-template-rows:auto auto; align-content:center; gap:0; line-height:1.05}
 .node .cn{font-size:21px}
+.node .cn.l3{font-size:16px; letter-spacing:-.04em}
+.st-vname.l4{font-size:36px}
 .node .an{font-family:var(--body); font-size:10.5px; font-weight:700; opacity:.75}
-.go{position:absolute; top:-30px; left:50%; transform:translateX(-50%); background:var(--seal); color:var(--seal-ink); font-family:var(--body); font-size:12.5px; font-weight:700; padding:3px 10px; border-radius:8px; white-space:nowrap; animation:bob 1.6s ease-in-out infinite}
+.go{position:absolute; top:-30px; left:50%; transform:translateX(-50%); background:var(--seal); color:var(--seal-ink); font-family:var(--body); font-size:12.5px; font-weight:700; padding:3px 10px; border-radius:8px; white-space:nowrap}
 .go::after{content:""; position:absolute; left:50%; bottom:-5px; margin-left:-5px; border:5px solid transparent; border-bottom:0; border-top-color:var(--seal)}
-@keyframes bob{50%{transform:translate(-50%, -4px)}}
 .nlabel{position:absolute; top:22px; display:flex; flex-direction:column; line-height:1.25; min-width:0}
 .nlabel.r{left:calc(50% + var(--x) + 46px); right:4px; align-items:flex-start; text-align:left}
 .nlabel.l{right:calc(50% - var(--x) + 46px); left:4px; align-items:flex-end; text-align:right}
@@ -264,18 +243,15 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .bigstamp .sz{font-family:var(--brush); font-size:56px; line-height:1}
 .bigstamp small{font-size:12px; font-weight:700; letter-spacing:.06em}
 @keyframes slam{0%{transform:scale(2.4) rotate(-30deg); opacity:0} 60%{transform:scale(.92) rotate(-6deg); opacity:1} 100%{transform:scale(1) rotate(-8deg)}}
-@media (min-width:880px){
-}
 
 /* ---------- Titelbild ---------- */
 .hero{position:relative; margin:-18px -16px 0; height:min(64vh, 440px); min-height:340px; overflow:hidden; isolation:isolate}
 .hero-art{position:absolute; inset:-36px 0 0 0; will-change:transform; -webkit-mask-image:linear-gradient(to bottom, #000 58%, transparent 97%); mask-image:linear-gradient(to bottom, #000 58%, transparent 97%)}
 .hero-art .scene-svg{width:100%; height:100%; display:block}
-.scene-img{width:100%; height:100%; display:block; object-fit:cover; object-position:50% 42%}
+.scene-img{width:100%; height:100%; display:block; object-fit:cover; object-position:50% 42%; filter:var(--pic-filter)}
 .st-art .scene-img{object-position:50% 45%}
-:root[data-app-theme="dark"] .scene-img, :root[data-theme="dark"]:not([data-app-theme="light"]) .scene-img{filter:brightness(.86) saturate(.92) sepia(.08)}
 :root[data-app-theme="dark"] .scene-svg, :root[data-theme="dark"]:not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]):not([data-app-theme="light"]) .scene-img{filter:brightness(.86) saturate(.92) sepia(.08)} :root:not([data-theme="light"]):not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)} }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]):not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)} }
 .hero .cl{position:absolute; z-index:1; width:130px; color:color-mix(in srgb, var(--sheet) 92%, transparent); animation:drift linear infinite; filter:drop-shadow(0 2px 4px rgba(120,100,70,.18))}
 @keyframes drift{from{transform:translateX(-160px)} to{transform:translateX(min(110vw, 1100px))}}
 .birds{position:absolute; z-index:1; top:14%; left:0; width:70px; color:var(--ink-2); animation:fly 28s linear infinite}
@@ -299,14 +275,30 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .mini-route i.cur{background:linear-gradient(90deg, var(--seal) var(--p), var(--line) var(--p)); box-shadow:0 0 0 2px color-mix(in srgb, var(--seal) 25%, transparent)}
 .hr-go{flex-direction:column; align-items:flex-start; gap:1px; padding:10px 18px; text-align:left}
 .hr-go small{font-weight:600; font-size:12.5px; opacity:.92}
+@media (max-width:520px){ .hero-ribbon{padding:12px} .hr-go{flex:1 1 100%} }
 .statline{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; margin:18px 0 0}
 .statline > span{display:flex; flex-direction:column; align-items:center; gap:1px; text-align:center; font-size:12.5px; color:var(--muted); min-width:0}
 .statline .sl{display:inline-flex; align-items:center; gap:7px; white-space:nowrap}
 .statline b{font-variant-numeric:tabular-nums; font-size:16px; color:var(--ink)}
 .statline .seal{width:26px; height:26px; font-size:17px; border-radius:50%}
+.daycard{margin-top:18px; padding:14px 16px 4px}
+.td-head{display:flex; align-items:center; gap:12px; padding-bottom:12px}
+.td-head .ring{flex:none}
+.td-t{display:flex; flex-direction:column; flex:1; min-width:0; line-height:1.3}
+.td-t b{font-family:var(--display); font-weight:600; font-size:20px}
+.td-t > span{font-size:13.5px; color:var(--muted)}
+.nw{white-space:nowrap}
+.td-words{flex:none; display:flex; flex-direction:column; align-items:flex-end; font-size:12.5px; color:var(--muted); line-height:1.25}
+.td-words b{font-family:var(--display); font-size:22px; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums}
+.daycard .dl-banner{margin:0; padding:12px 2px; border:0; border-top:1px solid var(--line); border-radius:0; background:none}
+.daycard .dl-banner:hover{border-color:var(--line); background:color-mix(in srgb, var(--gold) 7%, transparent)}
+.daycard .dl-banner .seal{width:34px; height:34px; font-size:21px; border-radius:9px; flex:none}
+.daycard .day-banner .seal{background:var(--seal)}
+.daycard .day-banner.done .seal{background:var(--ok)}
+.td-empty{margin:0; padding:12px 0 12px; border-top:1px solid var(--line); font-size:14px; color:var(--muted)}
 .tiles2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px}
 .tile{position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; gap:1px; min-height:176px; padding:14px; border-radius:18px; text-decoration:none; color:inherit; border:0; cursor:pointer; text-align:left; font:inherit; transition:transform .3s cubic-bezier(.2,.9,.3,1.3), box-shadow .3s; box-shadow:0 14px 30px -18px rgba(60,40,20,.55)}
-.tile:hover{transform:translateY(-4px) rotate(-.6deg)}
+@media (hover:hover){ .tile:hover{transform:translateY(-4px) rotate(-.6deg)} }
 .tile:disabled{cursor:default; opacity:.7}
 .tile b{font-size:16px; line-height:1.25; position:relative; z-index:1}
 .tile small{font-size:12.5px; opacity:.85; position:relative; z-index:1}
@@ -314,36 +306,33 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .tile-rev .big{position:absolute; right:-8px; top:-18px; font-family:var(--brush); font-size:104px; line-height:1; color:rgba(239,230,212,.1)}
 .tile-rev .count{font-family:var(--display); font-weight:600; font-size:38px; line-height:1; color:#fff; position:relative}
 .tile-rev .count em{font-style:normal; font-size:15px; font-family:var(--body); font-weight:600; color:var(--gold); margin-left:4px}
-.tile-game{background:#efe0c3; color:#1d1a16}
-.tile-game canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+.tile-game{background:var(--tg-bg); color:var(--tg-ink)}
+.tile-game canvas{position:absolute; inset:0; width:100%; height:100%; display:block; filter:var(--pic-filter)}
 .tile-game{justify-content:flex-start}
-.tile-game::after{content:""; position:absolute; inset:0 0 45% 0; background:linear-gradient(to bottom, rgba(239,224,195,.9) 50%, rgba(239,224,195,0))}
-.tile-game .tz{position:relative; z-index:1; font-family:var(--brush); font-size:28px; color:#c23a2c; line-height:1}
+.tile-game::after{content:""; position:absolute; inset:0 0 45% 0; background:linear-gradient(to bottom, color-mix(in srgb, var(--tg-bg) 92%, transparent) 50%, transparent)}
+.tile-game .tz{position:relative; z-index:1; font-family:var(--brush); font-size:28px; color:var(--seal); line-height:1}
 .booklet{margin-top:30px}
 .bk-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:10px}
 .bk-head b{font-family:var(--display); font-weight:600; font-size:21px}
 .bk-head b .brush{color:var(--seal); margin-right:6px}
-.bk{display:grid; grid-template-columns:1fr 1fr; padding:6px; border-radius:12px; background:linear-gradient(135deg, #8a2620, #5e1612); box-shadow:0 18px 34px -20px rgba(60,10,8,.7)}
-.bk-page{position:relative; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); align-content:start; gap:12px; padding:16px 12px 18px; background:#f6efdf var(--texture); overflow:hidden}
-.bk-page:first-child{border-radius:7px 0 0 7px; box-shadow:inset -16px 0 20px -16px rgba(0,0,0,.4)}
-.bk-page:last-child{border-radius:0 7px 7px 0; box-shadow:inset 16px 0 20px -16px rgba(0,0,0,.4)}
-.bk-page::before{content:attr(data-wm); position:absolute; inset:0; display:grid; place-items:center; font-family:var(--brush); font-size:120px; color:rgba(194,58,44,.05); pointer-events:none}
-.bk .stamp{color:#c23a2c}
-.bk .stamp.got{border-color:#c23a2c; background:rgba(194,58,44,.05)}
-.bk .stamp.open{color:#9a8f7c; border-color:#d9ccb2}
-.stamp.got:hover{transform:rotate(0deg) scale(1.06); transition:transform .25s}
-.journey-head{display:flex; align-items:flex-end; gap:14px; margin:44px 0 0}
-.journey-head .brush{font-size:60px; color:var(--seal); line-height:.85}
+.bk{display:grid; grid-template-columns:1fr 1fr; border-radius:14px; background:var(--sheet); box-shadow:0 0 0 1px color-mix(in srgb, var(--line) 80%, transparent), inset 0 -3px 0 color-mix(in srgb, var(--seal) 55%, transparent), 0 12px 28px -20px rgba(60,40,20,.38)}
+.bk-page{position:relative; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); align-content:start; gap:12px; padding:16px 12px 18px; background:var(--texture); overflow:hidden}
+.bk-page:first-child{border-radius:14px 0 0 14px; box-shadow:inset -14px 0 16px -16px rgba(60,40,20,.45)}
+.bk-page:last-child{border-radius:0 14px 14px 0; box-shadow:inset 14px 0 16px -16px rgba(60,40,20,.45); border-left:1px dashed var(--line)}
+.bk-page::before{content:attr(data-wm); position:absolute; inset:0; display:grid; place-items:center; font-family:var(--brush); font-size:120px; color:color-mix(in srgb, var(--seal) 5%, transparent); pointer-events:none}
+@media (hover:hover){ .stamp.got:hover{transform:rotate(0deg) scale(1.06); transition:transform .25s} }
+.journey-head{display:flex; align-items:center; gap:14px; margin:40px 0 0}
+.journey-head .brush{flex:none; font-size:46px; color:var(--seal); line-height:1}
 .journey-head h2{font-family:var(--display); font-weight:600; font-size:24px; margin:0; line-height:1.15}
 .journey-head p{margin:2px 0 0; color:var(--muted); font-size:14px}
 .stage2{position:relative; z-index:1; margin:24px 0 2px}
 .st-art{position:relative; height:196px; background:var(--st-bg); -webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 50%, #000 56%, transparent 100%); mask-image:radial-gradient(ellipse 74% 70% at 50% 50%, #000 56%, transparent 100%); transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.stage2:hover .st-art{transform:scale(1.03)}
+@media (hover:hover){ .stage2:hover .st-art{transform:scale(1.03)} }
 /* Gezeichnete Etappen: ausgefranster Aquarellrand statt glattem Verlauf */
 .st-art:has(> .scene-svg){-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 196' preserveAspectRatio='none'%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035' numOctaves='3' seed='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='20'/%3E%3CfeGaussianBlur stdDeviation='6'/%3E%3C/filter%3E%3Crect x='16' y='14' width='328' height='168' rx='48' filter='url(%23f)'/%3E%3C/svg%3E"); mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 196' preserveAspectRatio='none'%3E%3Cfilter id='f' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.035' numOctaves='3' seed='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='20'/%3E%3CfeGaussianBlur stdDeviation='6'/%3E%3C/filter%3E%3Crect x='16' y='14' width='328' height='168' rx='48' filter='url(%23f)'/%3E%3C/svg%3E"); -webkit-mask-size:100% 100%; mask-size:100% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat}
 .st-art .scene-svg{width:100%; height:100%; display:block}
-.st-vname{position:absolute; z-index:2; top:8px; left:4px; writing-mode:vertical-rl; font-family:var(--brush); font-size:48px; line-height:1.02; color:#c23a2c; text-shadow:0 0 14px var(--paper), 0 0 4px var(--paper), 0 0 2px var(--paper)}
-.st-done{position:absolute; z-index:2; top:14px; right:10px; width:58px; height:58px; border-radius:50%; border:3px double #c23a2c; color:#c23a2c; display:grid; place-items:center; font-family:var(--brush); font-size:34px; transform:rotate(-12deg); background:rgba(251,246,234,.75)}
+.st-vname{position:absolute; z-index:2; top:8px; left:4px; writing-mode:vertical-rl; font-family:var(--brush); font-size:48px; line-height:1.02; color:var(--seal); text-shadow:0 0 14px var(--paper), 0 0 4px var(--paper), 0 0 2px var(--paper)}
+.st-done{position:absolute; z-index:2; top:14px; right:10px; width:58px; height:58px; border-radius:50%; border:3px double var(--seal); color:var(--seal); display:grid; place-items:center; font-family:var(--brush); font-size:34px; transform:rotate(-12deg); background:color-mix(in srgb, var(--sheet) 75%, transparent)}
 .st-info{position:relative; width:fit-content; max-width:100%; margin:-4px auto 0; text-align:center; padding:4px 14px 6px; border-radius:16px; background:var(--paper); box-shadow:0 0 18px 14px var(--paper)}
 .st-num{display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); font-weight:700}
 .st-info h3{font-family:var(--display); font-weight:600; font-size:23px; margin:2px 0 2px; line-height:1.2}
@@ -353,20 +342,20 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .vbanner .vb-art{position:absolute; inset:0; -webkit-mask-image:linear-gradient(to bottom, #000 35%, transparent 92%); mask-image:linear-gradient(to bottom, #000 35%, transparent 92%)}
 .vbanner .scene-svg{width:100%; height:100%; display:block}
 .vb-text{position:absolute; z-index:2; left:16px; right:16px; bottom:10px; display:flex; align-items:flex-end; gap:12px}
-.vb-text .brush{font-size:56px; color:#c23a2c; line-height:.9; text-shadow:0 0 14px var(--paper)}
+.vb-text .brush{font-size:56px; color:var(--seal); line-height:.9; text-shadow:0 0 14px var(--paper)}
 .vb-text h1{font-family:var(--display); font-weight:600; font-size:28px; margin:0; line-height:1.1}
 /* Spielhalle */
-.lobby-hero{position:relative; margin:-18px -16px 10px; height:250px; overflow:hidden}
-.lobby-hero canvas{width:100%; height:100%; display:block; -webkit-mask-image:linear-gradient(to bottom, #000 70%, transparent); mask-image:linear-gradient(to bottom, #000 70%, transparent)}
+.lobby-hero{position:relative; margin:-18px -16px 0; height:220px; overflow:hidden}
+.lobby-hero canvas{width:100%; height:100%; display:block; filter:var(--pic-filter); -webkit-mask-image:linear-gradient(to bottom, #000 70%, transparent); mask-image:linear-gradient(to bottom, #000 70%, transparent)}
 .lobby-hero::after{-webkit-mask-image:linear-gradient(to bottom, #000 70%, transparent); mask-image:linear-gradient(to bottom, #000 70%, transparent)}
-.lobby-title{position:absolute; z-index:1; left:16px; top:12px; display:flex; flex-direction:column}
-.lobby-title .brush{font-size:60px; color:#c23a2c; line-height:1; text-shadow:0 0 16px rgba(246,234,211,.95)}
-.lt-de{margin:0; line-height:1.2; font-family:var(--display); font-weight:600; font-size:22px; color:#1d1a16; text-shadow:0 0 10px rgba(246,234,211,.95)}
+.lobby-title{position:relative; z-index:1; display:flex; flex-wrap:wrap; align-items:flex-end; gap:4px 12px; margin:-6px 0 8px}
+.lobby-title .brush{flex:none; white-space:nowrap; font-size:50px; color:var(--seal); line-height:.9; text-shadow:0 0 14px var(--paper)}
+.lt-de{margin:0; line-height:1.1; font-family:var(--display); font-weight:600; font-size:28px}
 .rivals{display:grid; gap:14px}
 .rival{display:flex; gap:14px; padding:14px; border-radius:18px; background:var(--sheet) var(--texture); box-shadow:0 0 0 1px color-mix(in srgb, var(--line) 75%, transparent), 0 14px 30px -20px rgba(60,40,20,.45); transition:transform .3s cubic-bezier(.2,.9,.3,1.3)}
-.rival:hover{transform:translateY(-4px)}
+@media (hover:hover){ .rival:hover{transform:translateY(-4px)} }
 .rv-face{flex:none}
-.rv-face svg{width:84px; height:84px; display:block}
+.rv-face svg{width:84px; height:84px; display:block; filter:var(--pic-filter)}
 .rv-body{min-width:0}
 .rv-name .hz{font-size:22px} .rvl-py{font-size:14.5px; font-weight:600}
 .rv-de{font-size:14px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap}
@@ -387,16 +376,16 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .combo.hot{color:var(--seal); animation:hot .5s ease-in-out infinite alternate}
 @keyframes hot{to{transform:scale(1.12)}}
 .race-stage{position:relative; width:100%; max-width:920px; margin:0 auto; height:min(38vh, 320px); min-height:220px; flex:none}
-.race-stage canvas{width:100%; height:100%; display:block}
+.race-stage canvas{width:100%; height:100%; display:block; filter:var(--pic-filter)}
 .race-stage::after, .lobby-hero::after, .tile-game::before{content:""; position:absolute; inset:0; pointer-events:none; background:var(--wash), var(--texture); background-size:420px 420px, auto; mix-blend-mode:multiply; z-index:1}
 .race-count{z-index:2}
 .race-count{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none}
-.race-count b{font-size:104px; color:#c23a2c; text-shadow:0 0 24px rgba(246,234,211,.95); line-height:1}
-.race-count small{font-weight:700; font-size:16px; color:#1d1a16; background:rgba(251,246,234,.88); padding:2px 12px; border-radius:8px}
+.race-count b{font-size:104px; color:var(--seal); text-shadow:0 0 24px var(--paper); line-height:1}
+.race-count small{font-weight:700; font-size:16px; color:var(--ink); background:color-mix(in srgb, var(--sheet) 88%, transparent); padding:2px 12px; border-radius:8px}
 .race-count.cgo b{animation:countin .8s cubic-bezier(.2,1.6,.4,1)}
 @keyframes countin{from{transform:scale(2.4) rotate(-8deg); opacity:0} 45%{transform:scale(.94); opacity:1} to{transform:none}}
 .race-say{display:flex; align-items:center; gap:10px; max-width:920px; width:100%; margin:8px auto 0; padding:0 14px}
-.race-say .panda svg{width:46px; height:46px; display:block}
+.race-say .panda svg{width:46px; height:46px; display:block; filter:var(--pic-filter)}
 .race-say p{margin:0; flex:1; background:var(--sheet); border-radius:14px; padding:8px 12px; font-size:14.5px; position:relative; box-shadow:0 0 0 1px var(--line); min-height:40px}
 .race-say p::before{content:""; position:absolute; left:-7px; top:50%; margin-top:-6px; border:6px solid transparent; border-left:0; border-right-color:var(--sheet)}
 .race-say p.pop{animation:sayin .35s cubic-bezier(.2,1.4,.4,1)}
@@ -405,7 +394,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .rq-head{display:flex; align-items:center; gap:14px; min-height:76px}
 .rq-k{display:block; font-size:13px; font-weight:700; color:var(--muted)}
 .rq-zi{font-size:calc(46px * var(--hz-scale)); line-height:1.15; background:var(--sheet); border:0; border-radius:14px; padding:4px 14px; box-shadow:0 0 0 1px var(--line); cursor:pointer; flex:none}
-.rq-play{width:64px; height:64px; border-radius:50%; border:0; background:var(--seal); color:#fff; display:grid; place-items:center; cursor:pointer; flex:none; box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--seal) 75%, #000), inset 0 1px 0 rgba(255,255,255,.18), 0 8px 18px -9px color-mix(in srgb, var(--seal) 85%, transparent)}
+.rq-play{width:64px; height:64px; border-radius:50%; border:0; background:var(--seal); color:var(--seal-ink); display:grid; place-items:center; cursor:pointer; flex:none; box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--seal) 75%, #000), inset 0 1px 0 rgba(255,255,255,.18), 0 8px 18px -9px color-mix(in srgb, var(--seal) 85%, transparent)}
 .rq-de{display:block; font-family:var(--display); font-weight:600; font-size:22px; line-height:1.2}
 .rq-py{display:block; font-size:18px; font-weight:600}
 .rq-timer{height:4px; border-radius:2px; background:var(--paper-2); overflow:hidden; margin:6px 0 10px}
@@ -426,7 +415,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .rq-fix{margin:10px 0 0; font-size:15px} .rq-fix .hz{font-size:20px}
 .rq-wait{text-align:center; padding:34px 10px; color:var(--muted); font-weight:600}
 .rr-head{display:flex; gap:14px; align-items:center}
-.rr-seal{flex:none; width:74px; height:74px; border-radius:14px; display:grid; place-items:center; background:var(--seal); color:#fff; font-family:var(--brush); font-size:52px; transform:rotate(-6deg); animation:stamp .5s cubic-bezier(.2,1.6,.4,1); box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
+.rr-seal{flex:none; width:74px; height:74px; border-radius:14px; display:grid; place-items:center; background:var(--seal); color:var(--seal-ink); font-family:var(--brush); font-size:52px; transform:rotate(-6deg); animation:stamp .5s cubic-bezier(.2,1.6,.4,1); box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
 .rr-seal.lost{background:var(--ink-2); color:var(--paper)}
 .rr-title{display:block; font-family:var(--display); font-weight:600; font-size:29px; line-height:1.15}
 .rr-sub{font-size:14px; color:var(--muted)}
@@ -441,7 +430,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .pbrush{flex:1; min-width:0; width:100%; height:20px; display:block; overflow:visible}
 .pbrush .fillrect{transform-box:fill-box; transform-origin:left center; transition:transform .55s cubic-bezier(.3,.9,.3,1)}
 @media (min-width:880px){
-  main{max-width:880px}
+  main{max-width:940px}
   .hero-art{-webkit-mask-image:linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 58%, transparent 97%); -webkit-mask-composite:source-in; mask-image:linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 58%, transparent 97%); mask-composite:intersect}
   .vbanner .vb-art{-webkit-mask-image:linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 35%, transparent 92%); -webkit-mask-composite:source-in; mask-image:linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 35%, transparent 92%); mask-composite:intersect}
   .lobby-hero canvas, .lobby-hero::after{-webkit-mask-image:linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 70%, transparent); -webkit-mask-composite:source-in; mask-image:linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 70%, transparent); mask-composite:intersect}
@@ -452,8 +441,8 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
   .hero-date{right:28px; top:26px}
   .vbanner{margin:-36px -40px 10px; height:210px}
   .vb-text{left:32px}
-  .lobby-hero{margin:-36px -40px 14px; height:320px}
-  .lobby-title{left:32px; top:24px}
+  .lobby-hero{margin:-36px -40px 0; height:300px}
+  .lobby-title{margin-left:-8px}
   .st-art{height:250px}
   .st-vname{font-size:60px}
   .tile{min-height:180px}
@@ -461,23 +450,27 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 @media (max-width:420px){
   .topbar .logo-t{display:none}
   .topbar .logo .seal{width:36px; height:36px; font-size:25px}
-  .tile-game small{display:none}
+  .tile-game small:not(.keep){display:none}
 }
 @media (max-width:520px){
   .rr-stats{grid-template-columns:repeat(2, 1fr)}
   .race-count b{font-size:84px}
-  .lobby-title .brush{font-size:50px}
+  .lobby-title .brush{font-size:40px}
+  .lt-de{font-size:22px}
 }
 
 /* ---------- Sitzung (Lektion, Wiederholung) ---------- */
 .session:focus, .game:focus{outline:none}
 .session{position:fixed; inset:0; z-index:50; display:flex; flex-direction:column; background:var(--paper) var(--texture)}
 .s-head{display:flex; align-items:center; gap:14px; padding:14px 18px; max-width:760px; width:100%; margin:0 auto}
-.s-close{flex:none; height:40px; min-width:40px; border-radius:999px; border:1.5px solid var(--line); background:var(--sheet); cursor:pointer; font-size:18px; padding:0 12px; font-weight:700}
+.s-close{flex:none; height:40px; min-width:40px; border-radius:999px; border:1.5px solid transparent; background:transparent; color:var(--ink-2); cursor:pointer; font-size:18px; padding:0 12px; font-weight:700}
+.s-close:hover{background:var(--paper-2)}
 .s-close.confirm{border-color:var(--bad); color:var(--bad); font-size:14px}
 .s-pct{flex:none; font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; min-width:38px; text-align:right}
+@media (max-width:520px){ .s-head{gap:10px; padding:12px 14px} .s-pct{display:none} }
 .s-main{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch}
 .s-inner{max-width:680px; margin:0 auto; padding:8px 18px 28px}
+@media (min-height:760px){ .s-inner{padding-top:3vh} }
 .s-foot{border-top:1px solid var(--line); background:var(--sheet); padding:14px 18px calc(14px + env(safe-area-inset-bottom))}
 .s-foot.ok{background:var(--ok-bg); border-top-color:var(--ok)}
 .s-foot.bad{background:var(--bad-bg); border-top-color:var(--bad)}
@@ -487,6 +480,8 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .s-foot-in{max-width:680px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 18px; min-height:52px}
 .fb{display:flex; gap:12px; align-items:flex-start; flex:1 1 280px}
 .fb .seal{flex:none; width:46px; height:46px; font-size:30px; border-radius:10px; animation:stamp .28s cubic-bezier(.2,1.6,.4,1)}
+@media (max-width:520px){ .fb .seal{width:38px; height:38px; font-size:24px} .fb-title{font-size:16.5px} .s-foot{padding:12px 14px calc(12px + env(safe-area-inset-bottom))} }
+#session .btn:focus-visible{outline-width:2px; outline-offset:3px}
 .s-foot.ok .fb .seal{background:var(--ok)}
 .s-foot.bad .fb .seal{background:var(--bad)}
 @keyframes stamp{from{transform:scale(1.6) rotate(-12deg); opacity:0} to{transform:scale(1) rotate(-3deg); opacity:1}}
@@ -504,6 +499,8 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .mn-cap{display:block; font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:2px}
 .s-foot .btn{min-width:160px}
 .s-hint{color:var(--muted); font-size:14.5px; flex:1 1 220px}
+.tch{display:none}
+@media (hover:none) and (pointer:coarse){ .kb, .btn kbd{display:none} .tch{display:inline} }
 .kicker{display:flex; align-items:center; gap:8px; margin:18px 0 6px; font-weight:700; color:var(--muted); font-size:14px; letter-spacing:.02em}
 .kicker .seal{width:24px; height:24px; font-size:15px; border-radius:6px}
 .prompt{font-family:var(--display); font-size:27px; line-height:1.25; margin:2px 0 14px; text-wrap:balance}
@@ -528,8 +525,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .bignum{margin:8px 0 4px; text-align:center; font-family:var(--display); font-size:64px; font-weight:600; line-height:1; letter-spacing:.02em}
 .nopt{font-size:20px; font-variant-numeric:tabular-nums}
 .numhow{margin:16px auto 0; max-width:46ch; text-align:center; font-size:15px; color:var(--ink-2)}
-.numcard{flex-wrap:wrap}
-.numcard .numguide{flex-basis:100%; margin-top:2px; padding-top:10px; border-top:1px solid var(--line)}
+.numcard .numguide{margin-top:2px; padding-top:10px; border-top:1px solid var(--line)}
 .drawcard .numguide b{display:inline; font-size:inherit}
 .numguide{margin-top:8px; font-size:14.5px}
 .numguide summary{cursor:pointer; font-weight:700; color:var(--ink-2)}
@@ -561,13 +557,13 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .ansline{min-height:92px; border-bottom:2px solid var(--line); background:repeating-linear-gradient(to bottom, transparent 0 44px, var(--line) 44px 45px); display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; padding:4px 0 8px; margin-top:8px}
 .bank{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; justify-content:center}
+.bank.done{display:none}
 .tok .tgl{font-size:11.5px; font-weight:600; color:var(--muted); max-width:92px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:1px}
 .plainpy .py{color:var(--ink-2) !important}
 .ansslots{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px 4px; margin-top:12px}
 .as-grp{display:flex; flex-direction:column; gap:4px; padding:6px; border-radius:14px; border:2px solid var(--c); background:color-mix(in srgb, var(--c) 12%, var(--sheet))}
 .as-l{font-size:11.5px; color:var(--ink-2); padding:0 4px; white-space:nowrap}
-.as-l b{color:var(--c); font-weight:800; filter:brightness(.8)}
-:root[data-app-theme="dark"] .as-l b{filter:none}
+.as-l b{color:var(--c); font-weight:800; filter:var(--as-filter)}
 .as-cells{display:flex; gap:6px; flex-wrap:wrap}
 .as-cell{display:block; width:58px; min-height:74px; border-radius:12px; border:2px dashed color-mix(in srgb, var(--c) 55%, var(--line)); background:var(--sheet)}
 .as-pair{display:flex; align-items:stretch; gap:4px}
@@ -603,11 +599,17 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .tbtn.wrong{border-color:var(--bad); background:var(--bad-bg)}
 .finish{display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; padding-top:30px}
 .finish .seal{width:120px; height:120px; font-size:76px; border-radius:18px; animation:stamp .45s cubic-bezier(.2,1.6,.4,1)}
+@media (max-width:520px){ .finish{padding-top:14px} .finish .seal{width:92px; height:92px; font-size:58px} .bigstamp{width:124px; height:124px} .bigstamp .sz{font-size:46px} .goldseal{width:100px; height:100px} .finish h1{font-size:26px} }
 .finish h1{font-family:var(--display); font-size:30px; margin:6px 0 0}
-.stats{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:6px 0}
-.stat{min-width:110px; padding:12px 16px; text-align:center}
+.stats{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; width:min(100%, 440px); margin:6px 0}
+.stat{min-width:0; padding:12px 6px; text-align:center}
+.fin-sub{margin:0; max-width:48ch}
+.fin-actions{display:flex; flex-direction:column; align-items:stretch; gap:8px; width:min(100%, 380px); margin-top:4px}
+.fin-actions .btn{white-space:normal}
+.btn.plain{background:none; color:var(--ink-2); box-shadow:none; padding:10px 16px; font-weight:600; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px}
+.btn.plain:hover{color:var(--ink); text-decoration-color:currentColor}
 .stat b{display:block; font-size:26px; font-variant-numeric:tabular-nums; line-height:1.2}
-.stat span{font-size:13px; color:var(--muted)}
+.stat span{display:block; font-size:12.5px; line-height:1.3; color:var(--muted)}
 .learned{display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
 
 
@@ -615,11 +617,9 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .s-S{--c:var(--sS)} .s-V{--c:var(--sV)} .s-O{--c:var(--sO)} .s-A{--c:var(--sA)} .s-D{--c:var(--sD)} .s-T{--c:var(--sT)}
 .s-L{--c:var(--sL)} .s-Z{--c:var(--sZ)} .s-Q{--c:var(--sQ)} .s-P{--c:var(--sP)} .s-X{--c:var(--sX)}
 .bauplan{display:flex; flex-wrap:wrap; align-items:center; gap:5px 6px}
-.bp{display:inline-flex; flex-direction:column; align-items:center; padding:3px 10px 4px; border-radius:9px; background:var(--c); color:#fff; line-height:1.15; box-shadow:inset 0 -2px 0 rgba(0,0,0,.18)}
+.bp{display:inline-flex; flex-direction:column; align-items:center; padding:3px 10px 4px; border-radius:9px; background:var(--c); color:var(--bp-ink); line-height:1.15; box-shadow:inset 0 -2px 0 rgba(0,0,0,.18)}
 .bp b{font-size:13px; font-weight:700}
 .bp small{font-size:10.5px; opacity:.88; white-space:nowrap}
-:root[data-app-theme="dark"] .bp{color:#14110d}
-@media (prefers-color-scheme: dark){ :root:not([data-app-theme="light"]) .bp{color:#14110d} }
 .bp-plus, .sg-plus{color:var(--muted); font-weight:800; font-size:15px}
 .bp-pair{display:inline-flex; align-items:center; gap:6px}
 .sg-pair{display:flex; align-items:stretch; gap:6px}
@@ -637,14 +637,15 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .sw-gl{font-size:13px; font-weight:700; margin-top:1px}
 .sw-wc{font-size:10.5px; color:var(--muted)}
 .why{display:flex; gap:10px; align-items:flex-start; background:color-mix(in srgb, var(--gold) 10%, var(--sheet)); border-radius:12px; padding:10px 12px; font-size:14.5px; line-height:1.5; margin:10px 0 0; text-align:left}
-.why .seal{flex:none; width:26px; height:26px; font-size:17px; border-radius:7px; background:var(--gold); color:#fff}
+.why .seal{flex:none; width:26px; height:26px; font-size:17px; border-radius:7px; background:var(--gold); color:var(--gold-ink)}
 .why .hz{font-size:1.15em}
-.satzbox{margin-top:18px; padding:12px 12px 14px; border-radius:16px; background:var(--sheet) var(--texture); box-shadow:0 0 0 1px var(--line), 0 12px 24px -20px rgba(60,40,20,.5); animation:inkin .45s cubic-bezier(.2,.8,.2,1)}
+.satzbox{margin-top:18px; padding:12px 12px 14px; border-radius:16px; background:var(--sheet) var(--texture); box-shadow:0 0 0 1px var(--line), 0 12px 24px -20px rgba(60,40,20,.5); animation:fadeup .35s ease-out; scroll-margin-bottom:16px}
+@keyframes fadeup{from{opacity:0; transform:translateY(6px)}}
 .satzbox.in-card{margin:2px 0 0; box-shadow:0 0 0 1px var(--line); text-align:left}
 .hzn{white-space:nowrap}
 .wc-tag{display:inline-block; font-size:12px; font-weight:800; letter-spacing:.06em; padding:2px 10px; border-radius:999px; border:1.5px solid var(--line); color:var(--ink-2); background:var(--paper-2)}
 .oldtag{display:inline-flex; align-items:center; gap:7px; margin:14px 0 -6px; padding:3px 12px 3px 4px; border-radius:999px; background:color-mix(in srgb, var(--gold) 16%, var(--sheet)); color:var(--ink-2); font-size:13px; font-weight:700}
-.oldtag .seal{width:22px; height:22px; font-size:14px; border-radius:50%; background:var(--gold); color:#fff}
+.oldtag .seal{width:22px; height:22px; font-size:14px; border-radius:50%; background:var(--gold); color:var(--gold-ink)}
 /* Bauplan als Schriftrolle */
 .scroll{margin:14px auto 4px; max-width:640px; filter:drop-shadow(0 16px 22px rgba(60,40,20,.16))}
 .sc-rod{position:relative; height:14px; margin:0 -10px; border-radius:7px; background:linear-gradient(#9a6a3f, #6b4424 55%, #4a2d17)}
@@ -665,7 +666,8 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .wordcard .center{margin-top:0}
 /* Kopf der Übung */
 .s-mid{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px}
-.s-ctx{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.s-ctx{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:var(--muted); white-space:nowrap; min-width:0}
+.s-ttl{min-width:0; overflow:hidden; text-overflow:ellipsis}
 .s-place{font-family:var(--brush); color:var(--seal); font-size:17px; line-height:1}
 /* Tonkurven */
 .tcurve{display:block; width:44px; height:26px; color:var(--ink); margin:1px 0 2px}
@@ -675,15 +677,14 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .fach{position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; min-height:158px; margin:0; padding:14px 2px 10px; background:linear-gradient(to bottom, color-mix(in srgb, var(--paper-2) 80%, var(--sheet)), var(--sheet) 70%); color:var(--ink); text-align:center}
 .fach + .fach::before{content:""; position:absolute; left:-1px; top:8px; bottom:8px; width:1.5px; border-radius:1px; background:linear-gradient(to bottom, color-mix(in srgb, var(--ink) 15%, transparent), color-mix(in srgb, var(--ink) 50%, transparent) 30%, color-mix(in srgb, var(--ink) 40%, transparent) 85%, color-mix(in srgb, var(--ink) 10%, transparent))}
 .stack{position:relative; width:78%; height:70px; margin-bottom:8px}
-.stack i{position:absolute; left:0; right:0; bottom:calc(var(--i) * 4px); height:42px; border-radius:3px; background:linear-gradient(#fdf8ee 0 7px, color-mix(in srgb, var(--seal) 70%, #fdf8ee) 7px 8px, #fdf8ee 8px); box-shadow:0 0 0 .5px rgba(60,40,20,.25), 0 1px 2px rgba(60,40,20,.25); transform:rotate(calc((var(--i) - 3) * .9deg))}
+.stack i{position:absolute; left:0; right:0; bottom:calc(var(--i) * 4px); height:42px; border-radius:3px; background:linear-gradient(var(--card-paper) 0 7px, color-mix(in srgb, var(--seal) 70%, var(--card-paper)) 7px 8px, var(--card-paper) 8px); box-shadow:0 0 0 .5px var(--line), 0 1px 2px rgba(60,40,20,.25); transform:rotate(calc((var(--i) - 3) * .9deg))}
 .fach b{font-family:var(--display); font-size:21px; line-height:1}
 .fach span{font-size:11.5px; font-weight:700; margin-top:2px}
-.fach small{font-size:10.5px; opacity:.75; line-height:1.2; margin-top:1px}
+.fach small{font-size:10.5px; opacity:.75; line-height:1.2; margin-top:1px; min-height:3.6em}
 .fach.leer .stack::after{content:""; position:absolute; left:14%; right:14%; bottom:0; height:2px; border-radius:2px; background:color-mix(in srgb, var(--ink) 18%, transparent)}
 .kasten-sum{margin:12px 0 0; font-size:14.5px; color:var(--ink-2); text-align:center}
 .kasten-sum b{font-variant-numeric:tabular-nums}
 /* Baupläne-Übersicht */
-.smode{margin-top:14px}
 .legend-card{margin-top:14px; padding:14px 16px}
 .legend{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
 .plan{margin-top:10px; border-radius:14px; background:var(--sheet) var(--texture); box-shadow:0 0 0 1px var(--line)}
@@ -703,7 +704,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .say-got{margin:0; font-size:26px; color:var(--ink-2)}
 .say-tgt{margin:0; font-size:32px} .say-tgt .ok{color:var(--ok)} .say-tgt .bad{color:var(--bad); text-decoration:underline dotted}
 /* ---------- Kurze Texte ---------- */
-.toast{position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom)); transform:translate(-50%, 12px); padding:9px 14px; border-radius:999px; background:var(--ink); color:var(--paper); font-size:14px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60}
+.toast{position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom)); transform:translate(-50%, 12px); padding:9px 14px; border-radius:999px; background:var(--inv-bg); color:var(--inv-ink); font-size:14px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60}
 .toast.on{opacity:1; transform:translate(-50%, 0)}
 @media (min-width: 900px){ .toast{bottom:28px} }
 .rtext{margin:4px 0 10px}
@@ -726,14 +727,16 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .lsn .dl-b:not(.played):not(.playing) .dl-line{opacity:.55}
 .lsn-n{font-size:12px; font-weight:700; opacity:.7}
 @keyframes lsnbounce{50%{opacity:1; transform:translateY(-3px)}}
-.lsn-sel{display:block; margin-top:8px; max-width:100%; font:inherit; font-size:14px; padding:6px 10px; border-radius:10px; border:1.5px solid var(--line); background:var(--sheet); color:var(--ink)}
+.lsn-sel{display:block; margin-top:8px; width:100%; max-width:420px; font:inherit; font-size:14px; padding:6px 10px; border-radius:10px; border:1.5px solid var(--line); background:var(--sheet); color:var(--ink)}
 .pl-chev{color:var(--muted); font-size:22px; line-height:1; transition:transform .2s}
 .plan[open] .pl-chev{transform:rotate(90deg)}
-.pl-n{flex:none; font-size:11.5px; font-weight:800; background:var(--seal); color:#fff; border-radius:6px; padding:2px 6px; font-variant-numeric:tabular-nums}
+.pl-n{flex:none; font-size:11.5px; font-weight:800; background:var(--seal); color:var(--seal-ink); border-radius:6px; padding:2px 6px; font-variant-numeric:tabular-nums}
 .plan.locked{display:flex; align-items:center; gap:10px; padding:11px 14px; opacity:.55; box-shadow:0 0 0 1px var(--line) inset; background:none}
 .plan.locked b{flex:1; font-weight:600}
 .plan.locked small{color:var(--muted); font-size:12.5px; white-space:nowrap}
 .plan.locked .pl-n{background:var(--muted)}
+.plan-more summary{cursor:pointer; padding:10px 2px; font-weight:700; color:var(--muted)}
+.plan-more > .plan{margin-top:8px}
 .pl-body{padding:0 14px 16px}
 .pl-body > p{font-size:15.5px; line-height:1.6; margin:12px 0 0}
 .pl-body > p .hz{font-size:1.15em}
@@ -765,29 +768,30 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .w-help{font-size:14px; color:var(--muted); flex:1 1 220px}
 .w-res{margin-top:12px}
 /* Gold */
-.node.done.gold{background:radial-gradient(circle at 35% 30%, #f4dc8e, #d4a63a 55%, #a77a1f); border-color:#a77a1f; color:#3b2a08;
+.node.done.gold{background:radial-gradient(circle at 35% 30%, var(--gold-hi), var(--gold-mid) 55%, var(--gold-lo)); border-color:var(--gold-lo); color:#3b2a08;
   box-shadow:inset 0 0 0 4px #e2bb55, inset 0 0 0 5.5px rgba(255,248,220,.8), 0 2px 6px -2px rgba(125,90,20,.5), 0 0 18px -2px rgba(212,166,58,.5)}
 .node.done.gold::after{opacity:.22}
 .node.done.gold .an{opacity:.85}
-.gtag{color:#a77a1f; font-weight:700}
+.gtag{color:var(--gold-text); font-weight:700}
 .btn.gold{background:linear-gradient(180deg, #e2bb55, #c4952e); color:#2c1f06; border-color:#a77a1f; box-shadow:inset 0 0 0 1px #a77a1f, 0 7px 16px -9px rgba(125,90,20,.8)}
-.st-done.gold{border-color:#c4952e; color:#a77a1f; background:rgba(255,246,214,.85)}
-.stamp.got.gold, .bk .stamp.got.gold{color:#a77a1f; border-color:#c4952e; background:rgba(212,166,58,.12)}
+.st-done.gold{border-color:var(--gold-mid); color:var(--gold-text); background:color-mix(in srgb, var(--gold) 14%, var(--sheet))}
+.stamp.got.gold, .bk .stamp.got.gold{color:var(--gold-text); border-color:var(--gold-mid); background:color-mix(in srgb, var(--gold) 12%, transparent)}
 .goldseal{width:120px; height:120px; margin:0 auto; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle at 35% 30%, #f8e6a6, #d4a63a 55%, #9c7019);
   box-shadow:inset 0 0 0 6px #e8c766, inset 0 0 0 8px rgba(255,248,220,.85), 0 10px 26px -10px rgba(120,80,10,.6); animation:slam .6s cubic-bezier(.2,1.4,.4,1) both}
 .goldseal span{font-family:var(--brush); font-size:66px; color:#3b2a08; line-height:1}
-.goldnote{display:flex; align-items:center; justify-content:center; gap:8px; margin:12px 0 0; font-size:14.5px; color:var(--ink-2)}
+.goldnote{display:inline-flex; align-items:flex-start; gap:8px; max-width:44ch; margin:12px 0 0; font-size:14.5px; color:var(--ink-2); text-align:left}
+.goldnote .gdot{margin-top:4px}
 .gdot{flex:none; width:14px; height:14px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #f4dc8e, #c4952e)}
 /* Ohne Ton */
-.s-snd{flex:none; width:40px; height:40px; border-radius:50%; border:1.5px solid var(--line); background:var(--sheet); color:var(--ink-2); display:grid; place-items:center; cursor:pointer; padding:0}
-.s-snd.off{background:var(--ink); border-color:var(--ink); color:var(--paper)}
-.s-snd:hover{border-color:var(--ink-2)}
+.s-snd{flex:none; width:40px; height:40px; border-radius:50%; border:1.5px solid transparent; background:transparent; color:var(--ink-2); display:grid; place-items:center; cursor:pointer; padding:0}
+.s-snd.off{background:var(--inv-bg); border-color:var(--inv-bg); color:var(--inv-ink)}
+.s-snd:hover{background:var(--paper-2)}
 .quiet-ask{max-width:440px; margin:40px auto 0; text-align:center; padding:20px 18px; border-radius:18px; background:var(--sheet); border:1px solid var(--line); box-shadow:0 10px 24px -18px rgba(40,20,10,.5)}
 .quiet-ask p{margin:0 0 14px; line-height:1.5}
 .qa-btns{display:flex; flex-direction:column; gap:8px; margin-bottom:10px}
 .nohear{display:inline-flex; align-items:center; gap:6px; margin-top:12px; border:1px solid var(--line); background:var(--sheet); border-radius:999px; padding:7px 14px; font:inherit; font-size:14px; font-weight:600; color:var(--ink-2); cursor:pointer}
 .nohear:hover{border-color:var(--ink-2)}
-.quiet-chip{cursor:pointer; color:var(--paper); background:var(--ink); padding:3px 10px 3px 8px; border:0; font:inherit; font-size:13px; font-weight:700}
+.quiet-chip{cursor:pointer; color:var(--inv-ink); background:var(--inv-bg); padding:3px 10px 3px 8px; border:0; font:inherit; font-size:13px; font-weight:700}
 .quiet-chip svg{width:16px; height:16px}
 @media (max-width:360px){ .quiet-chip .qc-t{display:none} }
 .side-quiet{display:flex; align-items:center; gap:10px; width:100%; margin-top:12px; padding:8px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:inherit; text-align:left; cursor:pointer; font:inherit}
@@ -809,9 +813,10 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .draw-done{font-family:var(--hanzi); font-size:calc(120px * var(--hz-scale)); line-height:1.1; margin:6px 0}
 .draw-btns{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
 .draw-btns .btn{padding:10px 14px; font-size:14.5px}
+@media (max-width:520px){ .draw-btns{flex:1 1 100%; flex-wrap:nowrap} .draw-btns .btn{flex:1 1 0; white-space:nowrap} }
 /* Freies Gespräch */
 .chat-intro{padding:16px 18px; margin-top:8px}
-.chat-intro h3{display:flex; align-items:center; gap:8px; margin:0 0 8px; font-family:var(--display); font-size:21px; font-weight:600}
+.chat-intro h3{display:flex; align-items:center; gap:8px; margin:0 0 8px; font-family:var(--display); font-size:18px; font-weight:600}
 .scenes{display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:8px}
 .scen{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px; border:1px solid var(--line); background:var(--sheet); text-align:left; cursor:pointer; font:inherit; color:inherit}
 .scen:hover{border-color:var(--ink-2)}
@@ -844,11 +849,25 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .tbar:last-child i{background:var(--seal)}
 .tbar small{font-size:11.5px; font-weight:700; order:-1}
 .tbar em{font-style:normal; font-size:10.5px; color:var(--muted)}
-.testcard.due{border-color:color-mix(in srgb, var(--seal) 45%, var(--line))}
-.drawcard{display:flex; align-items:center; gap:14px; margin-top:18px; padding:14px 16px}
-.drawcard .big{font-family:var(--hanzi); font-size:46px; line-height:1; color:var(--seal)}
-.drawcard > div{flex:1; min-width:0}
+.testcard.due{box-shadow:0 0 0 1.5px color-mix(in srgb, var(--seal) 45%, var(--line)), 0 12px 28px -20px rgba(60,40,20,.38)}
+.pgrid{display:grid; gap:12px}
+.drawcard{display:grid; grid-template-columns:auto minmax(0, 1fr) auto; align-items:center; column-gap:14px; margin-top:18px; padding:14px 16px}
+.pgrid .drawcard{margin-top:0}
+.drawcard .big{width:1em; text-align:center; font-family:var(--hanzi); font-size:40px; line-height:1; color:var(--seal)}
+.drawcard .btn:disabled{opacity:.55}
+.drawcard > div{min-width:0}
+.drawcard > .numguide{grid-column:1 / -1}
 .drawcard b{display:block; font-size:16px}
+@media (max-width:620px){
+  .drawcard{grid-template-columns:auto minmax(0, 1fr); align-items:start; align-content:start; row-gap:10px}
+  .drawcard .big{font-size:30px; margin-top:2px}
+  .drawcard > .btn{grid-column:2; justify-self:start; padding:9px 18px; font-size:15px}
+}
+@media (min-width:1100px){ .pgrid{grid-template-columns:1fr 1fr} .pgrid .drawcard{grid-template-columns:auto minmax(0, 1fr); align-items:start; align-content:start; row-gap:10px} .pgrid .drawcard > .btn{grid-column:2; justify-self:start} }
+@media (max-width:620px){ .wdh-go{width:100%} }
+.howto{margin:6px 0 0; font-size:14.5px; color:var(--ink-2)}
+.howto summary{cursor:pointer; font-weight:700; color:var(--muted); width:fit-content}
+.howto p{margin:6px 0 0; max-width:62ch}
 .drawcard small b{display:inline; font-size:inherit; color:var(--ink-2)}
 .drawcard small{color:var(--muted); font-size:13.5px}
 /* Gespräche */
@@ -890,8 +909,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .node.dl .an{font-size:9.5px}
 .node.dl.avail{border-color:var(--gold); color:var(--gold); background:var(--sheet); box-shadow:inset 0 0 0 4px var(--sheet), inset 0 0 0 5.5px var(--gold), var(--soft); animation:pulseg 2.4s ease-in-out infinite}
 @keyframes pulseg{50%{box-shadow:inset 0 0 0 4px var(--sheet), inset 0 0 0 5.5px var(--gold), var(--soft), 0 0 0 9px color-mix(in srgb, var(--gold) 14%, transparent)}}
-.node.dl.done{background:var(--ink); border-color:var(--ink); color:var(--paper); box-shadow:inset 0 0 0 4px var(--ink), inset 0 0 0 5.5px color-mix(in srgb, var(--paper) 45%, transparent), var(--soft)}
-.dl-whode{font-family:var(--body); font-size:12.5px; color:var(--muted)}
+.node.dl.done{background:var(--inv-bg); border-color:var(--inv-bg); color:var(--inv-ink); box-shadow:inset 0 0 0 4px var(--inv-bg), inset 0 0 0 5.5px color-mix(in srgb, var(--inv-ink) 45%, transparent), var(--soft)}
 .tp-cap{margin:14px 0 8px; font-size:15px}
 .tpgrid{display:grid; grid-template-columns:34px repeat(4, minmax(0, 1fr)); gap:4px; max-width:360px}
 .tpc{display:flex; align-items:center; justify-content:center; min-height:34px; border-radius:8px; background:var(--paper-2); font-size:13.5px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--muted)}
@@ -932,10 +950,10 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .dl-banner .seal{background:var(--gold)}
 .dl-go{font-size:28px; color:var(--gold); line-height:1}
 .dl-banner:hover{border-color:var(--gold)}
-.part-head{position:relative; z-index:1; display:flex; align-items:center; gap:12px; margin:34px 0 4px; padding:12px 14px; border-radius:14px; background:var(--paper-2); border:1px solid var(--line)}
-.part-head .brush{font-size:38px; color:var(--seal); line-height:1}
-.part-head h3{margin:0; font-family:var(--display); font-size:20px; font-weight:600}
+.part-head{position:relative; z-index:1; display:flex; align-items:center; gap:12px; margin:30px 0 4px; padding:10px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.part-head h3{margin:0; font-family:var(--display); font-size:19px; font-weight:600; line-height:1.25}
 .part-head p{margin:2px 0 0; font-size:13.5px; color:var(--muted)}
+.journey-head + .trail > .part-head:first-of-type{margin-top:16px}
 .bk-tabs{display:flex; gap:6px; margin:0 0 8px; flex-wrap:wrap}
 .bk-tabs button{border:1px solid var(--line); background:var(--sheet); border-radius:999px; padding:5px 12px; font:inherit; font-size:13px; font-weight:600; color:var(--ink-2); cursor:pointer}
 .bk-tabs button.on{background:var(--seal); border-color:var(--seal); color:var(--seal-ink)}
@@ -960,7 +978,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .mel-leg .lg-n::before{border-top:2px solid var(--ink); opacity:.75}
 .mel-leg .lg-u::before{border-top:2.5px dashed var(--seal)}
 .own{margin-top:16px; padding:16px 18px}
-.own h3{display:flex; align-items:center; gap:10px; margin:0 0 8px; font-family:var(--display); font-weight:600; font-size:19px}
+.own h3{display:flex; align-items:center; gap:10px; margin:0 0 8px; font-family:var(--display); font-weight:600; font-size:18px}
 .own h3 .seal{width:28px; height:28px; font-size:18px; border-radius:7px}
 .own-how{margin:0 0 10px; font-size:15px; line-height:1.5}
 .own-how .hz{font-size:20px}
@@ -988,8 +1006,6 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .stum-ok{display:flex; gap:3px} .stum-ok i{width:7px; height:7px; border-radius:50%; background:var(--line)} .stum-ok i.on{background:var(--ok)}
 
 /* ---------- Wiederholen ---------- */
-.tiles3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px}
-.tiles3 .stat{min-width:0}
 .filter{margin:6px 0 12px}
 .wlist{list-style:none; margin:0; padding:0}
 .wrow{width:100%; display:grid; grid-template-columns:auto 1fr auto; gap:2px 14px; align-items:center; background:none; border:0; border-bottom:1px solid var(--line); padding:10px 4px; text-align:left; cursor:pointer}
@@ -1010,8 +1026,11 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .reveal{min-height:56px; text-align:center}
 .rv-py{font-size:26px; font-weight:600; line-height:1.2}
 .t-fb{min-height:26px; margin:14px 0 8px; font-weight:600}
+.t-fb:empty{min-height:0; margin:0}
 .t-fb .ok{color:var(--ok)} .t-fb .bad{color:var(--bad)}
 .t-foot{display:flex; gap:10px; flex-wrap:wrap}
+.t-foot:not(:has(> .btn:not([hidden]))){display:none}
+.t-today{margin:16px 0 0}
 .t-foot .btn{flex:1}
 .tb{display:grid; grid-template-columns:70px 1fr auto; align-items:center; gap:12px; font-variant-numeric:tabular-nums; margin-bottom:10px}
 .tb-l{font-weight:600}
@@ -1023,9 +1042,13 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .tips li{margin-bottom:10px; max-width:64ch}
 
 /* ---------- Sätze ---------- */
-.chips{display:flex; flex-wrap:wrap; gap:6px; margin:16px 0 12px}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 12px}
+@media (max-width:620px){ .chips{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-left:-16px; margin-right:-16px; padding:2px 16px 4px; -webkit-mask-image:linear-gradient(to right, #000 85%, transparent); mask-image:linear-gradient(to right, #000 85%, transparent)} .chips::-webkit-scrollbar{display:none} .chip{flex:none} }
 .chip{border:1.5px solid var(--line); background:var(--sheet); border-radius:999px; padding:6px 13px; font-weight:600; font-size:14px; cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--inv-bg); color:var(--inv-ink); border-color:var(--inv-bg)}
+.dir-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 14px}
+#qinfo{margin:0; font-size:14px}
+#dir-hint{margin:10px 0 0; font-size:14.5px; max-width:62ch}
 .fcard{margin-top:14px; padding:18px 20px 20px; min-height:230px; display:flex; flex-direction:column; gap:10px}
 .fc-top{display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:13.5px}
 .fc-de{font-family:var(--display); font-size:25px; line-height:1.3; margin:6px 0 0; text-wrap:balance}
@@ -1044,7 +1067,7 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .done-card{margin-top:14px; padding:22px 20px; display:flex; flex-direction:column; gap:10px; align-items:flex-start}
 .done-card .seal{width:60px; height:60px; font-size:34px; border-radius:12px}
 details.list{margin-top:28px}
-details.list summary{cursor:pointer; font-family:var(--display); font-weight:700; font-size:19px}
+details.list summary{cursor:pointer; font-family:var(--display); font-weight:600; font-size:18px}
 .list h3{font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:20px 0 4px}
 
 /* ---------- Einstellungen ---------- */
@@ -1053,7 +1076,7 @@ details.list summary{cursor:pointer; font-family:var(--display); font-weight:700
 .set h3 .seal{width:28px; height:28px; font-size:18px; border-radius:7px}
 .row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; padding:14px 0; border-top:1px solid var(--line)}
 .set h3 + .row{border-top:0}
-.row .rl{flex:1 1 240px}
+.row .rl{flex:1 1 180px; min-width:0}
 .row .rl b{display:block; font-weight:600}
 .row .rl span{display:block; font-size:13.5px; color:var(--muted)}
 .switch{position:relative; width:52px; height:30px; border-radius:999px; border:0; background:var(--line); cursor:pointer; flex:none; transition:background .15s}
@@ -1074,8 +1097,6 @@ footer.credits{font-size:13px; color:var(--muted); margin-top:40px; border-top:1
   .zi.sm{width:calc(88px * var(--hz-scale)); height:calc(88px * var(--hz-scale)); font-size:calc(54px * var(--hz-scale))}
   h1.title{font-size:26px}
   .prompt{font-size:24px}
-  .continue h3{font-size:23px}
-  .tiles3 .stat b{font-size:22px}
   .s-foot .btn{flex:1 1 100%}
 }
 @media (prefers-reduced-motion: reduce){
@@ -1106,7 +1127,9 @@ footer.credits{font-size:13px; color:var(--muted); margin-top:40px; border-top:1
     <section class="view" id="view-toene" aria-labelledby="h-toene">
       <header class="vbanner"><div class="vb-art" data-scene="wall"></div><div class="vb-text"><span class="brush" aria-hidden="true">声调</span><h1 id="h-toene">Töne hören</h1></div></header>
       <p class="subtitle">Hör eine Aufnahme und tippe, welcher Ton es war. So lernst du, die vier Töne sicher zu unterscheiden.</p>
-      <div style="margin-top:16px" class="seg" role="group" aria-label="Übungsart" id="tmode"></div>
+      <div class="vtabs" role="group" aria-label="Bereich" id="tsecs"></div>
+      <div class="tsec" id="tsec-ueben">
+      <div class="seg" role="group" aria-label="Übungsart" id="tmode"></div>
       <div class="card tstage">
         <div class="picks" id="t-zis"></div>
         <div class="reveal" id="t-reveal" aria-live="polite"></div>
@@ -1120,10 +1143,8 @@ footer.credits{font-size:13px; color:var(--muted); margin-top:40px; border-top:1
         <button type="button" class="btn light" data-act="tundo" id="t-undo" hidden>Letzte Silbe zurück</button>
         <button type="button" class="btn ink" data-act="tnext" id="t-next" hidden>Nächste <kbd>Enter</kbd></button>
       </div>
-      <p class="muted" id="t-today" style="margin-top:12px"></p>
+      <p class="muted t-today" id="t-today"></p>
       <div class="card own" id="t-own"></div>
-      <h2 class="sec">Deine Trefferquote</h2>
-      <div class="card" style="padding:16px 18px 8px" id="t-stats"></div>
       <h2 class="sec">Töne im Satz</h2>
       <div class="card"><ul class="tips">
         <li>Zwei 3. Töne hintereinander: Der erste wird wie ein 2. Ton gesprochen. <span class="hz">你好</span> <span class="py t3">nǐ</span> <span class="py t3">hǎo</span> klingt wie <span class="py t2">ní</span> <span class="py t3">hǎo</span>. Geschrieben wird trotzdem nǐ hǎo.</li>
@@ -1132,21 +1153,25 @@ footer.credits{font-size:13px; color:var(--muted); margin-top:40px; border-top:1
         <li><span class="hz">一</span> <span class="py t1">yī</span> wird vor einem 4. Ton zu <span class="py t2">yí</span> und vor den anderen Tönen zu <span class="py t4">yì</span>. Beim Zählen und als Ordnungszahl bleibt es <span class="py t1">yī</span>.</li>
         <li>Silben ohne Tonzeichen sind unbetont (neutraler Ton), zum Beispiel das zweite <span class="py t0">xie</span> in <span class="hz">谢谢</span> <span class="py t4">xiè</span><span class="py t0">xie</span>.</li>
       </ul></div>
-      <h2 class="sec">Pinyin-Tabelle</h2>
+      </div>
+      <div class="tsec" id="tsec-quote" hidden>
+      <div class="card" style="padding:16px 18px 8px" id="t-stats"></div>
+      </div>
+      <div class="tsec" id="tsec-tabelle" hidden>
       <div class="card pytab" id="py-tab"></div>
+      </div>
     </section>
     <!-- SÄTZE -->
     <section class="view" id="view-saetze" aria-labelledby="h-saetze">
       <header class="vbanner"><div class="vb-art" data-scene="market"></div><div class="vb-text"><span class="brush" aria-hidden="true">句子</span><h1 id="h-saetze">Sätze</h1></div></header>
       <p class="subtitle">Fertige Sätze für die Reise und die Baupläne dahinter. So verstehst du, warum ein Satz so gebaut ist und nicht anders.</p>
-      <div class="seg smode" role="group" aria-label="Ansicht" id="smode"></div>
+      <div class="vtabs smode" role="group" aria-label="Ansicht" id="smode"></div>
       <div id="plans" hidden></div>
       <div id="chat" hidden></div>
       <div id="cards-wrap">
       <div class="chips" id="cats" role="group" aria-label="Thema"></div>
-      <div class="seg" role="group" aria-label="Richtung" id="dirseg"></div>
-      <p class="muted" id="dir-hint" style="margin:10px 0 0; font-size:14.5px"></p>
-      <p class="muted" id="qinfo" style="margin:10px 0 0; font-size:14px"></p>
+      <div class="dir-row"><div class="seg" role="group" aria-label="Richtung" id="dirseg"></div><p class="muted" id="qinfo"></p></div>
+      <p class="muted" id="dir-hint"></p>
       <article class="card fcard" id="fcard" aria-live="polite"></article>
       <div class="c-actions" id="c-actions"></div>
       <div class="card done-card" id="c-done" hidden></div>
@@ -1727,7 +1752,10 @@ function applyPrefs(){
   if(p.theme==="light" || p.theme==="dark") root.setAttribute("data-app-theme", p.theme); else root.removeAttribute("data-app-theme");
   if(p.hz==="gross") root.setAttribute("data-hz", "gross"); else root.removeAttribute("data-hz");
   ["#app", "#session", "#game"].forEach(function(s){ $(s).classList.toggle("tc", !!p.toneColors); });
+  /* Die Rennen-Kachel ist gemalt: nach einem Wechsel hell/dunkel neu zeichnen */
+  if($("#tile-canvas")) drawTile(1000);
 }
+if(window.matchMedia) try{ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){ if(state && state.prefs.theme==="auto" && $("#tile-canvas")) drawTile(1000); }); }catch(e){}
 
 /* ================= Navigation ================= */
 var NAV = [
@@ -1781,7 +1809,7 @@ function route(){
   renderNav();
   if(currentView==="lernen") renderLearn();
   if(currentView==="wiederholen") renderReview();
-  if(currentView==="toene"){ renderTone(); renderToneStats(); renderPyTable(); }
+  if(currentView==="toene"){ renderToneSec(); renderTone(); renderToneStats(); renderPyTable(); }
   if(currentView==="saetze"){ if(!current) startCards(); renderCards(); }
   if(currentView==="einstellungen") renderSettings();
   if(currentView==="spiel") renderLobby();
@@ -1897,11 +1925,15 @@ function renderLearn(){
       (due ? '<button type="button" class="btn red hr-go" data-act="review">Wiederholen<small>'+plural(due, "Wort", "Wörter")+' fällig</small></button>' : '<a class="btn red hr-go" href="#spiel">Zum Rennen<small>Wörter im Drachenboot üben</small></a>')+'</div>';
   }
   h += '</header>';
-  /* Tageswerte in einer Zeile */
-  h += '<div class="statline"><span><span class="sl"><span class="seal" aria-hidden="true">火</span><b>'+plural(streakInfo().count, "Tag", "Tage")+'</b></span>in Folge geübt</span>'+
-    '<span><span class="sl"><span class="seal" style="background:var(--gold)" aria-hidden="true">今</span><b>'+Math.min(d.xp, goal)+' / '+goal+'</b></span>Punkte heute</span>'+
-    '<span><span class="sl"><span class="seal" style="background:var(--ink);color:var(--paper)" aria-hidden="true">词</span><b>'+learned+' / '+WORDS.length+'</b></span>Wörter gelernt</span></div>';
-  h += dayBanner();
+  /* Heute: Tageswerte und was heute ansteht, in einer Karte */
+  var sk = streakInfo().count, rows = dayBanner();
+  /* Gespräch, das nach einer geschafften Etappe wartet, sonst der Wochen-Test */
+  var pend = UNITS.find(function(u){ return u.dlg && unitDone(u) && !dlgDone(u); });
+  if(!pend && testDue()) rows += '<button type="button" class="dl-banner" data-act="test"><span class="seal" aria-hidden="true">考</span><span><b>Dein Wochen-Test ist dran</b><small>15 Fragen quer durch alles Gelernte, etwa fünf Minuten.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
+  if(pend) rows += '<button type="button" class="dl-banner" data-dlg="'+pend.id+'"><span class="seal" aria-hidden="true">话</span><span><b>Gespräch: '+esc(pend.dlg.title)+'</b><small>'+esc(pend.place.de)+' · Gegenüber: '+esc(pend.dlg.who.de.split(",")[0])+'</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
+  h += '<section class="daycard card" aria-label="Heute"><div class="td-head">'+ring(d.xp/goal, 46)+'<div class="td-t"><b>Heute</b><span><span class="nw">'+Math.min(d.xp, goal)+' von '+goal+' Punkten</span>'+(sk ? ' · <span class="nw">'+plural(sk, "Tag", "Tage")+' in Folge</span>' : '')+'</span></div>'+
+    '<span class="td-words" title="Wörter gelernt"><b>'+learned+'</b>von '+WORDS.length+' Wörtern</span></div>'+
+    (rows || '<p class="td-empty">'+(learned ? "Heute steht nichts an. Weiter geht es oben mit der nächsten Lektion." : "Fang oben mit der ersten Lektion an. Danach findest du hier, was jeden Tag ansteht.")+'</p>')+'</section>';
   /* Kacheln: Wiederholen und Spiel */
   var ready = gameReady();
   h += '<div class="tiles2">'+
@@ -1909,12 +1941,17 @@ function renderLearn(){
       '<span class="big" aria-hidden="true">复</span><span class="count">'+due+'<em>'+(due===1 ? "Wort" : "Wörter")+'</em></span>'+
       '<b>'+(due ? "Jetzt wiederholen" : learned ? "Alles wiederholt" : "Noch nichts zu wiederholen")+'</b><small>'+(due ? "Dauert ein paar Minuten" : learned ? "Neue Wörter kommen in den nächsten Tagen" : "Nach der ersten Lektion geht's los")+'</small>'+
     (due ? '</button>' : '</a>')+
-    '<a class="tile tile-game" href="#spiel" id="tile-game"><canvas id="tile-canvas" aria-hidden="true"></canvas><span class="tz" lang="zh" aria-hidden="true">龙舟赛</span><b>Drachenboot-Rennen</b><small>'+(ready ? "Deine Wörter gegen die Uhr" : "Ab 4 gelernten Wörtern")+'</small></a></div>';
-  /* Gespräch, das nach einer geschafften Etappe wartet */
-  var pend = UNITS.find(function(u){ return u.dlg && unitDone(u) && !dlgDone(u); });
-  if(!pend && testDue()) h += '<button type="button" class="dl-banner" data-act="test"><span class="seal" aria-hidden="true">考</span><span><b>Dein Wochen-Test ist dran</b><small>15 Fragen quer durch alles Gelernte. Dauert etwa fünf Minuten.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
-  if(pend) h += '<button type="button" class="dl-banner" data-dlg="'+pend.id+'"><span class="seal" aria-hidden="true">话</span><span><b>Gespräch: '+esc(pend.dlg.title)+'</b><small>'+esc(pend.place.de)+' · Dein Gegenüber: '+esc(pend.dlg.who.de)+'. Deine Antworten wählst du selbst.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
-  /* Reisepass als aufgeschlagenes Heft */
+    '<a class="tile tile-game" href="#spiel" id="tile-game"><canvas id="tile-canvas" aria-hidden="true"></canvas><span class="tz" lang="zh" aria-hidden="true">龙舟赛</span><b>Drachenboot-Rennen</b><small'+(ready ? '' : ' class="keep"')+'>'+(ready ? "Deine Wörter gegen die Uhr" : "Ab 4 gelernten Wörtern")+'</small></a></div>';
+  h += '<div id="learn-booklet">'+bookletHTML(part)+'</div>';
+  h += '<div id="learn-trail"></div>';
+  h += '<footer class="credits">Aufnahmen von Muttersprachlerinnen: Silben gesprochen von Chen Wang, Wörter von Yue Tan, aus dem Projekt <a href="https://github.com/hugolpz/audio-cmn">audio-cmn</a> (Lizenz CC BY-SA). Strichfolgen: <a href="https://hanziwriter.org">Hanzi Writer</a> mit Daten aus Make Me a Hanzi (Arphic Public License).</footer>';
+  $("#view-lernen").innerHTML = h;
+  renderTrail(false);
+  drawTile(1000);
+  heroParallax();
+}
+/* Reisepass als aufgeschlagenes Heft; part: Teil der nächsten Etappe */
+function bookletHTML(part){
   var got = UNITS.filter(unitDone).length;
   var stamp = function(u){
     var i = UNITS.indexOf(u), ok = unitDone(u), r = (rng(i*31+7)()*16-8).toFixed(1);
@@ -1922,15 +1959,9 @@ function renderLearn(){
     return '<div class="stamp '+(ok ? "got"+(unitGold(u) ? " gold" : "") : "open")+(i%2 ? " sq" : "")+'" style="--r:'+r+'deg" title="'+esc(u.place.de)+'"><span class="sz'+(u.place.zh.length>3 ? " l4" : u.place.zh.length>2 ? " l3" : "")+'" lang="zh">'+esc(u.place.zh)+'</span><small>'+(ok ? shortDate(unitDate(u)) : esc(short))+'</small></div>';
   };
   var bp = bkPart || part, pu = UNITS.filter(function(u){ return u.part===bp; }), half = Math.ceil(pu.length/2);
-  h += '<section class="booklet" aria-label="Reisepass"><div class="bk-head"><b><span class="brush" lang="zh">护照</span>Reisepass</b><span class="muted" style="font-size:13.5px">'+got+' von '+UNITS.length+' Stempeln</span></div>'+
+  return '<section class="booklet" aria-label="Reisepass"><div class="bk-head"><b><span class="brush" lang="zh">护照</span>Reisepass</b><span class="muted" style="font-size:13.5px">'+got+' von '+UNITS.length+' Stempeln</span></div>'+
     '<div class="bk-tabs" role="group" aria-label="Seite im Reisepass">'+[1,2].map(function(k){ return '<button type="button" data-bkpart="'+k+'" class="'+(bp===k ? "on" : "")+'" aria-pressed="'+(bp===k)+'">'+(k===1 ? "Peking → Shanghai" : "Shanghai und Hangzhou")+'</button>'; }).join("")+'</div>'+
     '<div class="bk"><div class="bk-page" data-wm="护">'+pu.slice(0, half).map(stamp).join("")+'</div><div class="bk-page" data-wm="照">'+pu.slice(half).map(stamp).join("")+'</div></div></section>';
-  h += '<div id="learn-trail"></div>';
-  h += '<footer class="credits">Aufnahmen von Muttersprachlerinnen: Silben gesprochen von Chen Wang, Wörter von Yue Tan, aus dem Projekt <a href="https://github.com/hugolpz/audio-cmn">audio-cmn</a> (Lizenz CC BY-SA). Strichfolgen: <a href="https://hanziwriter.org">Hanzi Writer</a> mit Daten aus Make Me a Hanzi (Arphic Public License).</footer>';
-  $("#view-lernen").innerHTML = h;
-  renderTrail(false);
-  drawTile(1000);
-  heroParallax();
 }
 /* Lernpfad mit Etappen und Lektionen; calm: ohne Einblend-Animation (beim Auf- und Zuklappen) */
 function renderTrail(calm){
@@ -1943,8 +1974,8 @@ function renderTrail(calm){
   h += '<div class="trail'+(calm ? " calm" : "")+'" id="trail"><svg class="route" id="route" aria-hidden="true"></svg>';
   UNITS.forEach(function(u, ui){
     var dn = u.lessons.filter(isDone).length, up = u.place;
-    if(!ui || u.part!==UNITS[ui-1].part){ var pt = PARTS[u.part]; h += '<div class="part-head"><span class="brush" lang="zh" aria-hidden="true">'+esc(pt.zh)+'</span><div><h3>'+esc(pt.title)+'</h3><p>'+esc(pt.text)+'</p></div></div>'; }
-    h += '<section class="stage2" aria-label="Etappe '+(ui+1)+': '+esc(up.de)+'"><div class="st-art">'+sceneSVG(up.scene)+'</div><span class="st-vname" lang="zh" aria-hidden="true">'+esc(up.zh)+'</span>'+(unitDone(u) ? '<span class="st-done'+(unitGold(u) ? " gold" : "")+'" title="'+(unitGold(u) ? "Etappe gemeistert: alle Lektionen gold" : "Etappe geschafft")+'">'+(unitGold(u) ? "金" : "到")+'</span>' : '')+
+    if(!ui || u.part!==UNITS[ui-1].part){ var pt = PARTS[u.part]; h += '<div class="part-head"><div><h3>'+esc(pt.title)+'</h3><p>'+esc(pt.text)+'</p></div></div>'; }
+    h += '<section class="stage2" aria-label="Etappe '+(ui+1)+': '+esc(up.de)+'"><div class="st-art">'+sceneSVG(up.scene)+'</div><span class="st-vname'+(Array.from(up.zh).length>3 ? " l4" : "")+'" lang="zh" aria-hidden="true">'+esc(up.zh)+'</span>'+(unitDone(u) ? '<span class="st-done'+(unitGold(u) ? " gold" : "")+'" title="'+(unitGold(u) ? "Etappe gemeistert: alle Lektionen gold" : "Etappe geschafft")+'">'+(unitGold(u) ? "金" : "到")+'</span>' : '')+
       '<div class="st-info"><span class="st-num">Etappe '+(ui+1)+' · '+esc(u.title)+'</span><h3>'+esc(up.de)+' <span class="hz" lang="zh" style="font-size:.8em; color:var(--muted)">'+esc(up.zh)+'</span></h3><p>'+esc(up.text)+'</p><span class="st-prog">'+dn+' / '+u.lessons.length+' Lektionen</span></div></section>';
     u.lessons.forEach(function(l){
       var x = ROW_X[gi % ROW_X.length], side = x.charAt(0)==="-" || x==="0%" ? "r" : "l"; gi++;
@@ -1952,7 +1983,7 @@ function renderTrail(calm){
       var cls = done ? "done"+(isGold(l) ? " gold" : "") : isCur ? "current" : "locked";
       h += '<div class="nrow" style="--x:'+x+'">'+
         '<button type="button" class="node '+cls+(open ? " open" : "")+'" data-node="'+l.id+'" style="--d:'+(gi*0.04).toFixed(2)+'s"'+(locked ? ' disabled aria-disabled="true"' : '')+' aria-label="Lektion '+l.n+': '+esc(l.title)+(done ? ", geschafft" : locked ? ", gesperrt" : "")+'" aria-expanded="'+open+'">'+
-        (isCur && !open ? '<span class="go">Start</span>' : '')+'<span class="cn">'+cnNum(l.n)+'</span><small class="an">'+l.n+'</small></button>'+
+        (isCur && !open ? '<span class="go">Start</span>' : '')+'<span class="cn'+(cnNum(l.n).length>2 ? " l3" : "")+'">'+cnNum(l.n)+'</span><small class="an">'+l.n+'</small></button>'+
         '<span class="nlabel '+side+'"><small>Lektion '+l.n+(done ? (isGold(l) ? ' · <span class="gtag">gold</span>' : " · geschafft") : locked ? " · gesperrt" : "")+'</small><b>'+esc(l.title)+'</b><span class="hz" lang="zh">'+l.W.map(function(w){ return esc(w.zh); }).join(" · ")+'</span></span></div>';
       if(open){
         var best = (state.learn.done[l.id]||{}).best;
@@ -2414,7 +2445,7 @@ function capFirst(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
 function dayBanner(){
   var p = dayRoundPlan(); if(!p) return "";
   var done = dayGet().round, ns = Math.min(3, sentPool().length), parts = [p.due ? plural(Math.min(12, p.due), "fälliges Wort", "fällige Wörter") : "deine schwächsten Wörter"].concat(ns ? [ns===1 ? "ein Satz" : ns===2 ? "zwei Sätze" : "drei Sätze"] : [], p.nums ? ["zwei Zahlen"] : []);
-  return '<button type="button" class="dl-banner day-banner'+(done ? " done" : "")+'" data-act="dayround"><span class="seal" aria-hidden="true">'+(done ? "好" : "日")+'</span><span><b>'+(done ? "Tagesrunde geschafft. Noch eine?" : "Tagesrunde, etwa zehn Minuten")+'</b><small>'+esc(capFirst(parts.length>1 ? parts.slice(0, -1).join(", ")+" und "+parts[parts.length-1] : parts[0]))+'. Danach geht es mit der nächsten Lektion weiter.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
+  return '<button type="button" class="dl-banner day-banner'+(done ? " done" : "")+'" data-act="dayround"><span class="seal" aria-hidden="true">'+(done ? "好" : "日")+'</span><span><b>'+(done ? "Tagesrunde geschafft. Noch eine?" : "Tagesrunde, etwa zehn Minuten")+'</b><small>'+esc(capFirst(parts.length>1 ? parts.slice(0, -1).join(", ")+" und "+parts[parts.length-1] : parts[0]))+', danach die nächste Lektion.</small></span><span class="dl-go" aria-hidden="true">›</span></button>';
 }
 /* ================= Zahlen-Training ================= */
 var DIG = ["", "一","二","三","四","五","六","七","八","九","十"];
@@ -2557,23 +2588,23 @@ function optCls(i, isRight){
 }
 function kicker(seal, text){ return '<p class="kicker"><span class="seal" aria-hidden="true">'+seal+'</span>'+text+'</p>'; }
 function sessCtx(){
-  if(S.kind==="dialog") return '<span class="s-ctx"><span class="s-place" lang="zh">'+esc(S.unit.place.zh)+'</span>Gespräch · '+esc(S.d.title)+'</span>';
-  if(S.kind==="lesson") return '<span class="s-ctx"><span class="s-place" lang="zh">'+esc(S.lesson.unit.place.zh)+'</span>Lektion '+S.lesson.n+' · '+esc(S.lesson.title)+'</span>';
-  if(S.kind==="draw") return '<span class="s-ctx"><span class="s-place" lang="zh">写</span>Zeichen schreiben</span>';
-  if(S.kind==="test") return '<span class="s-ctx"><span class="s-place" lang="zh">考</span>Wochen-Test · ohne zweite Chance</span>';
-  if(S.kind==="hsk"){ var ce = cur(); return '<span class="s-ctx"><span class="s-place" lang="zh">考</span>HSK-1-Probetest · '+(ce && ce.part==="l" ? "Lesen" : "Hören")+'</span>'; }
-  if(S.kind==="sent") return '<span class="s-ctx"><span class="s-place" lang="zh">句</span>Satz-Training</span>';
-  if(S.kind==="say") return '<span class="s-ctx"><span class="s-place" lang="zh">说</span>Sag es auf Chinesisch</span>';
-  if(S.kind==="text") return '<span class="s-ctx"><span class="s-place" lang="zh">读</span>Lesen · '+esc(S.t.title)+'</span>';
-  if(S.kind==="listen") return '<span class="s-ctx"><span class="s-place" lang="zh">'+esc(S.unit.place.zh)+'</span>Hören · '+esc(S.d.title)+'</span>';
-  if(S.kind==="num") return '<span class="s-ctx"><span class="s-place" lang="zh">数</span>Zahlen-Training</span>';
-  if(S.kind==="day") return '<span class="s-ctx"><span class="s-place" lang="zh">日</span>Tagesrunde</span>';
-  return '<span class="s-ctx"><span class="s-place" lang="zh">复</span>'+(S.kind==="review" ? "Wiederholen" : "Freies Üben")+'</span>';
+  if(S.kind==="dialog") return '<span class="s-ctx"><span class="s-place" lang="zh">'+esc(S.unit.place.zh)+'</span><span class="s-ttl">Gespräch · '+esc(S.d.title)+'</span></span>';
+  if(S.kind==="lesson") return '<span class="s-ctx"><span class="s-place" lang="zh">'+esc(S.lesson.unit.place.zh)+'</span><span class="s-ttl">Lektion '+S.lesson.n+' · '+esc(S.lesson.title)+'</span></span>';
+  if(S.kind==="draw") return '<span class="s-ctx"><span class="s-place" lang="zh">写</span><span class="s-ttl">Zeichen schreiben</span></span>';
+  if(S.kind==="test") return '<span class="s-ctx"><span class="s-place" lang="zh">考</span><span class="s-ttl">Wochen-Test · ohne zweite Chance</span></span>';
+  if(S.kind==="hsk"){ var ce = cur(); return '<span class="s-ctx"><span class="s-place" lang="zh">考</span><span class="s-ttl">HSK-1-Probetest · '+(ce && ce.part==="l" ? "Lesen" : "Hören")+'</span></span>'; }
+  if(S.kind==="sent") return '<span class="s-ctx"><span class="s-place" lang="zh">句</span><span class="s-ttl">Satz-Training</span></span>';
+  if(S.kind==="say") return '<span class="s-ctx"><span class="s-place" lang="zh">说</span><span class="s-ttl">Sag es auf Chinesisch</span></span>';
+  if(S.kind==="text") return '<span class="s-ctx"><span class="s-place" lang="zh">读</span><span class="s-ttl">Lesen · '+esc(S.t.title)+'</span></span>';
+  if(S.kind==="listen") return '<span class="s-ctx"><span class="s-place" lang="zh">'+esc(S.unit.place.zh)+'</span><span class="s-ttl">Hören · '+esc(S.d.title)+'</span></span>';
+  if(S.kind==="num") return '<span class="s-ctx"><span class="s-place" lang="zh">数</span><span class="s-ttl">Zahlen-Training</span></span>';
+  if(S.kind==="day") return '<span class="s-ctx"><span class="s-place" lang="zh">日</span><span class="s-ttl">Tagesrunde</span></span>';
+  return '<span class="s-ctx"><span class="s-place" lang="zh">复</span><span class="s-ttl">'+(S.kind==="review" ? "Wiederholen" : "Freies Üben")+'</span></span>';
 }
 function oldTag(ex){ return ex.old ? '<p class="oldtag"><span class="seal" aria-hidden="true">复</span>Wiederholung aus Lektion '+ex.w.lesson.n+' · '+esc(ex.w.lesson.title)+'</p>' : ''; }
 function renderSession(){
   var v = $("#session");
-  if(S.finished){ v.innerHTML = '<div class="s-main"><div class="s-inner">'+renderFinish()+'</div></div>'; var b = $("#fin-go"); if(b) b.focus(); return; }
+  if(S.finished){ v.innerHTML = '<div class="s-main" id="s-main"><div class="s-inner">'+renderFinish()+'</div></div>'; var b = $("#fin-go"); if(b) b.focus({preventScroll:true}); return; }
   var ex = cur(), pct = Math.round(100*S.prog);
   v.innerHTML = '<div class="s-head"><button type="button" class="s-close'+(S.confirmClose ? " confirm" : "")+'" data-act="close" aria-label="Übung beenden">'+(S.confirmClose ? "Wirklich beenden?" : "✕")+'</button>'+
     '<div class="s-mid">'+sessCtx()+brushBar(S.lastPct==null ? pct : S.lastPct, pct)+'</div>'+
@@ -2597,7 +2628,7 @@ var ICON_MIC = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stro
 var BRUSH_D = "M4 9.5 C30 4 90 3.5 150 4.6 C210 5.6 262 3 292 5.4 C298.5 6.4 299.5 12 295 14 C270 17.6 200 15.6 150 16 C95 16.4 40 17.6 10 15.6 C3 15 1 12 4 9.5 Z";
 function brushBar(from, pct){
   return '<svg class="pbrush" viewBox="0 0 300 20" preserveAspectRatio="none" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'">'+
-    '<defs><clipPath id="pb-clip"><path d="'+BRUSH_D+'"/></clipPath></defs><g clip-path="url(#pb-clip)"><rect width="300" height="20" fill="var(--paper-2)"/>'+
+    '<defs><clipPath id="pb-clip"><path d="'+BRUSH_D+'"/></clipPath></defs><g clip-path="url(#pb-clip)"><rect width="300" height="20" style="fill:color-mix(in srgb, var(--line) 70%, var(--paper-2))"/>'+
     '<rect class="fillrect" id="pb-fill" width="300" height="20" fill="var(--seal)" style="transform:scaleX('+(from/100)+')"/>'+
     '<path d="M0 8.2 H300 M0 12.6 H300" stroke="var(--paper)" stroke-width=".7" opacity=".35" stroke-dasharray="40 9 70 6 25 12"/></g></svg>';
 }
@@ -2691,13 +2722,13 @@ function renderEx(ex){
             return '<button type="button" class="tok as-tok'+mk+(pre ? " pre" : "")+'" data-ans="'+i+'"'+(S.answered || pre ? " disabled" : "")+'><span class="thz" lang="zh">'+esc(t.zh)+'</span>'+pyBlock(t.py, "tpy")+'<span class="tgl">'+esc(t.gl)+'</span></button>'; }).join("")+'</div></div>'+(k ? '</span>' : '');
         }).join("")+'</div>'+
         (ex.pre && !S.answered ? '<p class="muted pre-note">Neuer Bauplan: Die ersten Wörter sind schon eingesetzt.</p>' : '')+
-        '<div class="bank plainpy">'+ex.bank.map(function(t, i){ var used = ex.built.indexOf(i)>=0;
+        '<div class="bank plainpy'+(S.answered ? " done" : "")+'">'+ex.bank.map(function(t, i){ var used = ex.built.indexOf(i)>=0;
           return '<button type="button" class="tok'+(used?" used":"")+'" data-bank="'+i+'"'+(used||S.answered?" disabled":"")+'><span class="thz" lang="zh">'+esc(t.zh)+'</span>'+pyBlock(t.py, "tpy")+'<span class="tgl">'+esc(t.gl)+'</span></button>'; }).join("")+'</div>';
       } else {
         h += (ex.s.gs ? '<div class="bp-hint"><span class="bp-cap">Bauplan</span>'+patternHTML(ex.s.gs)+'</div>' : '')+
         '<div class="ansline" aria-label="Deine Antwort">'+ex.built.map(function(bi, i){ var t = ex.bank[bi];
           return '<button type="button" class="tok" data-ans="'+i+'"'+(S.answered?" disabled":"")+'><span class="thz" lang="zh">'+esc(t.zh)+'</span>'+pyBlock(t.py, "tpy")+'</button>'; }).join("")+'</div>'+
-        '<div class="bank">'+ex.bank.map(function(t, i){ var used = ex.built.indexOf(i)>=0;
+        '<div class="bank'+(S.answered ? " done" : "")+'">'+ex.bank.map(function(t, i){ var used = ex.built.indexOf(i)>=0;
           return '<button type="button" class="tok'+(used?" used":"")+'" data-bank="'+i+'"'+(used||S.answered?" disabled":"")+'><span class="thz" lang="zh">'+esc(t.zh)+'</span>'+pyBlock(t.py, "tpy")+'</button>'; }).join("")+'</div>';
       }
       if(S.answered && ex.s.gs) h += '<div class="satzbox plainpy"><p class="sb-cap">So ist der Satz gebaut</p>'+breakdownHTML(ex.s.toks, ex.s.gs, ex.s.why)+'</div>';
@@ -2747,6 +2778,8 @@ function renderEx(ex){
   }
   return h;
 }
+/* Hinweis für Tastatur, am Handy ein eigener Text */
+function kbHint(kb, touch){ return '<span class="kb">'+kb+'</span><span class="tch">'+touch+'</span>'; }
 function renderFoot(ex){
   var btnNext = '<button type="button" class="btn ink" id="s-next" data-act="next">Weiter <kbd>Enter</kbd></button>';
   if(ex.type==="dialog") return dialogFoot();
@@ -2761,9 +2794,9 @@ function renderFoot(ex){
   if(!S.answered){
     var hint = ex.type==="build" ? (ex.slot ? (ex.tried ? "Zweiter Versuch: Die grünen Wörter stehen schon richtig." : "Jedes Feld ist ein Wort. Unter den Zeichen steht, was sie heißen.") : "Tippe die Wörter in der richtigen Reihenfolge an.") :
       ex.type==="pairs" ? "Tippe ein Zeichen und dann die passende Bedeutung an." :
-      ex.type==="tone" ? "Tasten 1 bis 4 wählen den Ton"+(quiet() ? "." : ", Leertaste spielt es nochmal ab.") :
+      ex.type==="tone" ? kbHint("Tasten 1 bis 4 wählen den Ton"+(quiet() ? "." : ", Leertaste spielt es nochmal ab."), quiet() ? "Tipp auf den passenden Ton." : "Tipp auf »Anhören«, um es nochmal zu hören.") :
       ex.type==="write" ? "Zum Beispiel xie4xie, xièxie oder 谢谢. Unbetonte Silben ohne Zahl." :
-      "Tasten 1 bis "+ex.opts.length+" wählen eine Antwort"+(ex.type==="hear" ? ", Leertaste spielt es nochmal ab." : ".");
+      kbHint("Tasten 1 bis "+ex.opts.length+" wählen eine Antwort"+(ex.type==="hear" ? ", Leertaste spielt es nochmal ab." : "."), ex.type==="hear" ? "Tipp auf den Lautsprecher, um es nochmal zu hören." : "Tipp auf die richtige Antwort.");
     var right = ex.type==="build" ? '<button type="button" class="btn ink" id="s-check" data-act="check"'+(buildReady(ex)?"":" disabled")+'>'+(ex.tried ? "Nochmal prüfen" : "Prüfen")+' <kbd>Enter</kbd></button>' :
       ex.type==="write" ? '<button type="button" class="btn ink" id="s-check" data-act="check">Prüfen <kbd>Enter</kbd></button>' : '';
     return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">'+hint+'</span>'+right+'</div></div>';
@@ -2828,7 +2861,7 @@ function answer(ok, pick, half){
   if(ex.old && ex.w && S.kind==="lesson"){ S.oldRes = S.oldRes || {}; var orr = S.oldRes[ex.w.zh] || (S.oldRes[ex.w.zh] = {ok:0, bad:0}); if(ok) orr.ok++; else orr.bad++; if(half) orr.half = 1; }
   chime(ok);
   renderSession();
-  if(ok && !half) burstOn($("#session .opt.right") || $("#session .tbtn.right") || $("#session .w-in") || $("#session .s-foot .seal"));
+  if(ok && !half) burstOn($("#session .s-foot .seal") || $("#session .opt.right") || $("#session .tbtn.right"), null, 18);
   if(ex.type==="char" || ex.type==="write") playWord(ex.w, 380);
   if((ex.type==="build" || ex.type==="gap" || ex.type==="judge" || ex.type==="nread" || ex.type==="nctx" || ex.type==="say") && state.prefs.autoplay!=="none") playPhrase(ex.s, 380);
 }
@@ -2999,7 +3032,7 @@ function finishSession(){
   S.finished = {xp:xp, pct:pct};
   chime(true);
   renderSession();
-  petals(S.unitNew || S.goldNew ? 70 : (pct===100 ? 40 : 24), !!S.goldNew);
+  petals(S.unitNew || S.goldNew ? 44 : (pct===100 ? 26 : 14), !!S.goldNew);
 }
 function renderFinish(){
   var f = S.finished, nx = nextLesson(), d = dayGet(), goal = state.prefs.goal;
@@ -3010,20 +3043,20 @@ function renderFinish(){
   if(S.kind==="lesson" && S.unitNew){
     var up = S.lesson.unit.place;
     h = '<div class="finish"><div class="ceremony"><div class="bigstamp" aria-hidden="true"><span class="sz" lang="zh">'+esc(up.zh)+'</span><small>'+esc(shortDate(today()))+new Date().getFullYear()+'</small></div></div>'+
-      '<h1>Etappe geschafft: '+esc(up.de)+'</h1><p class="muted" style="margin:0">Neuer Stempel in deinem Reisepass. Lektion '+S.lesson.n+' ist fertig. Die Wörter kommen in den nächsten Lektionen und ab morgen beim Wiederholen wieder:</p>';
+      '<h1>Etappe geschafft: '+esc(up.de)+'</h1><p class="muted fin-sub">Neuer Stempel im Reisepass. Diese Wörter kommen in den nächsten Lektionen und ab morgen beim Wiederholen wieder:</p>';
     if(S.lesson.unit.dlg) S.offerDlg = S.lesson.unit;
     h += '<div class="learned">'+S.lesson.W.map(function(w){ return '<button type="button" class="tok" data-word="'+esc(w.zh)+'"><span class="thz" lang="zh">'+esc(w.zh)+'</span><span class="tpy">'+pyHTML(w.py)+'</span></button>'; }).join("")+'</div>';
   } else if(S.kind==="lesson" && S.goldNew){
     h = '<div class="finish"><div class="ceremony"><div class="goldseal" aria-hidden="true"><span lang="zh">金</span></div></div>'+
-      '<h1>Lektion '+S.lesson.n+' gemeistert!</h1><p class="muted" style="margin:0">Kein einziger Fehler. Der Kreis von »'+esc(S.lesson.title)+'« ist jetzt gold.'+(S.unitGoldNew ? ' Und weil beide Lektionen der Etappe gold sind, ist auch dein Stempel '+esc(S.lesson.unit.place.zh)+' im Reisepass jetzt gold.' : '')+'</p>';
+      '<h1>Lektion '+S.lesson.n+' gemeistert!</h1><p class="muted fin-sub">Kein einziger Fehler. Der Kreis von »'+esc(S.lesson.title)+'« ist jetzt gold.'+(S.unitGoldNew ? ' Und weil beide Lektionen der Etappe gold sind, ist auch dein Stempel '+esc(S.lesson.unit.place.zh)+' im Reisepass jetzt gold.' : '')+'</p>';
     h += '<div class="learned">'+S.lesson.W.map(function(w){ return '<button type="button" class="tok" data-word="'+esc(w.zh)+'"><span class="thz" lang="zh">'+esc(w.zh)+'</span><span class="tpy">'+pyHTML(w.py)+'</span></button>'; }).join("")+'</div>';
   } else if(S.kind==="lesson"){
-    h += '<h1>Lektion '+S.lesson.n+' geschafft!</h1><p class="muted" style="margin:0">'+(S.first ? "Diese Wörter kommen in den nächsten Lektionen und ab morgen beim Wiederholen wieder:" : "Deine Wörter aus dieser Lektion:")+'</p>';
+    h += '<h1>Lektion '+S.lesson.n+' geschafft!</h1><p class="muted fin-sub">'+(S.first ? "Diese Wörter kommen in den nächsten Lektionen und ab morgen beim Wiederholen wieder:" : "Deine Wörter aus dieser Lektion:")+'</p>';
     h += '<div class="learned">'+S.lesson.W.map(function(w){ return '<button type="button" class="tok" data-word="'+esc(w.zh)+'"><span class="thz" lang="zh">'+esc(w.zh)+'</span><span class="tpy">'+pyHTML(w.py)+'</span></button>'; }).join("")+'</div>';
-  } else if(S.kind==="draw") h += '<h1>'+(S.drawn ? plural(S.drawn, "Zeichen", "Zeichen")+' geschrieben!' : 'Übung beendet')+'</h1><p class="muted" style="margin:0">Zeichen, bei denen du dich vertan hast, kommen beim nächsten Mal zuerst.</p>';
-  else if(S.kind==="day") h += '<h1>Tagesrunde geschafft!</h1><p class="muted" style="margin:0">'+(S.sub==="review" ? "Deine fälligen Wörter sind für heute erledigt." : "Heute war nichts fällig, also gab es deine schwächsten Wörter.")+'</p>';
-  else if(S.kind==="num") h += '<h1>Zahlen-Training geschafft!</h1><p class="muted" style="margin:0">Zahlen, bei denen du danebenlagst, kommen beim nächsten Mal öfter.</p>';
-  else if(S.kind==="sent") h += '<h1>Satz-Training geschafft!</h1><p class="muted" style="margin:0">Jeder Satz besteht nur aus Wörtern, die du schon kennst. Unter Sätze, Baupläne findest du alle Regeln noch einmal.</p>';
+  } else if(S.kind==="draw") h += '<h1>'+(S.drawn ? plural(S.drawn, "Zeichen", "Zeichen")+' geschrieben!' : 'Übung beendet')+'</h1><p class="muted fin-sub">Zeichen, bei denen du dich vertan hast, kommen beim nächsten Mal zuerst.</p>';
+  else if(S.kind==="day") h += '<h1>Tagesrunde geschafft!</h1><p class="muted fin-sub">'+(S.sub==="review" ? "Deine fälligen Wörter sind für heute erledigt." : "Heute war nichts fällig, also gab es deine schwächsten Wörter.")+'</p>';
+  else if(S.kind==="num") h += '<h1>Zahlen-Training geschafft!</h1><p class="muted fin-sub">Zahlen, bei denen du danebenlagst, kommen beim nächsten Mal öfter.</p>';
+  else if(S.kind==="sent") h += '<h1>Satz-Training geschafft!</h1><p class="muted fin-sub">Jeder Satz besteht nur aus Wörtern, die du schon kennst. Unter Sätze, Baupläne findest du alle Regeln noch einmal.</p>';
   else h += '<h1>'+(S.kind==="review" ? "Wiederholung geschafft!" : "Übung geschafft!")+'</h1>';
   var oldK = S.kind==="lesson" ? Object.keys(S.oldRes||{}) : [];
   if(oldK.length){
@@ -3033,12 +3066,13 @@ function renderFinish(){
   }
   if(S.kind==="lesson" && S.goldTry) h += '<p class="goldnote"><span class="gdot" aria-hidden="true"></span>Für Gold: diese Lektion einmal ganz ohne Fehler. Diesmal '+(S.mistakes===1 ? "war es ein Fehler" : "waren es "+S.mistakes+" Fehler")+'.</p>';
   else if(S.kind==="lesson" && S.first && S.perfect) h += '<p class="goldnote"><span class="gdot" aria-hidden="true"></span>Ohne Fehler! Mach die Lektion später nochmal genauso, dann wird ihr Kreis gold.</p>';
-  h += '<div class="stats"><div class="card stat"><b>'+f.pct+' %</b><span>auf Anhieb richtig</span></div><div class="card stat"><b>+'+f.xp+'</b><span>Punkte</span></div><div class="card stat"><b>'+Math.min(d.xp, goal)+'/'+goal+'</b><span>Tagesziel</span></div></div>';
-  if(S.offerDlg) h += '<button type="button" class="btn red" id="fin-go" data-dlg="'+S.offerDlg.id+'">Jetzt das Gespräch führen: '+esc(S.offerDlg.dlg.title)+'</button>'+(nx ? '<button type="button" class="btn light" data-lesson="'+nx.id+'">Nächste Lektion: '+esc(nx.title)+'</button>' : '')+'<button type="button" class="btn light" data-act="exit">Zurück zum Lernpfad</button>';
-  else if(S.kind==="day" && nx) h += '<button type="button" class="btn red" id="fin-go" data-lesson="'+nx.id+'">Weiter mit Lektion '+nx.n+': '+esc(nx.title)+'</button><button type="button" class="btn light" data-act="exit">Zurück zum Lernpfad</button>';
-  else if(S.kind==="lesson" && nx && nx!==S.lesson) h += '<button type="button" class="btn red" id="fin-go" data-lesson="'+nx.id+'">Nächste Lektion: '+esc(nx.title)+'</button><button type="button" class="btn light" data-act="exit">Zurück zum Lernpfad</button>';
+  h += '<div class="stats"><div class="card stat"><b>'+f.pct+' %</b><span>auf Anhieb</span></div><div class="card stat"><b>+'+f.xp+'</b><span>Punkte</span></div><div class="card stat"><b>'+Math.min(d.xp, goal)+'/'+goal+'</b><span>Tagesziel</span></div></div>';
+  h += '<div class="fin-actions">';
+  if(S.offerDlg) h += '<button type="button" class="btn red" id="fin-go" data-dlg="'+S.offerDlg.id+'">Jetzt das Gespräch führen: '+esc(S.offerDlg.dlg.title)+'</button>'+(nx ? '<button type="button" class="btn light" data-lesson="'+nx.id+'">Nächste Lektion: '+esc(nx.title)+'</button>' : '')+'<button type="button" class="btn plain" data-act="exit">Zurück zum Lernpfad</button>';
+  else if(S.kind==="day" && nx) h += '<button type="button" class="btn red" id="fin-go" data-lesson="'+nx.id+'">Weiter mit Lektion '+nx.n+': '+esc(nx.title)+'</button><button type="button" class="btn plain" data-act="exit">Zurück zum Lernpfad</button>';
+  else if(S.kind==="lesson" && nx && nx!==S.lesson) h += '<button type="button" class="btn red" id="fin-go" data-lesson="'+nx.id+'">Nächste Lektion: '+esc(nx.title)+'</button><button type="button" class="btn plain" data-act="exit">Zurück zum Lernpfad</button>';
   else h += '<button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button>';
-  return h + '</div>';
+  return h + '</div></div>';
 }
 
 /* ================= Gespräche ================= */
@@ -3107,17 +3141,17 @@ function dialogHTML(){
   return h;
 }
 function dialogFoot(){
-  if(S.waiting) return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">Tasten 1 bis '+S.opts.length+' wählen deine Antwort. Tipp auf eine Zeile, um sie nochmal zu hören.</span></div></div>';
+  if(S.waiting) return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">'+kbHint("Tasten 1 bis "+S.opts.length+" wählen deine Antwort. ", "")+'Tipp auf eine Zeile, um sie nochmal zu hören.</span></div></div>';
   var end = S.i >= S.d.lines.length;
-  return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">'+(end ? "Das Gespräch ist zu Ende." : "Tipp auf eine Zeile, um sie nochmal zu hören. Leertaste spielt die letzte Zeile.")+'</span>'+
+  return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">'+(end ? "Das Gespräch ist zu Ende." : "Tipp auf eine Zeile, um sie nochmal zu hören."+kbHint(" Leertaste spielt die letzte Zeile.", ""))+'</span>'+
     '<button type="button" class="btn ink" id="s-next" data-act="next">'+(end ? "Abschließen" : "Weiter")+' <kbd>Enter</kbd></button></div></div>';
 }
 function dialogFinish(f, nx, d, goal){
-  var u = S.unit, h = '<div class="finish"><span class="seal" aria-hidden="true">对话</span><h1>Gespräch geschafft!</h1><p class="muted" style="margin:0">'+esc(u.place.de)+' · '+esc(S.d.title)+'. Hier nochmal alles mit Übersetzung:</p>';
+  var u = S.unit, h = '<div class="finish"><span class="seal" aria-hidden="true">对话</span><h1>Gespräch geschafft!</h1><p class="muted fin-sub">'+esc(u.place.de)+' · '+esc(S.d.title)+'. Hier nochmal alles mit Übersetzung:</p>';
   h += '<div class="dl-sum">'+S.d.lines.map(function(ln, i){ return '<button type="button" class="dl-row" data-dsay="'+u.id+':'+i+'"><span class="dl-av sm'+(ln.s==="me" ? " me" : "")+'" lang="zh" aria-hidden="true">'+(ln.s==="me" ? "弗" : esc(Array.from(S.d.who.zh)[0]))+'</span><span><span class="hz" lang="zh">'+esc(ln.zh)+'</span><span class="dl-py">'+pyHTML(ln.py)+'</span><span class="dl-de">'+esc(ln.de)+'</span></span></button>'; }).join("")+'</div>';
   h += '<div class="stats"><div class="card stat"><b>'+f.pct+' %</b><span>auf Anhieb richtig</span></div><div class="card stat"><b>+'+f.xp+'</b><span>Punkte</span></div><div class="card stat"><b>'+Math.min(d.xp, goal)+'/'+goal+'</b><span>Tagesziel</span></div></div>';
-  if(nx) h += '<button type="button" class="btn red" id="fin-go" data-lesson="'+nx.id+'">Nächste Lektion: '+esc(nx.title)+'</button><button type="button" class="btn light" data-act="exit">Zurück zum Lernpfad</button>';
-  else h += '<button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button>';
+  h += '<div class="fin-actions">'+(nx ? '<button type="button" class="btn red" id="fin-go" data-lesson="'+nx.id+'">Nächste Lektion: '+esc(nx.title)+'</button><button type="button" class="btn plain" data-act="exit">Zurück zum Lernpfad</button>'
+    : '<button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button>')+'</div>';
   if(!quiet()) h += '<p class="muted" style="margin:14px 0 0; font-size:14px">Unter Wiederholen kannst du dieses Gespräch später nur hören, ohne Text.</p>';
   return h + '</div>';
 }
@@ -3179,7 +3213,7 @@ function ltextHTML(){
 function listenCard(){
   var us = lsnUnits(); if(!us.length) return '';
   var pick = lsnPick(), heard = us.filter(function(u){ return state.learn.lsn[u.id]; }).length;
-  return '<div class="card drawcard lsncard"><span class="big" lang="zh" aria-hidden="true">听</span><div><b>Gespräche hören</b><small>'+(quiet() ? 'Braucht Ton. Schalte den Ton wieder ein, dann kannst du hier Gespräche nur hören.' : 'Ein geschafftes Gespräch einmal ohne Text hören, dann drei Fragen dazu. '+(heard ? heard+' von '+us.length+' schon gehört. ' : '')+'Dran: <b>'+esc(pick.dlg.title)+'</b>.')+'</small>'+
+  return '<div class="card drawcard lsncard"><span class="big" lang="zh" aria-hidden="true">听</span><div><b>Gespräche hören</b><small>'+(quiet() ? 'Braucht Ton. Schalte den Ton wieder ein, dann kannst du hier Gespräche nur hören.' : 'Ein geschafftes Gespräch ohne Text hören, dann drei Fragen. '+(heard ? heard+' von '+us.length+' schon gehört. ' : '')+'Dran: <b>'+esc(pick.dlg.title)+'</b>.')+'</small>'+
     '<select class="lsn-sel" id="lsn-sel" aria-label="Gespräch wählen">'+us.map(function(u){ return '<option value="'+u.id+'"'+(u===pick ? ' selected' : '')+'>'+esc(u.place.de)+' · '+esc(u.dlg.title)+(state.learn.lsn[u.id] ? ' ✓' : '')+'</option>'; }).join("")+'</select></div>'+
     '<button type="button" class="btn light" data-act="listen"'+(quiet() ? ' disabled' : '')+'>Hören</button></div>';
 }
@@ -3279,7 +3313,7 @@ function sayCard(){
   var n = learnedWords().length; if(!n) return '';
   var sup = srSupported();
   return '<div class="card drawcard saycard"><span class="big" lang="zh" aria-hidden="true">说</span><div><b>Sag es auf Chinesisch</b><small>'+(sup
-    ? 'Die App zeigt einen deutschen Satz, du sagst ihn auf Chinesisch. Die Spracherkennung deines Browsers prüft, ob die richtigen Zeichen herauskommen. Als Übung gut, als Urteil nicht: Sie ist mal zu streng, mal zu gnädig.'
+    ? 'Du siehst einen deutschen Satz und sagst ihn auf Chinesisch. Die Spracherkennung des Browsers prüft, ob die richtigen Zeichen herauskommen. Eine Hilfe, kein Urteil.'
     : 'Dein Browser hat keine Spracherkennung. Am Mac in Chrome oder am iPhone in Safari geht es.')+'</small></div>'+
     '<button type="button" class="btn light" data-act="sayprac"'+(sup && !quiet() ? '' : ' disabled')+'>Sprechen</button></div>';
 }
@@ -3322,7 +3356,7 @@ function textHTML(mark, full){
 function textCard(){
   var ts = textUnits(); if(!ts.length) return '';
   var pick = textPick(), read = ts.filter(function(t){ return state.learn.txt[t.id]; }).length;
-  return '<div class="card drawcard txtcard"><span class="big" lang="zh" aria-hidden="true">读</span><div><b>Kurze Texte</b><small>Nachrichten, Speisekarten, Schilder und Zettel aus deinen Wörtern, mit drei Fragen dazu. '+(read ? read+' von '+ts.length+' schon gelesen. ' : plural(ts.length, "Text", "Texte")+' sind frei. ')+'Dran: <b>'+esc(pick.title)+'</b>.</small>'+
+  return '<div class="card drawcard txtcard"><span class="big" lang="zh" aria-hidden="true">读</span><div><b>Kurze Texte</b><small>Nachrichten, Speisekarten und Schilder aus deinen Wörtern, mit drei Fragen. '+(read ? read+' von '+ts.length+' schon gelesen. ' : plural(ts.length, "Text", "Texte")+' sind frei. ')+'Dran: <b>'+esc(pick.title)+'</b>.</small>'+
     '<select class="lsn-sel" id="txt-sel" aria-label="Text wählen">'+ts.map(function(t){ return '<option value="'+t.id+'"'+(t===pick ? ' selected' : '')+'>'+esc(t.kind)+' · '+esc(t.title)+(state.learn.txt[t.id] ? ' ✓' : '')+'</option>'; }).join("")+'</select></div>'+
     '<button type="button" class="btn light" data-act="readtext">Lesen</button></div>';
 }
@@ -3356,7 +3390,7 @@ function drawHTML(ex){
   return h;
 }
 function drawFoot(ex){
-  if(!S.answered) return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">Rot ist der Baustein (Radikal) des Zeichens. Leertaste spielt das Wort ab.</span>'+
+  if(!S.answered) return '<div class="s-foot"><div class="s-foot-in"><span class="s-hint">Rot ist der Baustein (Radikal) des Zeichens.'+kbHint(" Leertaste spielt das Wort ab.", "")+'</span>'+
     '<span class="draw-btns"><button type="button" class="btn light" data-act="drawshow">Strichfolge zeigen</button><button type="button" class="btn light" data-act="drawskip">Überspringen</button></span></div></div>';
   var m = ex.miss||0, n = ex.strokes||0;
   return '<div class="s-foot ok"><div class="s-foot-in"><div class="fb"><span class="seal" aria-hidden="true">写</span><div><span class="fb-title">'+(m ? "Geschafft!" : "Alle Striche auf Anhieb!")+'</span><span class="fb-detail">'+
@@ -3576,7 +3610,7 @@ function startTest(){
 }
 function testFinish(f, d, goal){
   var pv = S.prev, h = '<div class="finish"><span class="seal" aria-hidden="true">考</span><h1>Wochen-Test: '+f.pct+' %</h1>';
-  h += '<p class="muted" style="margin:0">'+(pv ? (f.pct>pv.pct ? 'Besser als beim letzten Mal ('+pv.pct+' % am '+shortDate(pv.at)+').' : f.pct===pv.pct ? 'Genau wie beim letzten Mal ('+shortDate(pv.at)+').' : 'Letztes Mal waren es '+pv.pct+' % ('+shortDate(pv.at)+'). Die Fehler unten kommen in deine Stolpersteine.') : 'Dein erster Test. Ab jetzt siehst du hier, wie du dich von Woche zu Woche entwickelst.')+'</p>';
+  h += '<p class="muted fin-sub">'+(pv ? (f.pct>pv.pct ? 'Besser als beim letzten Mal ('+pv.pct+' % am '+shortDate(pv.at)+').' : f.pct===pv.pct ? 'Genau wie beim letzten Mal ('+shortDate(pv.at)+').' : 'Letztes Mal waren es '+pv.pct+' % ('+shortDate(pv.at)+'). Die Fehler unten kommen in deine Stolpersteine.') : 'Dein erster Test. Ab jetzt siehst du hier, wie du dich von Woche zu Woche entwickelst.')+'</p>';
   if(S.wrongs.length){
     h += '<div class="oldsum"><p class="muted" style="margin:0 0 6px">Danebengelegen:</p><div class="rr-words">'+S.wrongs.map(function(x){
       return x.w ? '<button type="button" class="rr-w bad" data-word="'+esc(x.w.zh)+'"><span class="m">✗</span><span class="hz" lang="zh">'+esc(x.w.zh)+'</span><span>'+pyHTML(x.w.py)+'</span></button>'
@@ -3584,7 +3618,7 @@ function testFinish(f, d, goal){
   } else h += '<p style="margin:10px 0 0; font-weight:700; color:var(--ok)">Alles richtig. Stark!</p>';
   h += testBars();
   h += '<div class="stats"><div class="card stat"><b>'+f.pct+' %</b><span>richtig</span></div><div class="card stat"><b>+'+f.xp+'</b><span>Punkte</span></div><div class="card stat"><b>'+Math.min(d.xp, goal)+'/'+goal+'</b><span>Tagesziel</span></div></div>';
-  return h + '<button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button></div>';
+  return h + '<div class="fin-actions"><button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button></div></div>';
 }
 function testBars(){
   var ts = state.tests.slice(-8); if(ts.length < 2) return "";
@@ -3592,7 +3626,7 @@ function testBars(){
 }
 function testCard(){
   var n = learnedWords().length, lt = lastTest(), due = testDue();
-  var txt = n < TEST_MIN ? 'Ab '+TEST_MIN+' gelernten Wörtern. Du hast '+n+'.' : lt ? 'Zuletzt am '+shortDate(lt.at)+': '+lt.pct+' %. '+(due ? 'Eine Woche ist um, Zeit für den nächsten.' : 'Der nächste ist ab '+shortDate(addDays(lt.at, 7))+' dran, üben kannst du immer.') : '15 Fragen quer durch alles Gelernte, ohne zweite Chance. Einmal pro Woche zeigt dir, was wirklich sitzt.';
+  var txt = n < TEST_MIN ? 'Ab '+TEST_MIN+' gelernten Wörtern. Du hast '+n+'.' : lt ? 'Zuletzt am '+shortDate(lt.at)+': '+lt.pct+' %. '+(due ? 'Eine Woche ist um, Zeit für den nächsten.' : 'Der nächste ist ab '+shortDate(addDays(lt.at, 7))+' dran, üben kannst du immer.') : '15 Fragen quer durch alles Gelernte, ohne zweite Chance. Einmal pro Woche zeigt er dir, was wirklich sitzt.';
   return '<div class="card drawcard testcard'+(due ? " due" : "")+'"><span class="big" lang="zh" aria-hidden="true">考</span><div><b>Wochen-Test</b><small>'+esc(txt)+'</small></div>'+
     '<button type="button" class="btn '+(due ? "red" : "light")+'" data-act="test"'+(n < TEST_MIN ? " disabled" : "")+'>'+(due ? "Test starten" : "Test machen")+'</button></div>';
 }
@@ -3621,20 +3655,20 @@ function startHsk(){
 function hskFinish(f, d, goal){
   var r = S.hskRes, pts = r.h + r.l, pass = pts >= 120 && r.h > 0 && r.l > 0, pv = S.prevHsk;
   var h = '<div class="finish"><span class="seal" aria-hidden="true">考</span><h1>HSK-1-Probetest: '+pts+' von 200</h1>'+
-    '<p class="muted" style="margin:0">'+(pass ? 'Das wäre bestanden. Bei HSK 1 braucht man 120 von 200 Punkten.' : 'Für HSK 1 braucht man 120 von 200 Punkten. Die Fehler unten kommen in deine Stolpersteine, dann klappt es beim nächsten Mal.')+
+    '<p class="muted fin-sub">'+(pass ? 'Das wäre bestanden. Bei HSK 1 braucht man 120 von 200 Punkten.' : 'Für HSK 1 braucht man 120 von 200 Punkten. Die Fehler unten kommen in deine Stolpersteine, dann klappt es beim nächsten Mal.')+
     (pv ? ' Letztes Mal: '+(pv.h+pv.l)+' Punkte ('+shortDate(pv.at)+').' : '')+'</p>'+
     '<div class="stats"><div class="card stat"><b>'+r.h+'</b><span>Hören (von 100)</span></div><div class="card stat"><b>'+r.l+'</b><span>Lesen (von 100)</span></div><div class="card stat"><b>'+(pass ? "✓" : "–")+'</b><span>'+(pass ? "bestanden" : "noch nicht")+'</span></div></div>';
   if(S.wrongs.length) h += '<div class="oldsum"><p class="muted" style="margin:0 0 6px">Danebengelegen:</p><div class="rr-words">'+S.wrongs.map(function(x){
       return x.w ? '<button type="button" class="rr-w bad" data-word="'+esc(x.w.zh)+'"><span class="m">✗</span><span class="hz" lang="zh">'+esc(x.w.zh)+'</span><span>'+pyHTML(x.w.py)+'</span></button>'
         : '<span class="rr-w bad"><span class="m">✗</span><span class="hz" lang="zh">'+esc(x.s.zh)+'</span><span>'+esc(x.s.de)+'</span></span>'; }).join("")+'</div></div>';
   h += '<p class="muted" style="margin:12px 0 0; font-size:14px">Ein Probetest aus der App, keine offizielle Prüfung. Die echte HSK 1 hat Bildaufgaben, die es hier nicht gibt.</p>';
-  return h + '<button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button></div>';
+  return h + '<div class="fin-actions"><button type="button" class="btn ink" id="fin-go" data-act="exit">Weiter</button></div></div>';
 }
 function hskCard(){
   var on = hskReady(), lt = state.hsk.length ? state.hsk[state.hsk.length-1] : null, nx = nextLesson();
   var txt = !on ? 'Wenn alle 33 Lektionen geschafft sind. Du bist bei Lektion '+(nx ? nx.n : 33)+'.' : quiet() ? 'Der Hörteil braucht Ton. Schalte ihn oben wieder ein.' :
     (lt ? 'Zuletzt am '+shortDate(lt.at)+': '+(lt.h+lt.l)+' von 200 Punkten. ' : '')+'40 Fragen wie in der Prüfung: 20 Hören, 20 Lesen, ohne zweite Chance. Etwa 20 Minuten.';
-  return '<div class="card drawcard hskcard"><span class="big" lang="zh" aria-hidden="true">考</span><div><b>HSK-1-Probetest</b><small>'+esc(txt)+'</small></div>'+
+  return '<div class="card drawcard hskcard"><span class="big" lang="zh" aria-hidden="true">试</span><div><b>HSK-1-Probetest</b><small>'+esc(txt)+'</small></div>'+
     '<button type="button" class="btn light" data-act="hsk"'+(on && !quiet() ? "" : " disabled")+'>Starten</button></div>';
 }
 
@@ -3653,7 +3687,8 @@ function renderReview(){
   var learned = learnedWords(), due = dueWords(), t = today();
   var sure = learned.filter(function(w){ return state.words[w.zh].b>=4; }).length;
   var h = viewBanner("tea", "复习", "Wiederholen", "h-wdh")+
-    '<p class="subtitle">Jedes Wort liegt in einem Fach deines Karteikastens. Weißt du es, kommt es erst später wieder, und der Abstand wird jedes Mal größer. Weißt du es nicht, kommt es in derselben Runde noch zweimal und morgen wieder. Wörter, die dir schwerfallen, kommen öfter. Ab Fach 2 schreibst du das Wort selbst, statt es nur wiederzuerkennen.</p>'+
+    '<p class="subtitle">Jedes Wort liegt in einem Fach deines Karteikastens. Weißt du es, rückt es ein Fach weiter und kommt erst später wieder.</p>'+
+    '<details class="howto"><summary>Wie funktioniert das?</summary><p>Der Abstand wird mit jedem richtigen Mal größer: 1, 3, 8, 20, 50 Tage und mehr. Weißt du ein Wort nicht, kommt es in derselben Runde noch zweimal und morgen wieder. Wörter, die dir schwerfallen, kommen öfter. Ab Fach 2 schreibst du das Wort selbst, statt es nur wiederzuerkennen.</p></details>'+
     kastenHTML(learned)+
     '<p class="kasten-sum"><b>'+due.length+'</b> heute fällig · <b>'+learned.length+'</b> gelernt · <b>'+sure+'</b> sitzen sicher</p>';
   if(!learned.length){
@@ -3661,7 +3696,7 @@ function renderReview(){
     $("#view-wiederholen").innerHTML = h; return;
   }
   h += '<div style="margin-top:16px">'+(due.length
-    ? '<button type="button" class="btn red" data-act="review">'+plural(due.length, "Wort", "Wörter")+' wiederholen</button>'
+    ? '<button type="button" class="btn red wdh-go" data-act="review">'+plural(due.length, "Wort", "Wörter")+' wiederholen</button>'
     : '<p class="muted" style="margin:0 0 10px">Heute ist nichts mehr fällig. Freies Üben nimmt die Wörter, die dir am schwersten fallen. Was du dabei nicht weißt, kommt morgen wieder.</p><button type="button" class="btn light" data-act="practice">10 Wörter frei üben</button>')+'</div>';
   var st = stumbles();
   if(st.length){
@@ -3670,11 +3705,15 @@ function renderReview(){
         return '<button type="button" class="stum" data-word="'+esc(w.zh)+'"><span class="hz" lang="zh">'+esc(w.zh)+'</span><span class="stum-t"><span>'+pyHTML(w.py)+'</span><small>'+esc(w.de.split(/[,(]/)[0].trim())+'</small></span><span class="stum-n" title="so oft falsch">'+e.n+'×</span><span class="stum-ok" aria-label="'+(e.ok||0)+' von 3 richtig">'+[0,1,2].map(function(i){ return '<i class="'+(i<(e.ok||0) ? "on" : "")+'"></i>'; }).join("")+'</span></button>'; }).join("")+'</div>'+
       '<div style="margin-top:12px"><button type="button" class="btn light" data-act="stumble">Stolpersteine üben</button></div>';
   }
-  h += testCard() + sayCard() + textCard() + listenCard() + sentCard() + numCard() + hskCard();
   var drawn = Object.keys(state.draw).length, dpool = drawPool().length;
-  h += '<div class="card drawcard"><span class="big" lang="zh" aria-hidden="true">写</span><div><b>Zeichen schreiben</b><small>'+(drawn ? drawn+' von '+dpool+' Zeichen schon geschrieben. ' : '')+'Sechs Zeichen aus dem Kopf, Strich für Strich. Neue zeigt die App erst einmal vor.</small></div><button type="button" class="btn light" data-act="drawprac">Üben</button></div>';
-  var F = [["alle","Alle"],["faellig","Fällig"],["neu","Frisch gelernt"],["sicher","Sitzen sicher"]];
-  h += '<h2 class="sec">Deine Wörter</h2><div class="seg filter" role="group" aria-label="Filter">'+F.map(function(f){ return '<button type="button" data-rf="'+f[0]+'" aria-pressed="'+(revFilter===f[0])+'">'+f[1]+'</button>'; }).join("")+'</div>';
+  h += '<h2 class="sec">Weitere Übungen</h2><div class="pgrid">'+testCard() + sayCard() + textCard() + listenCard() + sentCard() + numCard() + hskCard()+
+    '<div class="card drawcard"><span class="big" lang="zh" aria-hidden="true">写</span><div><b>Zeichen schreiben</b><small>Sechs Zeichen aus dem Kopf, Strich für Strich. '+(drawn ? drawn+' von '+dpool+' Zeichen schon geschrieben.' : 'Neue zeigt die App erst einmal vor.')+'</small></div><button type="button" class="btn light" data-act="drawprac">Üben</button></div></div>';
+  h += '<h2 class="sec">Deine Wörter</h2><div id="wdh-list">'+wordListHTML(learned, t)+'</div>';
+  $("#view-wiederholen").innerHTML = h;
+}
+function wordListHTML(learned, t){
+  var F = [["alle","Alle"],["faellig","Fällig"],["neu","Frisch gelernt"],["sicher","Sitzen sicher"]], h = '';
+  h += '<div class="seg filter" role="group" aria-label="Filter">'+F.map(function(f){ return '<button type="button" data-rf="'+f[0]+'" aria-pressed="'+(revFilter===f[0])+'">'+f[1]+'</button>'; }).join("")+'</div>';
   var list = learned.filter(function(w){ var r = state.words[w.zh];
     return revFilter==="alle" || (revFilter==="faellig" && r.d<=t) || (revFilter==="neu" && r.b<=1) || (revFilter==="sicher" && r.b>=4); })
     .sort(function(a,b){ return state.words[a.zh].d < state.words[b.zh].d ? -1 : state.words[a.zh].d > state.words[b.zh].d ? 1 : a.lesson.n - b.lesson.n; });
@@ -3685,7 +3724,7 @@ function renderReview(){
     return '<li><button type="button" class="wrow" data-word="'+esc(w.zh)+'"><span class="whz" lang="zh">'+esc(w.zh)+'</span><span class="wpy">'+pyHTML(w.py)+'</span><span class="wde">'+esc(w.de)+'</span>'+
       '<span class="wst"><span class="pill'+(dd<=0?" due":"")+'">'+st+'</span><span class="dots" title="Stufe '+r.b+' von 5">'+dots+'</span></span></button></li>';
   }).join("")+'</ul>' : '<p class="muted">Keine Wörter in dieser Auswahl.</p>';
-  $("#view-wiederholen").innerHTML = h;
+  return h;
 }
 
 /* ================= Pinyin-Tabelle ================= */
@@ -3798,6 +3837,12 @@ function playToneItem(){
   if(!tq) return;
   var it = tq.item, c = it.tones.length===1 ? clip("s", numeric(it.py)) : clip("w", it.zh);
   if(!(c && playClips([c]))) speak(it.zh);
+}
+/* Töne in drei Bereichen: Üben, Trefferquote, Pinyin-Tabelle */
+var tSec = "ueben", T_SECS = [["ueben", "Üben"], ["quote", "Trefferquote"], ["tabelle", "Pinyin-Tabelle"]];
+function renderToneSec(){
+  $("#tsecs").innerHTML = T_SECS.map(function(t){ return '<button type="button" data-tsec="'+t[0]+'" aria-pressed="'+(tSec===t[0])+'">'+t[1]+'</button>'; }).join("");
+  T_SECS.forEach(function(t){ $("#tsec-"+t[0]).hidden = tSec!==t[0]; });
 }
 function renderTone(){
   if(!tq) newToneQ();
@@ -4106,7 +4151,7 @@ function renderCards(){
 function numCard(){
   var on = numAvail();
   return '<div class="card drawcard numcard"><span class="big" lang="zh" aria-hidden="true">数</span><div><b>Zahlen-Training</b><small>'+(on
-    ? 'Zahlen lesen, hören und selbst bauen, bis 99. Dazu Preise, Uhrzeiten und Daten, sobald du die Wörter dafür kennst.'
+    ? 'Zahlen lesen, hören und selbst bauen, bis 99. Später auch Preise, Uhrzeiten und Daten.'
     : 'Ab Lektion 6, wenn du alle Zahlen von 1 bis 10 kennst.')+'</small></div>'+
     '<button type="button" class="btn light" data-act="numprac"'+(on ? "" : " disabled")+'>Üben</button>'+
     '<details class="numguide"><summary>So funktionieren die Zahlen</summary>'+
@@ -4120,7 +4165,7 @@ function numCard(){
 function sentCard(){
   var n = sentPool().length;
   return '<div class="card drawcard sentcard"><span class="big" lang="zh" aria-hidden="true">句</span><div><b>Satz-Training</b><small>'+(n >= 4
-    ? 'Zehn Sätze nur aus Wörtern, die du kennst: Lücken füllen, Sätze bauen, den richtigen Satz finden. '+plural(n, "Satz", "Sätze")+' sind schon frei.'+(focusPat() ? ' Heute öfter dran: <b>'+hzText(focusPat().title)+'</b>.' : '')
+    ? 'Zehn Sätze aus deinen Wörtern: Lücken füllen, Sätze bauen, den richtigen Satz finden. '+plural(n, "Satz", "Sätze")+' sind schon frei.'+(focusPat() ? ' Heute öfter dran: <b>'+hzText(focusPat().title)+'</b>.' : '')
     : 'Nach den ersten Lektionen kannst du hier Sätze aus deinen Wörtern bauen.')+'</small></div>'+
     '<button type="button" class="btn light" data-act="sentprac"'+(n < 4 ? " disabled" : "")+'>Üben</button></div>';
 }
@@ -4128,8 +4173,10 @@ function renderPlans(){
   var got = POINTS.filter(function(pt){ return isDone(pt.lesson); }), last = got[got.length-1], fp = focusPat();
   var h = sentCard()+'<div class="card legend-card"><p class="lg-cap">Die Farben zeigen die Satzteile</p><div class="legend">'+Object.keys(SLOT).map(function(k){ return '<span class="bp s-'+k+'"><b>'+SLOT[k][0]+'</b><small>'+SLOT[k][1]+'</small></span>'; }).join("")+'</div>'+
     '<p class="muted" style="margin:10px 0 0; font-size:14px">'+got.length+' von '+POINTS.length+' Bauplänen gelernt. Neue kommen mit den Lektionen dazu. Jeder Bauplan hat wie ein Wort seinen eigenen Wiederholplan: Geht ein Satz daneben, kommt sein Bauplan öfter.'+(fp ? ' Gerade am wackligsten: <b>'+hzText(fp.title)+'</b>.' : '')+'</p></div>';
+  var lockN = 0, lockAll = POINTS.filter(function(pt){ return !isDone(pt.lesson); }).length;
   h += POINTS.map(function(pt){
-    if(!isDone(pt.lesson)) return '<div class="plan locked"><span class="pl-n">L'+pt.lesson.n+'</span><b>'+hzText(pt.title)+'</b><small>kommt in Lektion '+pt.lesson.n+'</small></div>';
+    if(!isDone(pt.lesson)){ lockN++;
+      return (lockN===4 ? '<details class="plan-more"><summary>Noch '+(lockAll-3)+' Baupläne kommen später</summary>' : '')+'<div class="plan locked"><span class="pl-n">L'+pt.lesson.n+'</span><b>'+hzText(pt.title)+'</b><small>kommt in Lektion '+pt.lesson.n+'</small></div>'+(lockN===lockAll && lockN>=4 ? '</details>' : ''); }
     var ps = patStatus(pt), pr = state.pats[pt.id];
     return '<details class="plan"'+(pt===last || pt===fp ? ' open' : '')+'><summary><span class="pl-n">L'+pt.lesson.n+'</span><b>'+hzText(pt.title)+'</b><span class="pill pl-st '+ps.k+'">'+ps.de+'</span><span class="pl-chev" aria-hidden="true">›</span></summary><div class="pl-body">'+patternHTML(pt.ex[0].gs)+
       (pr && pr.n ? '<p class="pl-stat">'+plural(pr.n, "Satz", "Sätze")+' dazu geübt, '+(pr.bad ? plural(pr.bad, "Fehler", "Fehler") : "kein Fehler")+'. '+(pr.d <= today() ? "Heute wieder dran." : "Wieder dran "+relDay(pr.d)+".")+'</p>' : '')+
@@ -4232,10 +4279,11 @@ function setPref(k, v){
 document.addEventListener("click", function(e){
   var gel = e.target.closest("[data-race],[data-gopt],[data-gact]");
   if(gel){ if(!gel.disabled) gameClick(gel); return; }
-  var el = e.target.closest("[data-say],[data-smode],[data-node],[data-act],[data-tone],[data-tmode],[data-cat],[data-dir],[data-chunk],[data-card],[data-lesson],[data-word],[data-opt],[data-stone],[data-pl],[data-pr],[data-bank],[data-ans],[data-stok],[data-switch],[data-pref],[data-rf],[data-dlg],[data-dopt],[data-dtr],[data-dsay],[data-bkpart],[data-scen],[data-csay],[data-ctr],[data-quiet],[data-py],[data-tkey]");
+  var el = e.target.closest("[data-say],[data-smode],[data-node],[data-act],[data-tone],[data-tmode],[data-cat],[data-dir],[data-chunk],[data-card],[data-lesson],[data-word],[data-opt],[data-stone],[data-pl],[data-pr],[data-bank],[data-ans],[data-stok],[data-switch],[data-pref],[data-rf],[data-dlg],[data-dopt],[data-dtr],[data-dsay],[data-bkpart],[data-scen],[data-csay],[data-ctr],[data-quiet],[data-py],[data-tkey],[data-tsec]");
   if(!el || el.disabled) return;
   var ds = el.dataset;
   if(ds.say){ var sp = ds.say.split("|"); playWord({zh:sp[0], py:sp[1], syls:sp[1].split("_")}); return; }
+  if(ds.tsec){ if(tSec!==ds.tsec){ tSec = ds.tsec; renderToneSec(); } return; }
   if(ds.smode){ if(state.prefs.smode!==ds.smode){ state.prefs.smode = ds.smode; touch(); renderCards(); } return; }
   if(ds.node){ openAuto = false; openLesson = openLesson===ds.node ? "" : ds.node; renderTrail(true); var nb = $('[data-node="'+ds.node+'"]'); if(nb) nb.focus({preventScroll:true}); return; }
   if(ds.lesson){ if(S && S.finished) S = null; startLesson(ds.lesson); return; }
@@ -4249,7 +4297,7 @@ document.addEventListener("click", function(e){
   if(ds.scen!==undefined){ chatStart(+ds.scen); return; }
   if(ds.csay!==undefined){ var cm = chat && chat.msgs[+ds.csay]; if(cm) speak(cm.zh); return; }
   if(ds.ctr!==undefined){ var ct = chat && chat.msgs[+ds.ctr]; if(ct){ ct.tr = !ct.tr; renderChat(); } return; }
-  if(ds.bkpart){ bkPart = +ds.bkpart; renderLearn(); var bt = $('[data-bkpart="'+ds.bkpart+'"]'); if(bt) bt.focus({preventScroll:true}); return; }
+  if(ds.bkpart){ bkPart = +ds.bkpart; var nxl = nextLesson(), bx = $("#learn-booklet"); if(bx) bx.innerHTML = bookletHTML(nxl ? nxl.unit.part : UNITS[UNITS.length-1].part); else renderLearn(); var bt = $('[data-bkpart="'+ds.bkpart+'"]'); if(bt) bt.focus({preventScroll:true}); return; }
   if(ds.word){ var ww = WORD[ds.word]; if(ww) playWord(ww); return; }
   if(ds.opt!==undefined){ chooseOpt(+ds.opt); return; }
   if(ds.stone){ chooseTone(+ds.stone); return; }
@@ -4260,7 +4308,7 @@ document.addEventListener("click", function(e){
   if(ds.stok!==undefined){ var se = cur(); if(se && se.s) playWord(se.s.toks[+ds.stok]); return; }
   if(ds.switch){ setPref(ds.switch, !state.prefs[ds.switch]); if(ds.switch==="fx" && state.prefs.fx) chime(true); if(S) renderSession(); return; }
   if(ds.pref){ var val = ds.pref==="goal" ? +ds.val : ds.val; setPref(ds.pref, val); return; }
-  if(ds.rf){ revFilter = ds.rf; renderReview(); return; }
+  if(ds.rf){ revFilter = ds.rf; var wl = $("#wdh-list"); if(wl){ wl.innerHTML = wordListHTML(learnedWords(), today()); var fb = $('[data-rf="'+ds.rf+'"]'); if(fb) fb.focus({preventScroll:true}); } else renderReview(); return; }
   if(ds.tone){ pickTone(+ds.tone); return; }
   if(ds.py){ playPySyl(ds.py); return; }
   if(ds.tkey){
@@ -4377,7 +4425,7 @@ document.addEventListener("keydown", function(e){
     else if(e.key==="Backspace" && ex.type==="build" && !S.answered && buildFilled(ex)){ e.preventDefault(); if(ex.slot){ for(var bk=ex.built.length-1; bk>=0; bk--){ if(ex.built[bk]!=null){ buildTap("ans", bk); break; } } } else buildTap("ans", ex.built.length-1); }
     return;
   }
-  if(currentView==="toene" && tq){
+  if(currentView==="toene" && tq && tSec==="ueben"){
     if(/^[1-4]$/.test(e.key) && !tq.done){ e.preventDefault(); pickTone(+e.key); }
     else if(e.key===" " && !onCtl){ e.preventDefault(); playToneItem(); }
     else if(e.key==="Enter" && !onCtl && tq.done){ e.preventDefault(); nextTone(); }

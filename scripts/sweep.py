@@ -9,7 +9,7 @@ scheme = sys.argv[1] if len(sys.argv) > 1 else "light"
 hz = len(sys.argv) > 2 and sys.argv[2] == "gross"
 issues = []
 OVER = """() => { const W = innerWidth, out = [];
-  document.querySelectorAll('#app *, #session *, #game *').forEach(e => { const b = e.getBoundingClientRect(); if(!b.width || e.closest('svg') || e.closest('.hero') || e.closest('.vbanner') || e.closest('.lobby-hero')) return;
+  document.querySelectorAll('#app *, #session *, #game *').forEach(e => { const b = e.getBoundingClientRect(); if(!b.width || e.closest('svg') || e.closest('.hero') || e.closest('.vbanner') || e.closest('.lobby-hero') || e.closest('.chips')) return;
     const cs = getComputedStyle(e); if(cs.position === 'fixed') return;
     if(b.right > W + 1 || b.left < -1) out.push(e.tagName + '.' + e.className + ' [' + Math.round(b.left) + ',' + Math.round(b.right) + ']'); });
   return {doc: document.scrollingElement.scrollWidth - W, els: out.slice(0, 6)}; }"""

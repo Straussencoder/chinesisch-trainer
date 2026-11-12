@@ -69,7 +69,8 @@ with sync_playwright() as p:
         pg.evaluate("() => { location.hash = 'lernen'; }"); pg.wait_for_timeout(80); pg.evaluate("() => { location.hash = 'toene'; }"); pg.wait_for_timeout(300)
         cells = pg.locator("#t-stats .tpgrid .tpc").count()
         ok(cells == 25 and pg.locator("#t-stats .tpc.low").count() == 1 and pg.locator("#t-stats .tpc.good").count() >= 1, f"{view}: 4×4-Raster mit Farben ({cells} Felder)")
-        # --- Pinyin-Tabelle ---
+        # --- Pinyin-Tabelle (eigener Reiter unter Töne) ---
+        pg.click('[data-tsec="tabelle"]'); pg.wait_for_timeout(100)
         n = pg.locator("#py-tab .py-chip").count()
         ok(n == 405, f"{view}: Pinyin-Tabelle mit 405 Silben ({n})")
         lv = pg.locator('#py-tab .py-chip[data-py="lv"]').text_content()
