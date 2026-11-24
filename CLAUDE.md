@@ -74,7 +74,7 @@ Die App läuft als Artifact auf claude.ai, weil sie dessen Funktionen nutzt (Dat
 - Slug: `eaee8426-2b03-4d48-8ea2-c5919007e2aa`
 - Link: https://claude.ai/artifact/W1bszcWm8iBVbNZ4WZE88q
 - Stand bei der Übertragung: Version `1794085414-b9b4` (11.11.2026)
-- Zuletzt veröffentlicht: Version `1794515919-254b` (12.11.2026, Ton-Duell, hartnäckige Wörter, Tagesrunde nach Pausen; davor `1794494507-d081` Design, `1794085414-b9b4` Übertragung)
+- Zuletzt veröffentlicht: Version `1795525493-6655` (24.11.2026, alle 17 Etappen-Bilder; davor `1794515919-254b` Ton-Duell, hartnäckige Wörter, Tagesrunde nach Pausen, `1794494507-d081` Design, `1794085414-b9b4` Übertragung)
 - Fähigkeiten: `{db:{}, user:{}, sample:{}}`
 
 Veröffentlicht werden genau diese Dateien: `index.html`, `audio-1.js` … `audio-4.js`, `pinyin.js`, `schreiben.js`, `img/*.webp`. Wenn die Artifact-Werkzeuge (`mcp__claude-artifacts__*`) in der Sitzung da sind: erst `get_artifact` (aktuelle Version), dann `publish_files` mit `slug` und `base_version`, jede Datei mit `as` = Pfad im Artifact. Ohne diese Werkzeuge: Florian veröffentlicht über einen Chat im claude.ai-Projekt „🇨🇳 CHINESISCH“, der das Repo einliest.
@@ -89,11 +89,15 @@ Außerhalb von claude.ai (z. B. lokal geöffnet) läuft die App auch, speichert 
 
 ## Etappen-Bilder
 
-5 von 17 sind fertig (01–05). Neue Bilder einbauen:
+Alle 17 sind fertig (seit 24.11.2026). Ein Bild ersetzen:
 ```
 python3 scripts/add_image.py 06 /pfad/zum/06.png
 ```
-Das Skript speichert das Original in `dl/scenes/`, erzeugt beide `.webp`-Größen und trägt die Etappe in `SCENE_IMG` (`zh-app/scenes.part.js`) ein. Danach bauen, `python3 scripts/sweep.py` für die Ansichten, veröffentlichen (die neuen Bilder mit hochladen). Reihenfolge der Etappen: 06 train, 07 bund, 08 water, 09 lane, 10 school, 11 street, 12 garden, 13 lake, 14 restaurant, 15 tower, 16 park, 17 airport. Vorher prüfen: keine Schrift oder Fantasie-Zeichen im Bild.
+Das Skript speichert das Original in `dl/scenes/`, erzeugt beide `.webp`-Größen und trägt die Etappe in `SCENE_IMG` (`zh-app/scenes.part.js`) ein. Etappen: 01 gate, 02 hutong, 03 wall, 04 tea, 05 market, 06 train, 07 bund, 08 water, 09 lane, 10 school, 11 street, 12 garden, 13 lake, 14 restaurant, 15 tower, 16 park, 17 airport. Vorher prüfen: keine Schrift oder Fantasie-Zeichen im Bild.
+
+Am Handy ist das Startbild schmal und wird seitlich beschnitten. Wo die Hauptfigur sonst rausfällt, legt `SCENE_FX` in `scenes.part.js` den waagrechten Ausschnitt fest (z. B. `airport:"18%"`). Prüfen mit `python3 scripts/imgshots.py light|dark`: macht Fotos von Startbild und Lernpfad für alle Etappen (Handy und Mac) in `shots/img/` und meldet Bilder, die nicht laden. Danach `sweep.py`, veröffentlichen (geänderte Bilder mit hochladen).
+
+Die gezeichneten SVG-Szenen bleiben nur als Ersatz, falls ein Bild nicht lädt.
 
 ## Quellen und Lizenzen
 

@@ -251,8 +251,8 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .hero{position:relative; margin:-18px -16px 0; height:min(64vh, 440px); min-height:340px; overflow:hidden; isolation:isolate}
 .hero-art{position:absolute; inset:-36px 0 0 0; will-change:transform; -webkit-mask-image:linear-gradient(to bottom, #000 58%, transparent 97%); mask-image:linear-gradient(to bottom, #000 58%, transparent 97%)}
 .hero-art .scene-svg{width:100%; height:100%; display:block}
-.scene-img{width:100%; height:100%; display:block; object-fit:cover; object-position:50% 42%; filter:var(--pic-filter)}
-.st-art .scene-img{object-position:50% 45%}
+.scene-img{width:100%; height:100%; display:block; object-fit:cover; object-position:var(--fx,50%) 42%; filter:var(--pic-filter)}
+.st-art .scene-img{object-position:var(--fx,50%) 45%}
 :root[data-app-theme="dark"] .scene-svg, :root[data-theme="dark"]:not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]):not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)} }
 .hero .cl{position:absolute; z-index:1; width:130px; color:color-mix(in srgb, var(--sheet) 92%, transparent); animation:drift linear infinite; filter:drop-shadow(0 2px 4px rgba(120,100,70,.18))}
@@ -3343,10 +3343,12 @@ var SCENES = {
   },
 };
 /* Gemalte Etappen-Bilder (aus dem Bildgenerator). Wo es noch keins gibt, bleibt die gezeichnete Szene. */
-var SCENE_IMG = {gate:"01", hutong:"02", wall:"03", tea:"04", market:"05"};
+var SCENE_IMG = {gate:"01", hutong:"02", wall:"03", tea:"04", market:"05", train:"06", bund:"07", water:"08", lane:"09", school:"10", street:"11", garden:"12", lake:"13", restaurant:"14", tower:"15", park:"16", airport:"17"};
+/* Waagrechter Bildausschnitt, wo das Bild schmal angezeigt wird (Handy): sonst fällt die Hauptfigur raus */
+var SCENE_FX = {lane:"28%", park:"30%", airport:"18%"};
 function sceneSVG(kind, cls, eager){
   var n = SCENE_IMG[kind];
-  if(n) return '<img class="scene-img" src="img/'+n+'.webp" srcset="img/'+n+'-640.webp 640w, img/'+n+'.webp 1280w" sizes="(max-width: 700px) 100vw, 1100px" alt="" aria-hidden="true" decoding="async"'+(eager ? '' : ' loading="lazy"')+' onerror="this.replaceWith(sceneFallback(\''+kind+'\'))">';
+  if(n) return '<img class="scene-img"'+(SCENE_FX[kind] ? ' style="--fx:'+SCENE_FX[kind]+'"' : '')+' src="img/'+n+'.webp" srcset="img/'+n+'-640.webp 640w, img/'+n+'.webp 1280w" sizes="(max-width: 700px) 100vw, 1100px" alt="" aria-hidden="true" decoding="async"'+(eager ? '' : ' loading="lazy"')+' onerror="this.replaceWith(sceneFallback(\''+kind+'\'))">';
   return '<svg class="'+(cls||"scene-svg")+'" viewBox="0 0 360 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g filter="url(#wc)">'+(SCENES[kind] ? SCENES[kind]() : "")+'</g></svg>';
 }
 /* Falls ein Bild nicht lädt: die gezeichnete Szene einsetzen */

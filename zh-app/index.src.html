@@ -251,8 +251,8 @@ h2.sec::before{content:""; width:10px; height:10px; background:var(--seal); tran
 .hero{position:relative; margin:-18px -16px 0; height:min(64vh, 440px); min-height:340px; overflow:hidden; isolation:isolate}
 .hero-art{position:absolute; inset:-36px 0 0 0; will-change:transform; -webkit-mask-image:linear-gradient(to bottom, #000 58%, transparent 97%); mask-image:linear-gradient(to bottom, #000 58%, transparent 97%)}
 .hero-art .scene-svg{width:100%; height:100%; display:block}
-.scene-img{width:100%; height:100%; display:block; object-fit:cover; object-position:50% 42%; filter:var(--pic-filter)}
-.st-art .scene-img{object-position:50% 45%}
+.scene-img{width:100%; height:100%; display:block; object-fit:cover; object-position:var(--fx,50%) 42%; filter:var(--pic-filter)}
+.st-art .scene-img{object-position:var(--fx,50%) 45%}
 :root[data-app-theme="dark"] .scene-svg, :root[data-theme="dark"]:not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]):not([data-app-theme="light"]) .scene-svg{filter:brightness(.7) saturate(.85) sepia(.18)} }
 .hero .cl{position:absolute; z-index:1; width:130px; color:color-mix(in srgb, var(--sheet) 92%, transparent); animation:drift linear infinite; filter:drop-shadow(0 2px 4px rgba(120,100,70,.18))}

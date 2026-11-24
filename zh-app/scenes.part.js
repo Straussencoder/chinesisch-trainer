@@ -371,10 +371,12 @@ var SCENES = {
   },
 };
 /* Gemalte Etappen-Bilder (aus dem Bildgenerator). Wo es noch keins gibt, bleibt die gezeichnete Szene. */
-var SCENE_IMG = {gate:"01", hutong:"02", wall:"03", tea:"04", market:"05"};
+var SCENE_IMG = {gate:"01", hutong:"02", wall:"03", tea:"04", market:"05", train:"06", bund:"07", water:"08", lane:"09", school:"10", street:"11", garden:"12", lake:"13", restaurant:"14", tower:"15", park:"16", airport:"17"};
+/* Waagrechter Bildausschnitt, wo das Bild schmal angezeigt wird (Handy): sonst fällt die Hauptfigur raus */
+var SCENE_FX = {lane:"28%", park:"30%", airport:"18%"};
 function sceneSVG(kind, cls, eager){
   var n = SCENE_IMG[kind];
-  if(n) return '<img class="scene-img" src="img/'+n+'.webp" srcset="img/'+n+'-640.webp 640w, img/'+n+'.webp 1280w" sizes="(max-width: 700px) 100vw, 1100px" alt="" aria-hidden="true" decoding="async"'+(eager ? '' : ' loading="lazy"')+' onerror="this.replaceWith(sceneFallback(\''+kind+'\'))">';
+  if(n) return '<img class="scene-img"'+(SCENE_FX[kind] ? ' style="--fx:'+SCENE_FX[kind]+'"' : '')+' src="img/'+n+'.webp" srcset="img/'+n+'-640.webp 640w, img/'+n+'.webp 1280w" sizes="(max-width: 700px) 100vw, 1100px" alt="" aria-hidden="true" decoding="async"'+(eager ? '' : ' loading="lazy"')+' onerror="this.replaceWith(sceneFallback(\''+kind+'\'))">';
   return '<svg class="'+(cls||"scene-svg")+'" viewBox="0 0 360 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g filter="url(#wc)">'+(SCENES[kind] ? SCENES[kind]() : "")+'</g></svg>';
 }
 /* Falls ein Bild nicht lädt: die gezeichnete Szene einsetzen */
