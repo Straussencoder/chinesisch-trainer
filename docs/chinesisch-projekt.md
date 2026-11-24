@@ -69,6 +69,7 @@
 |---|---|
 | Tägliche Routine / Aufwärmen | Duolingo (ersetzt aber kein Sprechen und Tontraining) |
 | Wörter lernen und wiederholen, Satzbau, Zahlen, Töne, Pinyin, Zeichen schreiben, Gespräche, Reisesätze, kurze Texte, Nachsprechen, Sprechen, Lernspiel, HSK-Probetest | Eigener Chinesisch-Trainer: https://claude.ai/artifact/W1bszcWm8iBVbNZ4WZE88q |
+| Quellcode der App (für Claude Code) | GitHub: https://github.com/Straussencoder/chinesisch-trainer, mit CLAUDE.md als Anleitung |
 | Etappen-Bilder | ChatGPT oder ein anderer Bildgenerator, mit den Prompts aus docs/etappen-bilder-prompts.md |
 | Wörterbuch | Pleco |
 | Lehrbuch | HSK Standard Course 1 |
